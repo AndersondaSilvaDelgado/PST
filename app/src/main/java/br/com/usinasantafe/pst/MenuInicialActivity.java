@@ -47,6 +47,8 @@ public class MenuInicialActivity extends ActivityGeneric {
         pstContext = (PSTContext) getApplication();
         textViewProcesso = (TextView) findViewById(R.id.textViewProcesso);
 
+        progressBar = new ProgressDialog(this);
+
         configCTR = new ConfigCTR();
 
         if (!checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
@@ -90,11 +92,15 @@ public class MenuInicialActivity extends ActivityGeneric {
 
                 if (text.equals("FORMULÁRIO")) {
 
+//                    Intent it = new Intent(MenuInicialActivity.this, CameraActivity.class);
+//                    startActivity(it);
+//                    finish();
+
                     ColabBean colabBean = new ColabBean();
                     configBean = new ConfigBean();
                     if (colabBean.hasElements() && configBean.hasElements()) {
 
-                        pstContext.getObservCTR().setMatricFuncObsForm(0L);
+                        pstContext.getAbordagemCTR().setMatricFuncObsForm(0L);
 
                         Intent it = new Intent(MenuInicialActivity.this, ObservadorActivity.class);
                         startActivity(it);

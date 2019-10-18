@@ -49,7 +49,7 @@ public class ListaTurnoActivity extends ActivityGeneric {
                                     long id) {
 
                 TurnoBean turnoBean = (TurnoBean) turnoList.get(position);
-                pstContext.getObservCTR().setIdAreaForm(turnoBean.getIdTurno());
+                pstContext.getAbordagemCTR().setIdTurno(turnoBean.getIdTurno());
                 turnoList.clear();
 
                 Intent it = new Intent(ListaTurnoActivity.this, DetalhesActivity.class);

@@ -4,8 +4,8 @@ import br.com.usinasantafe.pst.PSTContext;
 
 public class UrlsConexaoHttp {
 
-    public static String urlPrincipal = "http://www.usinasantafe.com.br/pacdev/view/";
-    public static String urlPrincEnvio = "http://www.usinasantafe.com.br/pacdev/view/";
+    public static String urlPrincipal = "http://www.usinasantafe.com.br/pstdev/view/";
+    public static String urlPrincEnvio = "http://www.usinasantafe.com.br/pstdev/view/";
 
     public static String localPSTEstatica = "br.com.usinasantafe.pst.bean.estaticas.";
     public static String localUrl = "br.com.usinasantafe.pst.util.UrlsConexaoHttp";
@@ -23,16 +23,8 @@ public class UrlsConexaoHttp {
     public UrlsConexaoHttp() {
     }
 
-    public String getsInserirCheckList() {
-        return urlPrincEnvio + "inserirchecklist.php" + put;
-    }
-
-    public String getsInsertApontaMM() {
-        return urlPrincEnvio + "inserirapontmm.php" + put;
-    }
-
-    public String getsInsertBolAbertoMM() {
-        return urlPrincEnvio + "inserirbolabertomm.php" + put;
+    public String getsInserirDados() {
+        return urlPrincEnvio + "inserirdados.php" + put;
     }
 
     public String getsInsertBolFechadoMM() {

@@ -87,7 +87,7 @@ public class AtualizarAplicativo extends AsyncTask<String ,Integer ,Boolean> {
 
         try {
 
-            URL url = new URL("http://www.usinasantafe.com.br/pmm/pmm.apk");
+            URL url = new URL("http://www.usinasantafe.com.br/pst/pst.apk");
 
             HttpURLConnection c = (HttpURLConnection) url.openConnection();
             c.setRequestMethod("GET");
@@ -99,7 +99,7 @@ public class AtualizarAplicativo extends AsyncTask<String ,Integer ,Boolean> {
             File file = new File(PATH);
             file.mkdirs();
 
-            File outputFile = new File(file,"pmm.apk");
+            File outputFile = new File(file,"pst.apk");
 
             if(outputFile.exists()){
                 outputFile.delete();
@@ -139,7 +139,7 @@ public class AtualizarAplicativo extends AsyncTask<String ,Integer ,Boolean> {
     void OpenNewVersion(String location) {
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(new File(location + "/pmm.apk")),
+        intent.setDataAndType(Uri.fromFile(new File(location + "/pst.apk")),
                 "application/vnd.android.package-archive");
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);

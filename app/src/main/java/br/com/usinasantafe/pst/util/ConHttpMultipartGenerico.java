@@ -13,14 +13,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 public class ConHttpMultipartGenerico extends AsyncTask<String, Void, String>   {
-
-	private String url = "http://internal.usinasantafe.com.br:8180/WebServiceTeste/UploadServlet";
-	private byte[] data;
 
     private static ConHttpMultipartGenerico instance = null;
 
@@ -39,8 +34,12 @@ public class ConHttpMultipartGenerico extends AsyncTask<String, Void, String>   
         String answer = "";
 
         String url = params[0];
-        String dado = params[1];
-        String foto = params[2];
+        String cabec = params[1];
+        String item = params[2];
+		String foto1 = params[3];
+		String foto2 = params[4];
+		String foto3 = params[5];
+		String foto4 = params[6];
 
 		try{
 
@@ -48,8 +47,12 @@ public class ConHttpMultipartGenerico extends AsyncTask<String, Void, String>   
 			HttpPost httpPost = new HttpPost(url);
 
             ArrayList<NameValuePair> valores = new ArrayList<NameValuePair>();
-            valores.add(new BasicNameValuePair("dado", dado));
-            valores.add(new BasicNameValuePair("foto", foto));
+            valores.add(new BasicNameValuePair("cabec", cabec));
+			valores.add(new BasicNameValuePair("item", item));
+            valores.add(new BasicNameValuePair("foto1", foto1));
+			valores.add(new BasicNameValuePair("foto2", foto2));
+			valores.add(new BasicNameValuePair("foto3", foto3));
+			valores.add(new BasicNameValuePair("foto4", foto4));
 
             httpPost.setEntity(new UrlEncodedFormEntity(valores));
             HttpResponse resposta = httpClient.execute(httpPost);
@@ -68,6 +71,9 @@ public class ConHttpMultipartGenerico extends AsyncTask<String, Void, String>   
 	protected void onPostExecute(String result) {
 
 		try {
+
+			Log.i("ECM", "VALOR RECEBIDO --> " + result);
+
 //			EnvioDadosServ.getInstance().setEnviando(false);
 //			Log.i("ECM", "VALOR RECEBIDO --> " + result);
 //			if(result.trim().equals("GRAVOU-CHECKLIST")){

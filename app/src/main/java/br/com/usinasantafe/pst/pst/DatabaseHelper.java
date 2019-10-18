@@ -15,9 +15,10 @@ import br.com.usinasantafe.pst.bean.estaticas.QuestaoBean;
 import br.com.usinasantafe.pst.bean.estaticas.TipoBean;
 import br.com.usinasantafe.pst.bean.estaticas.TopicoBean;
 import br.com.usinasantafe.pst.bean.estaticas.TurnoBean;
-import br.com.usinasantafe.pst.bean.variaveis.CabObservBean;
+import br.com.usinasantafe.pst.bean.variaveis.CabAbordBean;
 import br.com.usinasantafe.pst.bean.variaveis.ConfigBean;
-import br.com.usinasantafe.pst.bean.variaveis.ItemObservBean;
+import br.com.usinasantafe.pst.bean.variaveis.FotoAbordBean;
+import br.com.usinasantafe.pst.bean.variaveis.ItemAbordBean;
 
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
@@ -59,8 +60,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.createTable(cs, TurnoBean.class);
 
 			TableUtils.createTable(cs, ConfigBean.class);
-			TableUtils.createTable(cs, CabObservBean.class);
-			TableUtils.createTable(cs, ItemObservBean.class);
+			TableUtils.createTable(cs, CabAbordBean.class);
+			TableUtils.createTable(cs, ItemAbordBean.class);
+			TableUtils.createTable(cs, FotoAbordBean.class);
 
 		}
 		catch(Exception e){

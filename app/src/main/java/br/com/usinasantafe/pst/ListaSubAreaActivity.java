@@ -28,7 +28,7 @@ public class ListaSubAreaActivity extends ActivityGeneric {
         Button buttonRetSubArea = (Button) findViewById(R.id.buttonRetSubArea);
 
         SubAreaBean subAreaBean = new SubAreaBean();
-        subAreaList = subAreaBean.get("idArea", pstContext.getObservCTR().getIdAreaForm());
+        subAreaList = subAreaBean.get("idArea", pstContext.getAbordagemCTR().getIdAreaForm());
 
         ArrayList<String> itens = new ArrayList<String>();
 
@@ -48,7 +48,7 @@ public class ListaSubAreaActivity extends ActivityGeneric {
                                     long id) {
 
                 SubAreaBean subAreaBean = (SubAreaBean) subAreaList.get(position);
-                pstContext.getObservCTR().setIdSubAreaForm(subAreaBean.getIdSubArea());
+                pstContext.getAbordagemCTR().setIdSubAreaForm(subAreaBean.getIdSubArea());
                 subAreaList.clear();
 
                 Intent it = new Intent(ListaSubAreaActivity.this, ListaTurnoActivity.class);

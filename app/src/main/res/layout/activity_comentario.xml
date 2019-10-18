@@ -23,7 +23,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        />
+        >
+
+        <RadioButton android:id="@+id/radioButtonSeguro"
+            style="@style/TextViewItemList"
+            android:text="@string/texto_seguro"
+            android:layout_weight="1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+        <RadioButton android:id="@+id/radioButtonInseguro"
+            style="@style/TextViewItemList"
+            android:text="@string/texto_inseguro"
+            android:layout_weight="1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </RadioGroup>
 
     <EditText
         android:id="@+id/editTextComentario"

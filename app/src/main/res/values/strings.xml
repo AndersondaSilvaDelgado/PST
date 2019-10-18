@@ -43,4 +43,5 @@
     <string name="texto_funcionario">MATRÍCULA:</string>
     <string name="texto_padrao_alterar">ALTERAR</string>
     <string name="texto_titulo_comentario">COMENTARIO</string>
+        <string name="texto_titulo_questao">QUESTÃO</string>
 </resources>

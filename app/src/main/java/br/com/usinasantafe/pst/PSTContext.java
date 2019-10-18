@@ -2,12 +2,12 @@ package br.com.usinasantafe.pst;
 
 import android.app.Application;
 
-import br.com.usinasantafe.pst.control.ObservCTR;
+import br.com.usinasantafe.pst.control.AbordagemCTR;
 
 public class PSTContext extends Application {
 
     public static String versaoAplic = "1.00";
-    private ObservCTR observCTR;
+    private AbordagemCTR abordagemCTR;
     private int posTipo;
     private Long idTopico;
 
@@ -16,10 +16,10 @@ public class PSTContext extends Application {
         super.onCreate();
     }
 
-    public ObservCTR getObservCTR() {
-        if (observCTR == null)
-            observCTR = new ObservCTR();
-        return observCTR;
+    public AbordagemCTR getAbordagemCTR() {
+        if (abordagemCTR == null)
+            abordagemCTR = new AbordagemCTR();
+        return abordagemCTR;
     }
 
     public int getPosTipo() {

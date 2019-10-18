@@ -15,8 +15,6 @@ public class ObservadorActivity extends ActivityGeneric {
 
     private TextView textViewObservador;
     private PSTContext pstContext;
-    private Long matricFuncApar;
-    private Long matricFuncObs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +33,14 @@ public class ObservadorActivity extends ActivityGeneric {
         configBean = (ConfigBean) listConfigTO.get(0);
         listConfigTO.clear();
 
-        if(pstContext.getObservCTR().getMatricFuncObsForm() == 0){
-            pstContext.getObservCTR().setMatricFuncObsForm(configBean.getMatricFuncConfig());
+        if(pstContext.getAbordagemCTR().getMatricFuncObsForm() == 0){
+            pstContext.getAbordagemCTR().setMatricFuncObsForm(configBean.getMatricFuncConfig());
         }
 
-        pstContext.getObservCTR().setMatricFuncAparForm(configBean.getMatricFuncConfig());
+        pstContext.getAbordagemCTR().setMatricFuncAparForm(configBean.getMatricFuncConfig());
 
         ColabBean colabBean = new ColabBean();
-        List colabList = colabBean.get("matricColab", pstContext.getObservCTR().getMatricFuncObsForm());
+        List colabList = colabBean.get("matricColab", pstContext.getAbordagemCTR().getMatricFuncObsForm());
         colabBean = (ColabBean) colabList.get(0);
         colabList.clear();
 

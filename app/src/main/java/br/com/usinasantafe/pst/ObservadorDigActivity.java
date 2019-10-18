@@ -100,7 +100,7 @@ public class ObservadorDigActivity extends ActivityGeneric {
                     if (colabList.size() > 0) {
 
                         colabBean = (ColabBean) colabList.get(0);
-                        pstContext.getObservCTR().setMatricFuncObsForm(colabBean.getMatricColab());
+                        pstContext.getAbordagemCTR().setMatricFuncObsForm(colabBean.getMatricColab());
                         colabList.clear();
 
                         Intent it = new Intent(ObservadorDigActivity.this, ObservadorActivity.class);

@@ -48,7 +48,7 @@ public class ListaAreaActivity extends ActivityGeneric {
                                     long id) {
 
                 AreaBean subAreaBean = (AreaBean) areaList.get(position);
-                pstContext.getObservCTR().setIdAreaForm(subAreaBean.getIdArea());
+                pstContext.getAbordagemCTR().setIdAreaForm(subAreaBean.getIdArea());
                 areaList.clear();
 
                 Intent it = new Intent(ListaAreaActivity.this, ListaSubAreaActivity.class);
