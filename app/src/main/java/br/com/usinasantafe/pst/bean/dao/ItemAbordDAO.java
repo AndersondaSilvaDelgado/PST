@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.com.usinasantafe.pst.bean.variaveis.ItemAbordBean;
 import br.com.usinasantafe.pst.pst.EspecificaPesquisa;
+import br.com.usinasantafe.pst.util.Tempo;
 
 public class ItemAbordDAO {
 
@@ -12,6 +13,7 @@ public class ItemAbordDAO {
     }
 
     public void salvarItem(ItemAbordBean itemAbordBean){
+        itemAbordBean.setDthrItemAbord(Tempo.getInstance().dataComHora());
         itemAbordBean.insert();
     }
 
@@ -47,6 +49,15 @@ public class ItemAbordDAO {
     public List getListItemCabecFech(Long idCabec){
         ItemAbordBean itemAbordBean = new ItemAbordBean();
         return itemAbordBean.get("idCabItemAbord", idCabec);
+    }
+
+    public void delItemCabec(Long idCabec){
+        ItemAbordBean itemAbordBean = new ItemAbordBean();
+        List itemAbordList = itemAbordBean.get("idCabItemAbord", idCabec);
+        for (int i = 0; i < itemAbordList.size(); i++) {
+            itemAbordBean = (ItemAbordBean) itemAbordList.get(i);
+            itemAbordBean.delete();
+        }
     }
 
 }

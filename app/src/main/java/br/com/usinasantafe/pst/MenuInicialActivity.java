@@ -140,13 +140,16 @@ public class MenuInicialActivity extends ActivityGeneric {
 
         public void run() {
             if (configCTR.hasElements()) {
-                if (EnvioDadosServ.getInstance().getStatusEnvio() == 1) {
+                int status = EnvioDadosServ.getInstance().getStatusEnvio();
+                if (status == 1) {
                     textViewProcesso.setTextColor(Color.YELLOW);
                     textViewProcesso.setText("Enviando Dados...");
-                } else if (EnvioDadosServ.getInstance().getStatusEnvio() == 2) {
+                }
+                else if (status == 2) {
                     textViewProcesso.setTextColor(Color.RED);
                     textViewProcesso.setText("Existem Dados para serem Enviados");
-                } else if (EnvioDadosServ.getInstance().getStatusEnvio() == 3) {
+                }
+                else if (status == 3) {
                     textViewProcesso.setTextColor(Color.GREEN);
                     textViewProcesso.setText("Todos os Dados já foram Enviados");
                 }

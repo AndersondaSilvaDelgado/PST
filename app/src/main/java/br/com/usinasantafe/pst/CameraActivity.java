@@ -8,15 +8,13 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
-import br.com.usinasantafe.pst.bean.variaveis.FotoAbordBean;
+import br.com.usinasantafe.pst.util.EnvioDadosServ;
 
 public class CameraActivity extends ActivityGeneric {
 
@@ -59,6 +57,7 @@ public class CameraActivity extends ActivityGeneric {
             public void onClick(View v) {
 
                 pstContext.getAbordagemCTR().salvaBolFechado();
+                EnvioDadosServ.getInstance().envioDados(CameraActivity.this);
 
                 Intent it = new Intent(CameraActivity.this, MenuInicialActivity.class);
                 startActivity(it);

@@ -3,6 +3,7 @@ package br.com.usinasantafe.pst.bean.dao;
 import java.util.List;
 
 import br.com.usinasantafe.pst.bean.variaveis.CabAbordBean;
+import br.com.usinasantafe.pst.util.Tempo;
 
 public class CabAbordDAO {
 
@@ -11,6 +12,7 @@ public class CabAbordDAO {
 
     public void salvarCabecAbert(CabAbordBean cabAbordBean){
         cabAbordBean.setStatusCabAbord(1L);
+        cabAbordBean.setDthrCabAbord(Tempo.getInstance().dataComHora());
         cabAbordBean.insert();
     }
 
@@ -32,6 +34,14 @@ public class CabAbordDAO {
     public void salvarCabecFech(CabAbordBean cabAbordBean){
         cabAbordBean.setStatusCabAbord(2L);
         cabAbordBean.update();
+    }
+
+    public void delCabec(Long idCabAbord) {
+        CabAbordBean cabAbordBean = new CabAbordBean();
+        List cabecList = cabAbordBean.get("idCabAbord", idCabAbord);
+        cabAbordBean = (CabAbordBean) cabecList.get(0);
+        cabAbordBean.delete();
+        cabecList.clear();
     }
 
 }

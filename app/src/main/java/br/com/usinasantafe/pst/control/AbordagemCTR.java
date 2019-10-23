@@ -1,12 +1,14 @@
 package br.com.usinasantafe.pst.control;
 
-import android.util.Log;
+import android.app.ProgressDialog;
+import android.content.Context;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.usinasantafe.pst.bean.dao.CabAbordDAO;
@@ -15,6 +17,8 @@ import br.com.usinasantafe.pst.bean.dao.ItemAbordDAO;
 import br.com.usinasantafe.pst.bean.variaveis.CabAbordBean;
 import br.com.usinasantafe.pst.bean.variaveis.FotoAbordBean;
 import br.com.usinasantafe.pst.bean.variaveis.ItemAbordBean;
+import br.com.usinasantafe.pst.util.AtualDadosServ;
+import br.com.usinasantafe.pst.util.EnvioDadosServ;
 
 public class AbordagemCTR {
 
@@ -64,7 +68,7 @@ public class AbordagemCTR {
         this.cabAbordBean.setComentCabAbord(comentarioCabAbord);
     }
 
-    public boolean verEnvioDadosCabec() {
+    public boolean verEnvioDados() {
         CabAbordDAO cabAbordDAO = new CabAbordDAO();
         return cabAbordDAO.cabecFechList().size() > 0;
     }
@@ -141,8 +145,8 @@ public class AbordagemCTR {
 
         for (int i = 0; i < itemAbordList.size(); i++) {
             ItemAbordBean itemAbordBean = (ItemAbordBean) itemAbordList.get(i);
-            Gson gsonRend = new Gson();
-            jsonArrayItem.add(gsonRend.toJsonTree(itemAbordBean, itemAbordBean.getClass()));
+            Gson gsonItem = new Gson();
+            jsonArrayItem.add(gsonItem.toJsonTree(itemAbordBean, itemAbordBean.getClass()));
         }
 
         JsonObject jsonItem = new JsonObject();
@@ -150,19 +154,83 @@ public class AbordagemCTR {
         return jsonItem.toString();
     }
 
-    public String getFoto(int pos){
+    public String dadosFotoFechEnvio(int pos){
         CabAbordDAO cabAbordDAO = new CabAbordDAO();
         CabAbordBean cabAbordBean = (CabAbordBean) cabAbordDAO.cabecFechList().get(0);
         FotoAbordDAO fotoAbordDAO = new FotoAbordDAO();
         List fotoAbordList = fotoAbordDAO.getListFotoCabecAbert(cabAbordBean.getIdCabAbord());
 
+        JsonArray jsonArrayFoto = new JsonArray();
+
         if(fotoAbordList.size() >= pos) {
             FotoAbordBean fotoAbordBean = (FotoAbordBean) fotoAbordList.get(pos - 1);
-            return fotoAbordDAO.getBitmapString(fotoAbordBean);
+            fotoAbordBean.setFileFoto(fotoAbordDAO.getBitmapString(fotoAbordBean));
+            Gson gsonFoto = new Gson();
+            jsonArrayFoto.add(gsonFoto.toJsonTree(fotoAbordBean, fotoAbordBean.getClass()));
         }
-        else{
-            return "";
+
+        JsonObject jsonFoto = new JsonObject();
+        jsonFoto.add("foto", jsonArrayFoto);
+        return jsonFoto.toString();
+
+    }
+
+    public void deleteCabec(String retorno) {
+
+        try{
+
+            int pos1 = retorno.indexOf("_") + 1;
+            Long idCabec = Long.valueOf(retorno.substring(pos1));
+
+            CabAbordDAO cabAbordDAO = new CabAbordDAO();
+            cabAbordDAO.delCabec(idCabec);
+
+            ItemAbordDAO itemAbordDAO = new ItemAbordDAO();
+            itemAbordDAO.delItemCabec(idCabec);
+
+            FotoAbordDAO fotoAbordDAO = new FotoAbordDAO();
+            fotoAbordDAO.delFotoCabec(idCabec);
+
+            EnvioDadosServ.getInstance().envioDados();
+
         }
+        catch(Exception e){
+            EnvioDadosServ.getInstance().setEnviando(false);
+        }
+
+    }
+
+    public void atualDadosColab(Context telaAtual, Class telaProx, ProgressDialog progressDialog){
+        ArrayList arrayList = new ArrayList();
+        arrayList.add("ColabBean");
+        AtualDadosServ.getInstance().atualGenericoBD(telaAtual, telaProx, progressDialog, arrayList);
+    }
+
+    public void atualDadosArea(Context telaAtual, Class telaProx, ProgressDialog progressDialog){
+        ArrayList arrayList = new ArrayList();
+        arrayList.add("AreaBean");
+        arrayList.add("SubAreaBean");
+        AtualDadosServ.getInstance().atualGenericoBD(telaAtual, telaProx, progressDialog, arrayList);
+    }
+
+    public void atualDadosSubArea(Context telaAtual, Class telaProx, ProgressDialog progressDialog){
+        ArrayList arrayList = new ArrayList();
+        arrayList.add("SubAreaBean");
+        AtualDadosServ.getInstance().atualGenericoBD(telaAtual, telaProx, progressDialog, arrayList);
+    }
+
+    public void atualDadosTurno(Context telaAtual, Class telaProx, ProgressDialog progressDialog){
+        ArrayList arrayList = new ArrayList();
+        arrayList.add("TurnoBean");
+        AtualDadosServ.getInstance().atualGenericoBD(telaAtual, telaProx, progressDialog, arrayList);
+    }
+
+    public void atualDadosItem(Context telaAtual, Class telaProx, ProgressDialog progressDialog){
+        ArrayList arrayList = new ArrayList();
+        arrayList.add("TipoBean");
+        arrayList.add("TopicoBean");
+        arrayList.add("QuestaoBean");
+        AtualDadosServ.getInstance().atualGenericoBD(telaAtual, telaProx, progressDialog, arrayList);
     }
 
 }

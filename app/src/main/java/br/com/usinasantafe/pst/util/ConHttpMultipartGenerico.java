@@ -15,6 +15,8 @@ import org.apache.http.util.EntityUtils;
 
 import java.util.ArrayList;
 
+import br.com.usinasantafe.pst.control.AbordagemCTR;
+
 public class ConHttpMultipartGenerico extends AsyncTask<String, Void, String>   {
 
     private static ConHttpMultipartGenerico instance = null;
@@ -59,10 +61,7 @@ public class ConHttpMultipartGenerico extends AsyncTask<String, Void, String>   
             answer = EntityUtils.toString(resposta.getEntity());
 
 		} catch (Exception e) {
-			
-		}
-		finally{
-			
+			EnvioDadosServ.getInstance().setEnviando(false);
 		}
 		
 		return answer;
@@ -73,35 +72,15 @@ public class ConHttpMultipartGenerico extends AsyncTask<String, Void, String>   
 		try {
 
 			Log.i("ECM", "VALOR RECEBIDO --> " + result);
+			if(result.trim().contains("GRAVOU")){
+				AbordagemCTR abordagemCTR = new AbordagemCTR();
+				abordagemCTR.deleteCabec(result);
 
-//			EnvioDadosServ.getInstance().setEnviando(false);
-//			Log.i("ECM", "VALOR RECEBIDO --> " + result);
-//			if(result.trim().equals("GRAVOU-CHECKLIST")){
-//				EnvioDadosServ.getInstance().delChecklist();
-//			}
-//			else if(result.trim().equals("GRAVOU-BOLFECHADO")){
-//				EnvioDadosServ.getInstance().delBolFechadoMM();
-//			}
-//			else if(result.trim().equals("GRAVOU-BOLFECHADOFERT")){
-//				EnvioDadosServ.getInstance().delBolFechadoFert();
-//			}
-//			else if(result.trim().equals("GRAVOU-APONTAMM")){
-//				EnvioDadosServ.getInstance().delApontaMM();
-//			}
-//			else if(result.trim().equals("GRAVOU-APONTAFERT")){
-//				EnvioDadosServ.getInstance().delApontaFert();
-//			}
-//			else{
-//                if(result.trim().contains("GRAVOU")){
-//                    EnvioDadosServ.getInstance().atualDelBoletimMM(result);
-//                }
-//                else if(result.trim().contains("FERT")){
-//					EnvioDadosServ.getInstance().atualDelBoletimFert(result);
-//				}
-//			}
+			}
+
 		} catch (Exception e) {
-
-			Log.i("PMM", "Erro2 = " + e);
+			EnvioDadosServ.getInstance().setEnviando(false);
+			Log.i("PMM", "Erro = " + e);
 		}
 
 	}

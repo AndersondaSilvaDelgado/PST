@@ -66,8 +66,6 @@ public class ConHttpPostCadGenerico extends AsyncTask<String, Void, String> {
 			
 		} catch (Exception e) {
 			Log.i("PMM", "Erro = " + e);
-//			EnvioDadosServ.getInstance().setEnviando(false);
-			Tempo.getInstance().setEnvioDado(true);
 			if(bufferedReader != null){
 				try {
 					bufferedReader.close();
@@ -96,33 +94,10 @@ public class ConHttpPostCadGenerico extends AsyncTask<String, Void, String> {
 	protected void onPostExecute(String result) {
 
 		try {
-
-
-
 //			EnvioDadosServ.getInstance().setEnviando(false);
 //			Log.i("ECM", "VALOR RECEBIDO --> " + result);
 //			if(result.trim().equals("GRAVOU-CHECKLIST")){
 //				EnvioDadosServ.getInstance().delChecklist();
-//			}
-//			else if(result.trim().equals("GRAVOU-BOLFECHADO")){
-//				EnvioDadosServ.getInstance().delBolFechadoMM();
-//			}
-//			else if(result.trim().equals("GRAVOU-BOLFECHADOFERT")){
-//				EnvioDadosServ.getInstance().delBolFechadoFert();
-//			}
-//			else if(result.trim().equals("GRAVOU-APONTAMM")){
-//				EnvioDadosServ.getInstance().delApontaMM();
-//			}
-//			else if(result.trim().equals("GRAVOU-APONTAFERT")){
-//				EnvioDadosServ.getInstance().delApontaFert();
-//			}
-//			else{
-//                if(result.trim().contains("GRAVOU")){
-//                    EnvioDadosServ.getInstance().atualDelBoletimMM(result);
-//                }
-//                else if(result.trim().contains("FERT")){
-//					EnvioDadosServ.getInstance().atualDelBoletimFert(result);
-//				}
 //			}
 		} catch (Exception e) {
 

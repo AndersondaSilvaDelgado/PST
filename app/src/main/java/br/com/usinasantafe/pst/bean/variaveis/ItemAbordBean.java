@@ -20,6 +20,8 @@ public class ItemAbordBean extends Entidade {
     private Long qtdeInsegItemAbord;
     @DatabaseField
     private Long qtdeSegItemAbord;
+    @DatabaseField
+    private String dthrItemAbord;
 
     public ItemAbordBean() {
     }
@@ -64,4 +66,11 @@ public class ItemAbordBean extends Entidade {
         this.qtdeSegItemAbord = qtdeSegItemAbord;
     }
 
+    public String getDthrItemAbord() {
+        return dthrItemAbord;
+    }
+
+    public void setDthrItemAbord(String dthrItemAbord) {
+        this.dthrItemAbord = dthrItemAbord;
+    }
 }

@@ -52,7 +52,7 @@ public class ObservadorDigActivity extends ActivityGeneric {
                             progressBar.setMax(100);
                             progressBar.show();
 
-//                            pmmContext.getBoletimCTR().atualDadosOperador(OperadorActivity.this, OperadorActivity.class, progressBar);
+                            pstContext.getAbordagemCTR().atualDadosColab(ObservadorDigActivity.this, ObservadorDigActivity.class, progressBar);
 
                         } else {
 

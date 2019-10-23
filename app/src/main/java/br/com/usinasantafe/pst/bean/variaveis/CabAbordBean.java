@@ -33,6 +33,8 @@ public class CabAbordBean extends Entidade {
     @DatabaseField
     private String comentCabAbord;
     @DatabaseField
+    private String dthrCabAbord;
+    @DatabaseField
     private Long statusCabAbord;
 
     public CabAbordBean() {
@@ -124,6 +126,14 @@ public class CabAbordBean extends Entidade {
 
     public void setComentCabAbord(String comentCabAbord) {
         this.comentCabAbord = comentCabAbord;
+    }
+
+    public String getDthrCabAbord() {
+        return dthrCabAbord;
+    }
+
+    public void setDthrCabAbord(String dthrCabAbord) {
+        this.dthrCabAbord = dthrCabAbord;
     }
 
     public Long getStatusCabAbord() {

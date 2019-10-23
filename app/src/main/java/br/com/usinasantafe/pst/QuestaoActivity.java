@@ -1,5 +1,8 @@
 package br.com.usinasantafe.pst;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +17,7 @@ import java.util.List;
 
 import br.com.usinasantafe.pst.bean.estaticas.QuestaoBean;
 import br.com.usinasantafe.pst.bean.variaveis.ItemAbordBean;
+import br.com.usinasantafe.pst.util.ConexaoWeb;
 
 public class QuestaoActivity extends ActivityGeneric {
 
@@ -29,6 +33,8 @@ public class QuestaoActivity extends ActivityGeneric {
         pstContext = (PSTContext) getApplication();
 
         LinearLayout linearLayout =  (LinearLayout)  findViewById(R.id.layoutTela);
+        Button buttonRetQuestao = (Button) findViewById(R.id.buttonRetQuestao);
+        Button buttonSalvarQuestao = (Button) findViewById(R.id.buttonSalvarQuestao);
 
         QuestaoBean questaoBean = new QuestaoBean();
         questaoList = questaoBean.get("idTopico", pstContext.getIdTopico());
@@ -52,9 +58,6 @@ public class QuestaoActivity extends ActivityGeneric {
             }
             linearLayout.addView(view);
         }
-
-        Button buttonRetQuestao = (Button) findViewById(R.id.buttonRetQuestao);
-        Button buttonSalvarQuestao = (Button) findViewById(R.id.buttonSalvarQuestao);
 
         buttonRetQuestao.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -4,7 +4,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fonte_titulo_lista">26dp</dimen>
     <dimen name="fonte_edit">28dp</dimen>
-    <dimen name="fonte_tit_card">24dp</dimen>
+    <dimen name="fonte_tit_card">22dp</dimen>
     <dimen name="fonte_item_card">20dp</dimen>
     <dimen name="fonte_item_lista">22dp</dimen>
     <dimen name="fonte_botao_avulso">20dp</dimen>

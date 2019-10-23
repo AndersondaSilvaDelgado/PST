@@ -3,22 +3,13 @@ package br.com.usinasantafe.pst.util;
 import android.content.Context;
 import android.util.Log;
 
-import java.util.List;
-
 import br.com.usinasantafe.pst.control.AbordagemCTR;
 
 public class EnvioDadosServ {
 
     private static EnvioDadosServ instance = null;
-    private UrlsConexaoHttp urlsConexaoHttp;
-    private List listDatasFrenteTO;
     private int statusEnvio; //1 - Enviando; 2 - Existe Dados para Enviar; 3 - Todos os Dados Enviados
     private boolean enviando = false;
-
-    public EnvioDadosServ() {
-
-        urlsConexaoHttp = new UrlsConexaoHttp();
-    }
 
     public static EnvioDadosServ getInstance() {
         if (instance == null) {
@@ -29,7 +20,7 @@ public class EnvioDadosServ {
 
     //////////////////////// ENVIAR DADOS ////////////////////////////////////////////
 
-    public void enviarCabecalho() {
+    public void dadosEnvio() {
 
         UrlsConexaoHttp urlsConexaoHttp = new UrlsConexaoHttp();
         AbordagemCTR abordagemCTR = new AbordagemCTR();
@@ -45,10 +36,10 @@ public class EnvioDadosServ {
         dados[0] = urlsConexaoHttp.getsInserirDados();
         dados[1] = cabec;
         dados[2] = item;
-        dados[3] = abordagemCTR.getFoto(1);
-        dados[4] = abordagemCTR.getFoto(2);
-        dados[5] = abordagemCTR.getFoto(3);
-        dados[6] = abordagemCTR.getFoto(4);
+        dados[3] = abordagemCTR.dadosFotoFechEnvio(1);
+        dados[4] = abordagemCTR.dadosFotoFechEnvio(2);
+        dados[5] = abordagemCTR.dadosFotoFechEnvio(3);
+        dados[6] = abordagemCTR.dadosFotoFechEnvio(4);
 
         ConHttpMultipartGenerico conHttpMultipartGenerico = new ConHttpMultipartGenerico();
         conHttpMultipartGenerico.execute(dados);
@@ -57,18 +48,18 @@ public class EnvioDadosServ {
 
     //////////////////////VERIFICAÇÃO DE DADOS///////////////////////////
 
-    public Boolean verifCabec() {
+    public Boolean verifEnvioDados() {
         AbordagemCTR abordagemCTR = new AbordagemCTR();
-        return abordagemCTR.verEnvioDadosCabec();
+        return abordagemCTR.verEnvioDados();
     }
 
     /////////////////////////MECANISMO DE ENVIO//////////////////////////////////
 
     public void envioDados(Context context) {
-        enviando = true;
         ConexaoWeb conexaoWeb = new ConexaoWeb();
         if (conexaoWeb.verificaConexao(context)) {
-            envioDadosPrinc();
+            enviando = true;
+            envioDados();
         }
         else{
             enviando = false;
@@ -76,14 +67,18 @@ public class EnvioDadosServ {
 
     }
 
-    public void envioDadosPrinc() {
-        if(verifCabec()){
-            enviarCabecalho();
+    public void envioDados() {
+        if(verifEnvioDados()){
+            enviando = true;
+            dadosEnvio();
+        }
+        else{
+            enviando = false;
         }
     }
 
     public boolean verifDadosEnvio() {
-        if (!verifCabec()){
+        if (!verifEnvioDados()){
             enviando = false;
             return false;
         } else {
@@ -104,7 +99,11 @@ public class EnvioDadosServ {
         return statusEnvio;
     }
 
-    public void setStatusEnvio(int statusEnvio) {
-        this.statusEnvio = statusEnvio;
+    public boolean isEnviando() {
+        return enviando;
+    }
+
+    public void setEnviando(boolean enviando) {
+        this.enviando = enviando;
     }
 }

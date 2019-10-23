@@ -1,14 +1,7 @@
 package br.com.usinasantafe.pst.bean.variaveis;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.ThumbnailUtils;
-
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 
 import br.com.usinasantafe.pst.pst.Entidade;
 
@@ -22,9 +15,11 @@ public class FotoAbordBean extends Entidade {
     @DatabaseField
     private Long idCabFotoAbord;
     @DatabaseField
-    private String nameImage;
+    private String nameFoto;
     @DatabaseField
-    private String fileImage;
+    private String fileFoto;
+    @DatabaseField
+    private String dthrFotoAbord;
 
     public FotoAbordBean() {
     }
@@ -37,20 +32,20 @@ public class FotoAbordBean extends Entidade {
         this.idFotoAbord = idFotoAbord;
     }
 
-    public String getNameImage() {
-        return nameImage;
+    public String getNameFoto() {
+        return nameFoto;
     }
 
-    public void setNameImage(String nameImage) {
-        this.nameImage = nameImage;
+    public void setNameFoto(String nameFoto) {
+        this.nameFoto = nameFoto;
     }
 
-    public String getFileImage() {
-        return fileImage;
+    public String getFileFoto() {
+        return fileFoto;
     }
 
-    public void setFileImage(String fileImage) {
-        this.fileImage = fileImage;
+    public void setFileFoto(String fileFoto) {
+        this.fileFoto = fileFoto;
     }
 
     public Long getIdCabFotoAbord() {
@@ -59,5 +54,13 @@ public class FotoAbordBean extends Entidade {
 
     public void setIdCabFotoAbord(Long idCabFotoAbord) {
         this.idCabFotoAbord = idCabFotoAbord;
+    }
+
+    public String getDthrFotoAbord() {
+        return dthrFotoAbord;
+    }
+
+    public void setDthrFotoAbord(String dthrFotoAbord) {
+        this.dthrFotoAbord = dthrFotoAbord;
     }
 }

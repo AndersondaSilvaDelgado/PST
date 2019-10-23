@@ -49,6 +49,7 @@
         android:minLines="1"
         android:gravity="top|left"
         android:maxLines="3"
+        android:maxLength="400"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:scrollbars="vertical">

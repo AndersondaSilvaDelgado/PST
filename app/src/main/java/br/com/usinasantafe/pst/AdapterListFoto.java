@@ -42,7 +42,7 @@ public class AdapterListFoto extends RecyclerView.Adapter<ImagemViewHolder> {
         pos = position;
 
         fotoAbordBean = (FotoAbordBean) imagemList.get(pos);
-        holder.imagem.setImageBitmap(ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(fotoAbordBean.getFileImage()),
+        holder.imagem.setImageBitmap(ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(fotoAbordBean.getFileFoto()),
                 192, 192));
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +55,7 @@ public class AdapterListFoto extends RecyclerView.Adapter<ImagemViewHolder> {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        File file = new File(fotoAbordBean.getFileImage());
+                        File file = new File(fotoAbordBean.getFileFoto());
                         file.delete();
 
                         imagemList.remove(pos);

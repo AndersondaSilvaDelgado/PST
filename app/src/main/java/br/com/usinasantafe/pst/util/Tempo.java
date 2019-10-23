@@ -10,7 +10,6 @@ import java.util.TimeZone;
 public class Tempo {
 
     private static Tempo instance = null;
-    private boolean envioDado;
 	
 	public Tempo() {
 
@@ -196,14 +195,6 @@ public class Tempo {
         return data;
 
     }
-
-	public boolean isEnvioDado() {
-		return envioDado;
-	}
-
-	public void setEnvioDado(boolean envioDado) {
-		this.envioDado = envioDado;
-	}
 
     public boolean verDthrServ(String dthrServ){
 
