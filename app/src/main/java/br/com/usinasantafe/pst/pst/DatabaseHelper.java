@@ -16,13 +16,12 @@ import br.com.usinasantafe.pst.bean.estaticas.TipoBean;
 import br.com.usinasantafe.pst.bean.estaticas.TopicoBean;
 import br.com.usinasantafe.pst.bean.estaticas.TurnoBean;
 import br.com.usinasantafe.pst.bean.variaveis.CabAbordBean;
-import br.com.usinasantafe.pst.bean.variaveis.ConfigBean;
 import br.com.usinasantafe.pst.bean.variaveis.FotoAbordBean;
 import br.com.usinasantafe.pst.bean.variaveis.ItemAbordBean;
 
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
-	public static final String FORCA_DB_NAME = "pac_db";
+	public static final String FORCA_DB_NAME = "pst_db";
 	public static final int FORCA_BD_VERSION = 1;
 
 	private static DatabaseHelper instance;
@@ -59,7 +58,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.createTable(cs, TopicoBean.class);
 			TableUtils.createTable(cs, TurnoBean.class);
 
-			TableUtils.createTable(cs, ConfigBean.class);
 			TableUtils.createTable(cs, CabAbordBean.class);
 			TableUtils.createTable(cs, ItemAbordBean.class);
 			TableUtils.createTable(cs, FotoAbordBean.class);

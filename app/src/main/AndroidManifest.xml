@@ -31,8 +31,6 @@
             android:screenOrientation="portrait" />
         <activity android:name=".ObservadorDigActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ObservadorActivity"
-            android:screenOrientation="portrait" />
         <activity android:name=".ListaTurnoActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".ListaSubAreaActivity"

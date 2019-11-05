@@ -13,8 +13,6 @@ public class CabAbordBean extends Entidade {
     @DatabaseField(generatedId=true)
     private Long idCabAbord;
     @DatabaseField
-    private Long matricFuncAparCabAbord;
-    @DatabaseField
     private Long matricFuncCabAbord;
     @DatabaseField
     private Long idAreaCabAbord;
@@ -46,14 +44,6 @@ public class CabAbordBean extends Entidade {
 
     public void setIdCabAbord(Long idCabAbord) {
         this.idCabAbord = idCabAbord;
-    }
-
-    public Long getMatricFuncAparCabAbord() {
-        return matricFuncAparCabAbord;
-    }
-
-    public void setMatricFuncAparCabAbord(Long matricFuncAparCabAbord) {
-        this.matricFuncAparCabAbord = matricFuncAparCabAbord;
     }
 
     public Long getMatricFuncCabAbord() {

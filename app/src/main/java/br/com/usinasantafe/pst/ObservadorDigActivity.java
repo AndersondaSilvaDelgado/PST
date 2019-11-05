@@ -103,7 +103,7 @@ public class ObservadorDigActivity extends ActivityGeneric {
                         pstContext.getAbordagemCTR().setMatricFuncObsForm(colabBean.getMatricColab());
                         colabList.clear();
 
-                        Intent it = new Intent(ObservadorDigActivity.this, ObservadorActivity.class);
+                        Intent it = new Intent(ObservadorDigActivity.this, ListaAreaActivity.class);
                         startActivity(it);
                         finish();
 
@@ -132,7 +132,6 @@ public class ObservadorDigActivity extends ActivityGeneric {
 
             @Override
             public void onClick(View v) {
-
                 if (editTextPadrao.getText().toString().length() > 0) {
                     editTextPadrao.setText(editTextPadrao.getText().toString().substring(0, editTextPadrao.getText().toString().length() - 1));
                 }
@@ -142,7 +141,7 @@ public class ObservadorDigActivity extends ActivityGeneric {
     }
 
     public void onBackPressed() {
-        Intent it = new Intent(ObservadorDigActivity.this, ObservadorActivity.class);
+        Intent it = new Intent(ObservadorDigActivity.this, MenuInicialActivity.class);
         startActivity(it);
         finish();
     }

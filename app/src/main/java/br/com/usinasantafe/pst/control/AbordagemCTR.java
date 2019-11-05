@@ -29,10 +29,6 @@ public class AbordagemCTR {
             cabAbordBean = new CabAbordBean();
     }
 
-    public void setMatricFuncAparForm(Long matricFuncAparForm) {
-        this.cabAbordBean.setMatricFuncAparCabAbord(matricFuncAparForm);
-    }
-
     public void setMatricFuncObsForm(Long matricFuncObsForm) {
         this.cabAbordBean.setMatricFuncCabAbord(matricFuncObsForm);
     }

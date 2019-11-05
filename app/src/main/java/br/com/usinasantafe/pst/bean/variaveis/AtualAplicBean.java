@@ -6,19 +6,10 @@ package br.com.usinasantafe.pst.bean.variaveis;
 
 public class AtualAplicBean {
 
-    private Long matricFuncAtual;
     private String versaoAtual;
     private String versaoNova;
 
     public AtualAplicBean() {
-    }
-
-    public Long getMatricFuncAtual() {
-        return matricFuncAtual;
-    }
-
-    public void setMatricFuncAtual(Long matricFuncAtual) {
-        this.matricFuncAtual = matricFuncAtual;
     }
 
     public String getVersaoAtual() {

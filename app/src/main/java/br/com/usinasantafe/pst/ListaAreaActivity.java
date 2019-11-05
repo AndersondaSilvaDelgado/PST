@@ -128,7 +128,7 @@ public class ListaAreaActivity extends ActivityGeneric {
 
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(ListaAreaActivity.this, ObservadorActivity.class);
+                Intent it = new Intent(ListaAreaActivity.this, ObservadorDigActivity.class);
                 startActivity(it);
                 finish();
             }

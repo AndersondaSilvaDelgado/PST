@@ -3,8 +3,10 @@ package br.com.usinasantafe.pst;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -22,8 +24,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import br.com.usinasantafe.pst.bean.estaticas.ColabBean;
-import br.com.usinasantafe.pst.bean.variaveis.ConfigBean;
-import br.com.usinasantafe.pst.control.ConfigCTR;
+import br.com.usinasantafe.pst.util.AtualDadosServ;
 import br.com.usinasantafe.pst.util.ConexaoWeb;
 import br.com.usinasantafe.pst.util.EnvioDadosServ;
 import br.com.usinasantafe.pst.util.VerifDadosServ;
@@ -31,10 +32,8 @@ import br.com.usinasantafe.pst.util.VerifDadosServ;
 public class MenuInicialActivity extends ActivityGeneric {
 
     private ListView menuListView;
-    private ConfigBean configBean;
     private PSTContext pstContext;
     private ProgressDialog progressBar;
-    private ConfigCTR configCTR;
 
     private TextView textViewProcesso;
     private Handler customHandler = new Handler();
@@ -49,8 +48,6 @@ public class MenuInicialActivity extends ActivityGeneric {
 
         progressBar = new ProgressDialog(this);
 
-        configCTR = new ConfigCTR();
-
         if (!checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             String[] PERMISSIONS = {android.Manifest.permission.WRITE_EXTERNAL_STORAGE};
             ActivityCompat.requestPermissions((Activity) this, PERMISSIONS, 112);
@@ -63,6 +60,43 @@ public class MenuInicialActivity extends ActivityGeneric {
 
         customHandler.postDelayed(updateTimerThread, 0);
 
+        ColabBean colabBean = new ColabBean();
+
+        if (!colabBean.hasElements()) {
+
+            ConexaoWeb conexaoWeb = new ConexaoWeb();
+
+            if(conexaoWeb.verificaConexao(MenuInicialActivity.this)){
+
+                progressBar = new ProgressDialog(MenuInicialActivity.this);
+                progressBar.setCancelable(true);
+                progressBar.setMessage("ATUALIZANDO ...");
+                progressBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                progressBar.setProgress(0);
+                progressBar.setMax(100);
+                progressBar.show();
+
+                AtualDadosServ.getInstance().atualizarBD(progressBar);
+                AtualDadosServ.getInstance().setContext(MenuInicialActivity.this);
+
+            }
+            else{
+
+                AlertDialog.Builder alerta = new AlertDialog.Builder(MenuInicialActivity.this);
+                alerta.setTitle("ATENÇÃO");
+                alerta.setMessage("FALHA NA CONEXÃO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.");
+                alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alerta.show();
+
+            }
+
+        }
+
         atualizarAplic();
 
         listarMenuInicial();
@@ -74,7 +108,7 @@ public class MenuInicialActivity extends ActivityGeneric {
         ArrayList<String> itens = new ArrayList<String>();
 
         itens.add("FORMULÁRIO");
-        itens.add("CONFIGURAÇÃO");
+        itens.add("ATUALIZAR DADOS");
         itens.add("SAIR");
 
         AdapterList adapterList = new AdapterList(this, itens);
@@ -92,26 +126,63 @@ public class MenuInicialActivity extends ActivityGeneric {
 
                 if (text.equals("FORMULÁRIO")) {
 
-//                    Intent it = new Intent(MenuInicialActivity.this, CameraActivity.class);
-//                    startActivity(it);
-//                    finish();
-
                     ColabBean colabBean = new ColabBean();
-                    configBean = new ConfigBean();
-                    if (colabBean.hasElements() && configBean.hasElements()) {
+
+                    if (colabBean.hasElements()) {
 
                         pstContext.getAbordagemCTR().setMatricFuncObsForm(0L);
 
-                        Intent it = new Intent(MenuInicialActivity.this, ObservadorActivity.class);
+                        Intent it = new Intent(MenuInicialActivity.this, ObservadorDigActivity.class);
                         startActivity(it);
                         finish();
                     }
+                    else{
 
-                } else if (text.equals("CONFIGURAÇÃO")) {
+                        AlertDialog.Builder alerta = new AlertDialog.Builder(MenuInicialActivity.this);
+                        alerta.setTitle("ATENÇÃO");
+                        alerta.setMessage("BASE DE DADOS DESATUALIZADA! POR FAVOR, SELECIONE A OPÇÃO 'ATUALIZAR DADOS' PARA ATUALIZAR A BASE DE DADOS ANTES DE CRIAR UM NOVO FORMULÁRIO.");
+                        alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
-                    Intent it = new Intent(MenuInicialActivity.this, SenhaActivity.class);
-                    startActivity(it);
-                    finish();
+                            }
+                        });
+                        alerta.show();
+
+                    }
+
+                } else if (text.equals("ATUALIZAR DADOS")) {
+
+                    ConexaoWeb conexaoWeb = new ConexaoWeb();
+
+                    if(conexaoWeb.verificaConexao(MenuInicialActivity.this)){
+
+                        progressBar = new ProgressDialog(v.getContext());
+                        progressBar.setCancelable(true);
+                        progressBar.setMessage("ATUALIZANDO BASE DE DADOS...");
+                        progressBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                        progressBar.setProgress(0);
+                        progressBar.setMax(100);
+                        progressBar.show();
+
+                        AtualDadosServ.getInstance().atualizarBD(progressBar);
+                        AtualDadosServ.getInstance().setContext(MenuInicialActivity.this);
+
+                    }
+                    else{
+
+                        AlertDialog.Builder alerta = new AlertDialog.Builder(MenuInicialActivity.this);
+                        alerta.setTitle("ATENÇÃO");
+                        alerta.setMessage("FALHA NA CONEXÃO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.");
+                        alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        alerta.show();
+
+                    }
 
                 } else if (text.equals("SAIR")) {
 
@@ -139,23 +210,18 @@ public class MenuInicialActivity extends ActivityGeneric {
     private Runnable updateTimerThread = new Runnable() {
 
         public void run() {
-            if (configCTR.hasElements()) {
-                int status = EnvioDadosServ.getInstance().getStatusEnvio();
-                if (status == 1) {
-                    textViewProcesso.setTextColor(Color.YELLOW);
-                    textViewProcesso.setText("Enviando Dados...");
-                }
-                else if (status == 2) {
-                    textViewProcesso.setTextColor(Color.RED);
-                    textViewProcesso.setText("Existem Dados para serem Enviados");
-                }
-                else if (status == 3) {
-                    textViewProcesso.setTextColor(Color.GREEN);
-                    textViewProcesso.setText("Todos os Dados já foram Enviados");
-                }
-            } else {
+            int status = EnvioDadosServ.getInstance().getStatusEnvio();
+            if (status == 1) {
+                textViewProcesso.setTextColor(Color.YELLOW);
+                textViewProcesso.setText("Enviando Dados...");
+            }
+            else if (status == 2) {
                 textViewProcesso.setTextColor(Color.RED);
-                textViewProcesso.setText("Por Favor, realize a CONFIGURAÇÃO do aplicativo.");
+                textViewProcesso.setText("Existem Dados para serem Enviados");
+            }
+            else if (status == 3) {
+                textViewProcesso.setTextColor(Color.GREEN);
+                textViewProcesso.setText("Todos os Dados já foram Enviados");
             }
             customHandler.postDelayed(this, 10000);
         }
@@ -164,12 +230,10 @@ public class MenuInicialActivity extends ActivityGeneric {
     public void atualizarAplic(){
         ConexaoWeb conexaoWeb = new ConexaoWeb();
         if (conexaoWeb.verificaConexao(this)) {
-            if (configCTR.hasElements()) {
-                progressBar.setCancelable(true);
-                progressBar.setMessage("BUSCANDO ATUALIZAÇÃO...");
-                progressBar.show();
-                VerifDadosServ.getInstance().verAtualAplic(pstContext.versaoAplic, this, progressBar);
-            }
+            progressBar.setCancelable(true);
+            progressBar.setMessage("BUSCANDO ATUALIZAÇÃO...");
+            progressBar.show();
+            VerifDadosServ.getInstance().verAtualAplic(pstContext.versaoAplic, this, progressBar);
         } else {
             startTimer();
         }
