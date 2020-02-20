@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">PST</string>
     <string name="texto_item_default">TESTE</string>
-    <string name="texto_menu_principal">PRINCIPAL - V 1.00</string>
+    <string name="texto_menu_principal">PRINCIPAL - V 1.01</string>
     <string name="texto_senha">SENHA:</string>
     <string name="texto_num1">1</string>
     <string name="texto_num2">2</string>
@@ -43,5 +43,5 @@
     <string name="texto_funcionario">MATRÍCULA:</string>
     <string name="texto_padrao_alterar">ALTERAR</string>
     <string name="texto_titulo_comentario">COMENTARIO</string>
-        <string name="texto_titulo_questao">QUESTÃO</string>
+    <string name="texto_titulo_questao">QUESTÃO</string>
 </resources>

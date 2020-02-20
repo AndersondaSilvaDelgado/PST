@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -12,10 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.io.File;
 import java.util.List;
 
 import br.com.usinasantafe.pst.bean.variaveis.FotoAbordBean;
+import br.com.usinasantafe.pst.control.AbordagemCTR;
 
 public class AdapterListFoto extends RecyclerView.Adapter<ImagemViewHolder> {
 
@@ -27,6 +26,7 @@ public class AdapterListFoto extends RecyclerView.Adapter<ImagemViewHolder> {
     public AdapterListFoto(Context context, List imagemList) {
         this.context = context;
         this.imagemList = imagemList;
+
     }
 
     @NonNull
@@ -42,7 +42,8 @@ public class AdapterListFoto extends RecyclerView.Adapter<ImagemViewHolder> {
         pos = position;
 
         fotoAbordBean = (FotoAbordBean) imagemList.get(pos);
-        holder.imagem.setImageBitmap(ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(fotoAbordBean.getFileFoto()),
+        AbordagemCTR abordagemCTR = new AbordagemCTR();
+        holder.imagem.setImageBitmap(ThumbnailUtils.extractThumbnail(abordagemCTR.getStringBitmap(fotoAbordBean.getFotoAbord()),
                 192, 192));
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -54,9 +55,6 @@ public class AdapterListFoto extends RecyclerView.Adapter<ImagemViewHolder> {
                 alerta.setPositiveButton("SIM", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
-                        File file = new File(fotoAbordBean.getFileFoto());
-                        file.delete();
 
                         imagemList.remove(pos);
                         fotoAbordBean.delete();

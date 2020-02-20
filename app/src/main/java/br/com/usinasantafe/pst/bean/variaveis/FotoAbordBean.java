@@ -1,5 +1,7 @@
 package br.com.usinasantafe.pst.bean.variaveis;
 
+import android.graphics.Bitmap;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -15,9 +17,7 @@ public class FotoAbordBean extends Entidade {
     @DatabaseField
     private Long idCabFotoAbord;
     @DatabaseField
-    private String nameFoto;
-    @DatabaseField
-    private String fileFoto;
+    private String fotoAbord;
     @DatabaseField
     private String dthrFotoAbord;
 
@@ -30,22 +30,6 @@ public class FotoAbordBean extends Entidade {
 
     public void setIdFotoAbord(Long idFotoAbord) {
         this.idFotoAbord = idFotoAbord;
-    }
-
-    public String getNameFoto() {
-        return nameFoto;
-    }
-
-    public void setNameFoto(String nameFoto) {
-        this.nameFoto = nameFoto;
-    }
-
-    public String getFileFoto() {
-        return fileFoto;
-    }
-
-    public void setFileFoto(String fileFoto) {
-        this.fileFoto = fileFoto;
     }
 
     public Long getIdCabFotoAbord() {
@@ -62,5 +46,13 @@ public class FotoAbordBean extends Entidade {
 
     public void setDthrFotoAbord(String dthrFotoAbord) {
         this.dthrFotoAbord = dthrFotoAbord;
+    }
+
+    public String getFotoAbord() {
+        return fotoAbord;
+    }
+
+    public void setFotoAbord(String fotoAbord) {
+        this.fotoAbord = fotoAbord;
     }
 }

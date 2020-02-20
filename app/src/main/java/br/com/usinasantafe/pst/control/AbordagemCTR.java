@@ -2,6 +2,7 @@ package br.com.usinasantafe.pst.control;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -100,11 +101,11 @@ public class AbordagemCTR {
         return itemAbordDAO.getItemCabecAberts(cabAbordBean.getIdCabAbord(), idQuestao);
     }
 
-    public FotoAbordBean salvarFoto(File file){
+    public FotoAbordBean salvarFoto(Bitmap bitmap){
         CabAbordDAO cabAbordDAO = new CabAbordDAO();
         CabAbordBean cabAbordBean = cabAbordDAO.getCabecAbert();
         FotoAbordDAO fotoAbordDAO = new FotoAbordDAO();
-        return fotoAbordDAO.salvarFoto(cabAbordBean.getIdCabAbord(), file);
+        return fotoAbordDAO.salvarFoto(cabAbordBean.getIdCabAbord(), bitmap);
     }
 
     public List getListFotoCabecAbert(){
@@ -160,7 +161,6 @@ public class AbordagemCTR {
 
         if(fotoAbordList.size() >= pos) {
             FotoAbordBean fotoAbordBean = (FotoAbordBean) fotoAbordList.get(pos - 1);
-            fotoAbordBean.setFileFoto(fotoAbordDAO.getBitmapString(fotoAbordBean));
             Gson gsonFoto = new Gson();
             jsonArrayFoto.add(gsonFoto.toJsonTree(fotoAbordBean, fotoAbordBean.getClass()));
         }
@@ -227,6 +227,32 @@ public class AbordagemCTR {
         arrayList.add("TopicoBean");
         arrayList.add("QuestaoBean");
         AtualDadosServ.getInstance().atualGenericoBD(telaAtual, telaProx, progressDialog, arrayList);
+    }
+
+    public void clearBD(){
+
+        CabAbordDAO cabAbordDAO = new CabAbordDAO();
+        List cabAbordList = cabAbordDAO.cabecAbertList();
+
+        if(cabAbordList.size() > 0){
+
+            CabAbordBean cabAbordBean = (CabAbordBean) cabAbordList.get(0);
+
+            ItemAbordDAO itemAbordDAO = new ItemAbordDAO();
+            itemAbordDAO.delItemCabec(cabAbordBean.getIdCabAbord());
+
+            FotoAbordDAO fotoAbordDAO = new FotoAbordDAO();
+            fotoAbordDAO.delFotoCabec(cabAbordBean.getIdCabAbord());
+
+            cabAbordBean.delete();
+
+        }
+
+    }
+
+    public Bitmap getStringBitmap(String foto){
+        FotoAbordDAO fotoAbordDAO = new FotoAbordDAO();
+        return fotoAbordDAO.getStringBitmap(foto);
     }
 
 }

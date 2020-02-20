@@ -75,9 +75,10 @@ public class ConHttpMultipartGenerico extends AsyncTask<String, Void, String>   
 			if(result.trim().contains("GRAVOU")){
 				AbordagemCTR abordagemCTR = new AbordagemCTR();
 				abordagemCTR.deleteCabec(result);
-
 			}
-
+			else{
+				EnvioDadosServ.getInstance().setEnviando(false);
+			}
 		} catch (Exception e) {
 			EnvioDadosServ.getInstance().setEnviando(false);
 			Log.i("PMM", "Erro = " + e);

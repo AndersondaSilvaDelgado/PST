@@ -48,6 +48,16 @@ public class MenuInicialActivity extends ActivityGeneric {
 
         progressBar = new ProgressDialog(this);
 
+        if (!checkPermission(Manifest.permission.INTERNET)) {
+            String[] PERMISSIONS = {android.Manifest.permission.INTERNET};
+            ActivityCompat.requestPermissions((Activity) this, PERMISSIONS, 112);
+        }
+
+        if (!checkPermission(Manifest.permission.ACCESS_NETWORK_STATE)) {
+            String[] PERMISSIONS = {android.Manifest.permission.ACCESS_NETWORK_STATE};
+            ActivityCompat.requestPermissions((Activity) this, PERMISSIONS, 112);
+        }
+
         if (!checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             String[] PERMISSIONS = {android.Manifest.permission.WRITE_EXTERNAL_STORAGE};
             ActivityCompat.requestPermissions((Activity) this, PERMISSIONS, 112);
@@ -130,7 +140,7 @@ public class MenuInicialActivity extends ActivityGeneric {
 
                     if (colabBean.hasElements()) {
 
-                        pstContext.getAbordagemCTR().setMatricFuncObsForm(0L);
+                        pstContext.getAbordagemCTR().clearBD();
 
                         Intent it = new Intent(MenuInicialActivity.this, ObservadorDigActivity.class);
                         startActivity(it);
@@ -241,7 +251,8 @@ public class MenuInicialActivity extends ActivityGeneric {
 
     public void startTimer() {
 
-        boolean alarmeAtivo = (PendingIntent.getBroadcast(this, 0, new Intent("ALARME_DISPARADO"), PendingIntent.FLAG_NO_CREATE) == null);
+        Intent intent = new Intent(this, ReceberAlarme.class);
+        boolean alarmeAtivo = (PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_NO_CREATE) == null);
 
         if (progressBar.isShowing()) {
             progressBar.dismiss();
@@ -249,9 +260,11 @@ public class MenuInicialActivity extends ActivityGeneric {
 
         if (alarmeAtivo) {
 
-            Log.i("PMM", "NOVO TIMER");
-            Intent intent = new Intent("EXECUTAR_ALARME");
-            PendingIntent p = PendingIntent.getBroadcast(this, 0, intent, 0);
+            Log.i("PST", "NOVO TIMER");
+
+//            PendingIntent p = PendingIntent.getBroadcast(this, 0, intent, 0);
+            PendingIntent p = PendingIntent.getBroadcast(getApplicationContext(), 0,
+                    intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             Calendar c = Calendar.getInstance();
             c.setTimeInMillis(System.currentTimeMillis());
@@ -264,5 +277,6 @@ public class MenuInicialActivity extends ActivityGeneric {
             Log.i("PMM", "TIMER já ativo");
         }
     }
+
 
 }

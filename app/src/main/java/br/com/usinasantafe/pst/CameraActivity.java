@@ -3,15 +3,21 @@ package br.com.usinasantafe.pst;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import java.io.File;
+import java.net.URI;
 import java.util.List;
 
 import br.com.usinasantafe.pst.util.EnvioDadosServ;
@@ -20,7 +26,6 @@ public class CameraActivity extends ActivityGeneric {
 
     private RecyclerView mRecyclerView;
     private List fotoAbordList;
-    private File[] listFile;
     private PSTContext pstContext;
 
     @Override
@@ -99,16 +104,10 @@ public class CameraActivity extends ActivityGeneric {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         if(requestCode == 1 && resultCode == RESULT_OK){
-
-            File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM + File.separator + "Camera");
-
-            if (file.isDirectory()) {
-                listFile = file.listFiles();
-                File fileUltFoto = listFile[listFile.length - 1];
-                fotoAbordList.add(pstContext.getAbordagemCTR().salvarFoto(fileUltFoto));
-            }
-
+            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            fotoAbordList.add(pstContext.getAbordagemCTR().salvarFoto(bitmap));
         }
 
     }

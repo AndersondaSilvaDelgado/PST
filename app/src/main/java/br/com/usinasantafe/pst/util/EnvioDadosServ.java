@@ -32,6 +32,10 @@ public class EnvioDadosServ {
 
         Log.i("PST", "CABECALHO = " + cabec);
         Log.i("PST", "ITEM = " + item);
+        Log.i("PST", "FOTO 1 = " + abordagemCTR.dadosFotoFechEnvio(1));
+        Log.i("PST", "FOTO 2 = " + abordagemCTR.dadosFotoFechEnvio(2));
+        Log.i("PST", "FOTO 3 = " + abordagemCTR.dadosFotoFechEnvio(3));
+        Log.i("PST", "FOTO 4 = " + abordagemCTR.dadosFotoFechEnvio(4));
 
         dados[0] = urlsConexaoHttp.getsInserirDados();
         dados[1] = cabec;

@@ -13,6 +13,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+
     <application
         android:name=".PSTContext"
         android:allowBackup="true"
@@ -20,10 +21,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
         <activity android:name=".TopicoActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".SenhaActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".QuestaoActivity"
             android:screenOrientation="portrait" />
@@ -39,8 +42,6 @@
             android:screenOrientation="portrait" />
         <activity android:name=".DetalhesActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ConfiguracaoActivity"
-            android:screenOrientation="portrait" />
         <activity android:name=".ComentarioActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".CameraActivity"
@@ -53,10 +54,6 @@
             </intent-filter>
         </activity>
         <receiver android:name=".ReceberAlarme">
-            <intent-filter>
-                <action android:name="EXECUTAR_ALARME" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </receiver>
     </application>
 </manifest>
