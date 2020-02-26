@@ -44,4 +44,5 @@
     <string name="texto_padrao_alterar">ALTERAR</string>
     <string name="texto_titulo_comentario">COMENTARIO</string>
     <string name="texto_titulo_questao">QUESTÃO</string>
+    <string name="texto_cancelar_abord">CANCELAR ABORD.</string>
 </resources>

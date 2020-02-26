@@ -35,6 +35,8 @@ public class TopicoActivity extends ActivityGeneric {
         TextView textViewTipo = (TextView) findViewById(R.id.textViewTipo);
         Button buttonAvancaTopico = (Button) findViewById(R.id.buttonAvancaTopico);
         Button buttonAtualTopico = (Button) findViewById(R.id.buttonAtualTopico);
+        Button buttonRetTopico = (Button) findViewById(R.id.buttonRetTopico);
+        Button buttonCancAbord = (Button) findViewById(R.id.buttonCancAbord);
 
         buttonAtualTopico.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,6 +153,48 @@ public class TopicoActivity extends ActivityGeneric {
                 }
 
                 topicoList.clear();
+
+            }
+        });
+
+        buttonRetTopico.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if(pstContext.getPosTipo() > 1){
+                    pstContext.setPosTipo(pstContext.getPosTipo() - 1);
+                    Intent it = new Intent(TopicoActivity.this, TopicoActivity.class);
+                    startActivity(it);
+                    finish();
+                }
+            }
+        });
+
+        buttonCancAbord.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog.Builder alerta = new AlertDialog.Builder(TopicoActivity.this);
+                alerta.setTitle("ATENÇÃO");
+                alerta.setMessage("DESEJA REALMENTE ABANDONA A ABORDAGEM?");
+                alerta.setPositiveButton("SIM", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        pstContext.getAbordagemCTR().clearBD();
+                        Intent it = new Intent(TopicoActivity.this, MenuInicialActivity.class);
+                        startActivity(it);
+                        finish();
+                    }
+                });
+
+                alerta.setNegativeButton("NÃO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+
+                alerta.show();
 
             }
         });

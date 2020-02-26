@@ -6,7 +6,7 @@ import br.com.usinasantafe.pst.control.AbordagemCTR;
 
 public class PSTContext extends Application {
 
-    public static String versaoAplic = "1.00";
+    public static String versaoAplic = "1.01";
     private AbordagemCTR abordagemCTR;
     private int posTipo;
     private Long idTopico;

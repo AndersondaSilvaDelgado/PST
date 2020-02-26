@@ -54,7 +54,7 @@ public class QuestaoActivity extends ActivityGeneric {
                 if((itemAbordBean.getQtdeSegItemAbord() > 0))
                     editTextQtdeSeg.setText(String.valueOf(itemAbordBean.getQtdeSegItemAbord()));
                 if((itemAbordBean.getQtdeInsegItemAbord() > 0))
-                    editTextQtdeInseg.setText(String.valueOf(itemAbordBean.getQtdeSegItemAbord()));
+                    editTextQtdeInseg.setText(String.valueOf(itemAbordBean.getQtdeInsegItemAbord()));
             }
             linearLayout.addView(view);
         }

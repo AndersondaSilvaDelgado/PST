@@ -26,7 +26,6 @@ public class AdapterListFoto extends RecyclerView.Adapter<ImagemViewHolder> {
     public AdapterListFoto(Context context, List imagemList) {
         this.context = context;
         this.imagemList = imagemList;
-
     }
 
     @NonNull

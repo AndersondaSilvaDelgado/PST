@@ -107,7 +107,15 @@ public class MenuInicialActivity extends ActivityGeneric {
 
         }
 
-        atualizarAplic();
+        if(pstContext.getAbordagemCTR().verAbordAbert()){
+            pstContext.setPosTipo(1);
+            Intent it = new Intent(MenuInicialActivity.this, TopicoActivity.class);
+            startActivity(it);
+            finish();
+        }
+        else{
+            atualizarAplic();
+        }
 
         listarMenuInicial();
 

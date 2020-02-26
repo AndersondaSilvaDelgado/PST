@@ -39,14 +39,6 @@ public class CameraActivity extends ActivityGeneric {
         Button buttonAvancaFoto = (Button) findViewById(R.id.buttonAvancaFoto);
         Button buttonRetFoto = (Button) findViewById(R.id.buttonRetFoto);
 
-        buttonCapturaFoto.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                tirarFoto();
-            }
-        });
-
         mRecyclerView = findViewById(R.id.recyclerview);
         GridLayoutManager mGridLayoutManager = new GridLayoutManager(CameraActivity.this, 2);
         mRecyclerView.setLayoutManager(mGridLayoutManager);
@@ -55,6 +47,14 @@ public class CameraActivity extends ActivityGeneric {
 
         AdapterListFoto adapterListFoto = new AdapterListFoto(CameraActivity.this, fotoAbordList);
         mRecyclerView.setAdapter(adapterListFoto);
+
+        buttonCapturaFoto.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                tirarFoto();
+            }
+        });
 
         buttonAvancaFoto.setOnClickListener(new View.OnClickListener() {
 
@@ -108,6 +108,11 @@ public class CameraActivity extends ActivityGeneric {
         if(requestCode == 1 && resultCode == RESULT_OK){
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             fotoAbordList.add(pstContext.getAbordagemCTR().salvarFoto(bitmap));
+
+            Intent it = new Intent(CameraActivity.this, CameraActivity.class);
+            startActivity(it);
+            finish();
+
         }
 
     }

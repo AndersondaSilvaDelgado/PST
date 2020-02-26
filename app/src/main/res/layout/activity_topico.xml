@@ -32,6 +32,13 @@
         android:layout_height="wrap_content"
         android:text="@string/texto_atualizar" />
 
+    <Button
+        android:id="@+id/buttonCancAbord"
+        style="@style/BotaoAvulso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/texto_cancelar_abord" />
+
     <LinearLayout
         android:id="@+id/rightRelativeLayout"
         android:layout_width="match_parent"

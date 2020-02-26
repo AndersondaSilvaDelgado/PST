@@ -34,10 +34,6 @@ public class AbordagemCTR {
         this.cabAbordBean.setMatricFuncCabAbord(matricFuncObsForm);
     }
 
-    public Long getMatricFuncObsForm(){
-        return this.cabAbordBean.getMatricFuncCabAbord();
-    }
-
     public void setIdAreaForm(Long idAreaForm){
         this.cabAbordBean.setIdAreaCabAbord(idAreaForm);
     }
@@ -63,6 +59,11 @@ public class AbordagemCTR {
     public void setComentarioCabAbord(Long tipoCabAbord, String comentarioCabAbord){
         this.cabAbordBean.setTipoCabAbord(tipoCabAbord);
         this.cabAbordBean.setComentCabAbord(comentarioCabAbord);
+    }
+
+    public boolean verAbordAbert() {
+        CabAbordDAO cabAbordDAO = new CabAbordDAO();
+        return cabAbordDAO.cabecAbertList().size() > 0;
     }
 
     public boolean verEnvioDados() {
