@@ -7,10 +7,10 @@ import android.util.Log;
 
 import java.util.List;
 
-import br.com.usinasantafe.pst.bean.variaveis.CabAbordBean;
-import br.com.usinasantafe.pst.bean.variaveis.FotoAbordBean;
-import br.com.usinasantafe.pst.bean.variaveis.ItemAbordBean;
-import br.com.usinasantafe.pst.pst.DatabaseHelper;
+import br.com.usinasantafe.pst.model.bean.variaveis.CabAbordBean;
+import br.com.usinasantafe.pst.model.bean.variaveis.FotoAbordBean;
+import br.com.usinasantafe.pst.model.bean.variaveis.ItemAbordBean;
+import br.com.usinasantafe.pst.model.pst.DatabaseHelper;
 import br.com.usinasantafe.pst.util.EnvioDadosServ;
 import br.com.usinasantafe.pst.util.Tempo;
 

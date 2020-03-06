@@ -10,7 +10,7 @@ import android.widget.Button;
 
 import java.util.List;
 
-import br.com.usinasantafe.pst.bean.estaticas.ColabBean;
+import br.com.usinasantafe.pst.model.bean.estaticas.ColabBean;
 import br.com.usinasantafe.pst.util.ConexaoWeb;
 
 public class ObservadorDigActivity extends ActivityGeneric {

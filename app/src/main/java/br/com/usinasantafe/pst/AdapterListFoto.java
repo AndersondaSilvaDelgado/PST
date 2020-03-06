@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import br.com.usinasantafe.pst.bean.variaveis.FotoAbordBean;
+import br.com.usinasantafe.pst.model.bean.variaveis.FotoAbordBean;
 import br.com.usinasantafe.pst.control.AbordagemCTR;
 
 public class AdapterListFoto extends RecyclerView.Adapter<ImagemViewHolder> {

@@ -1,4 +1,4 @@
-package br.com.usinasantafe.pst.bean.dao;
+package br.com.usinasantafe.pst.model.dao;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -6,10 +6,9 @@ import android.util.Base64;
 import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.util.List;
 
-import br.com.usinasantafe.pst.bean.variaveis.FotoAbordBean;
+import br.com.usinasantafe.pst.model.bean.variaveis.FotoAbordBean;
 import br.com.usinasantafe.pst.util.Tempo;
 
 public class FotoAbordDAO {

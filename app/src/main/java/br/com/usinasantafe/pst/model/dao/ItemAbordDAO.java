@@ -1,10 +1,10 @@
-package br.com.usinasantafe.pst.bean.dao;
+package br.com.usinasantafe.pst.model.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.usinasantafe.pst.bean.variaveis.ItemAbordBean;
-import br.com.usinasantafe.pst.pst.EspecificaPesquisa;
+import br.com.usinasantafe.pst.model.bean.variaveis.ItemAbordBean;
+import br.com.usinasantafe.pst.model.pst.EspecificaPesquisa;
 import br.com.usinasantafe.pst.util.Tempo;
 
 public class ItemAbordDAO {

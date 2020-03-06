@@ -1,11 +1,7 @@
 package br.com.usinasantafe.pst;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,9 +11,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.usinasantafe.pst.bean.estaticas.QuestaoBean;
-import br.com.usinasantafe.pst.bean.variaveis.ItemAbordBean;
-import br.com.usinasantafe.pst.util.ConexaoWeb;
+import br.com.usinasantafe.pst.model.bean.estaticas.QuestaoBean;
+import br.com.usinasantafe.pst.model.bean.variaveis.ItemAbordBean;
 
 public class QuestaoActivity extends ActivityGeneric {
 

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.Log;
 
 import br.com.usinasantafe.pst.control.AbordagemCTR;
+import br.com.usinasantafe.pst.util.conHttp.PostMultipartGenerico;
+import br.com.usinasantafe.pst.util.conHttp.UrlsConexaoHttp;
 
 public class EnvioDadosServ {
 
@@ -45,8 +47,8 @@ public class EnvioDadosServ {
         dados[5] = abordagemCTR.dadosFotoFechEnvio(3);
         dados[6] = abordagemCTR.dadosFotoFechEnvio(4);
 
-        ConHttpMultipartGenerico conHttpMultipartGenerico = new ConHttpMultipartGenerico();
-        conHttpMultipartGenerico.execute(dados);
+        PostMultipartGenerico postMultipartGenerico = new PostMultipartGenerico();
+        postMultipartGenerico.execute(dados);
 
     }
 

@@ -1,4 +1,4 @@
-package br.com.usinasantafe.pst.pst;
+package br.com.usinasantafe.pst.model.pst;
 
 public class EspecificaPesquisa {
 

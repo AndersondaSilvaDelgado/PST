@@ -13,7 +13,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.usinasantafe.pst.bean.estaticas.AreaBean;
+import br.com.usinasantafe.pst.model.bean.estaticas.AreaBean;
 import br.com.usinasantafe.pst.util.ConexaoWeb;
 
 public class ListaAreaActivity extends ActivityGeneric {

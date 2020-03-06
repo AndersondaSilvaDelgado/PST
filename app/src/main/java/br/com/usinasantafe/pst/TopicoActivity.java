@@ -14,8 +14,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.usinasantafe.pst.bean.estaticas.TipoBean;
-import br.com.usinasantafe.pst.bean.estaticas.TopicoBean;
+import br.com.usinasantafe.pst.model.bean.estaticas.TipoBean;
+import br.com.usinasantafe.pst.model.bean.estaticas.TopicoBean;
 import br.com.usinasantafe.pst.util.ConexaoWeb;
 
 public class TopicoActivity extends ActivityGeneric {

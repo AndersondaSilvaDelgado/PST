@@ -14,7 +14,9 @@ import org.json.JSONObject;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-import br.com.usinasantafe.pst.pst.GenericRecordable;
+import br.com.usinasantafe.pst.model.pst.GenericRecordable;
+import br.com.usinasantafe.pst.util.conHttp.GetBDGenerico;
+import br.com.usinasantafe.pst.util.conHttp.UrlsConexaoHttp;
 
 public class AtualDadosServ {
 
@@ -108,8 +110,8 @@ public class AtualDadosServ {
 
 		    contAtualBD++;
 
-	        ConHttpGetBDGenerico conHttpGetBDGenerico = new ConHttpGetBDGenerico();
-	        conHttpGetBDGenerico.execute(url);
+	        GetBDGenerico getBDGenerico = new GetBDGenerico();
+	        getBDGenerico.execute(url);
 
 		} catch (Exception e) {
 			Log.i("PMM", "ERRO Manip2 = " + e);
@@ -144,8 +146,8 @@ public class AtualDadosServ {
 			String[] url = {classe};
 			contAtualBD++;
 
-			ConHttpGetBDGenerico conHttpGetBDGenerico = new ConHttpGetBDGenerico();
-			conHttpGetBDGenerico.execute(url);
+			GetBDGenerico getBDGenerico = new GetBDGenerico();
+			getBDGenerico.execute(url);
 
 		} catch (Exception e) {
 			Log.i("PMM", "ERRO = " + e);
@@ -176,7 +178,7 @@ public class AtualDadosServ {
 //
 //			contAtualBD++;
 //
-//			ConHttpGetBDGenerico conHttpGetBDGenerico = new ConHttpGetBDGenerico();
+//			GetBDGenerico conHttpGetBDGenerico = new GetBDGenerico();
 //			conHttpGetBDGenerico.execute(url);
 //
 //		} catch (Exception e) {
@@ -198,8 +200,8 @@ public class AtualDadosServ {
 				String[] url = {classe};
 				contAtualBD++;
 
-				ConHttpGetBDGenerico conHttpGetBDGenerico = new ConHttpGetBDGenerico();
-		        conHttpGetBDGenerico.execute(url);
+				GetBDGenerico getBDGenerico = new GetBDGenerico();
+		        getBDGenerico.execute(url);
 
 			}
 			else{
@@ -231,8 +233,8 @@ public class AtualDadosServ {
 				String[] url = {classe};
 				contAtualBD++;
 
-				ConHttpGetBDGenerico conHttpGetBDGenerico = new ConHttpGetBDGenerico();
-		        conHttpGetBDGenerico.execute(url);
+				GetBDGenerico getBDGenerico = new GetBDGenerico();
+		        getBDGenerico.execute(url);
 
 			}
 			else

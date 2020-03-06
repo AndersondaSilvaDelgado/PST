@@ -1,8 +1,8 @@
-package br.com.usinasantafe.pst.bean.dao;
+package br.com.usinasantafe.pst.model.dao;
 
 import java.util.List;
 
-import br.com.usinasantafe.pst.bean.variaveis.CabAbordBean;
+import br.com.usinasantafe.pst.model.bean.variaveis.CabAbordBean;
 import br.com.usinasantafe.pst.util.Tempo;
 
 public class CabAbordDAO {

@@ -9,12 +9,13 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import br.com.usinasantafe.pst.MenuInicialActivity;
-import br.com.usinasantafe.pst.pst.GenericRecordable;
-import br.com.usinasantafe.pst.bean.variaveis.AtualAplicBean;
+import br.com.usinasantafe.pst.model.pst.GenericRecordable;
+import br.com.usinasantafe.pst.model.bean.variaveis.AtualAplicBean;
+import br.com.usinasantafe.pst.util.conHttp.PostVerGenerico;
+import br.com.usinasantafe.pst.util.conHttp.UrlsConexaoHttp;
 
 /**
  * Created by anderson on 16/11/2015.
@@ -22,23 +23,13 @@ import br.com.usinasantafe.pst.bean.variaveis.AtualAplicBean;
 public class VerifDadosServ {
 
     private static VerifDadosServ instance = null;
-    private GenericRecordable genericRecordable;
     private UrlsConexaoHttp urlsConexaoHttp;
-    private Context telaAtual;
-    private Class telaProx1;
-    private Class telaProx2;
     private ProgressDialog progressDialog;
-    private String dado;
     private String tipo;
-    private AtualAplicBean atualAplicBean;
     private MenuInicialActivity menuInicialActivity;
-    private ConHttpPostVerGenerico conHttpPostVerGenerico;
-    private boolean verTerm;
-    private String senha;
-    private int verTelaAtualPerda = 0;
+    private PostVerGenerico postVerGenerico;
 
     public VerifDadosServ() {
-        //genericRecordable = new GenericRecordable();
     }
 
     public static VerifDadosServ getInstance() {
@@ -93,9 +84,9 @@ public class VerifDadosServ {
         Map<String, Object> parametrosPost = new HashMap<String, Object>();
         parametrosPost.put("dado", json.toString());
 
-        conHttpPostVerGenerico = new ConHttpPostVerGenerico();
-        conHttpPostVerGenerico.setParametrosPost(parametrosPost);
-        conHttpPostVerGenerico.execute(url);
+        postVerGenerico = new PostVerGenerico();
+        postVerGenerico.setParametrosPost(parametrosPost);
+        postVerGenerico.execute(url);
 
     }
 

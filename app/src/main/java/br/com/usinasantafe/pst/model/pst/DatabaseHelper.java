@@ -1,4 +1,4 @@
-package br.com.usinasantafe.pst.pst;
+package br.com.usinasantafe.pst.model.pst;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,16 +8,16 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
-import br.com.usinasantafe.pst.bean.estaticas.AreaBean;
-import br.com.usinasantafe.pst.bean.estaticas.SubAreaBean;
-import br.com.usinasantafe.pst.bean.estaticas.ColabBean;
-import br.com.usinasantafe.pst.bean.estaticas.QuestaoBean;
-import br.com.usinasantafe.pst.bean.estaticas.TipoBean;
-import br.com.usinasantafe.pst.bean.estaticas.TopicoBean;
-import br.com.usinasantafe.pst.bean.estaticas.TurnoBean;
-import br.com.usinasantafe.pst.bean.variaveis.CabAbordBean;
-import br.com.usinasantafe.pst.bean.variaveis.FotoAbordBean;
-import br.com.usinasantafe.pst.bean.variaveis.ItemAbordBean;
+import br.com.usinasantafe.pst.model.bean.estaticas.AreaBean;
+import br.com.usinasantafe.pst.model.bean.estaticas.SubAreaBean;
+import br.com.usinasantafe.pst.model.bean.estaticas.ColabBean;
+import br.com.usinasantafe.pst.model.bean.estaticas.QuestaoBean;
+import br.com.usinasantafe.pst.model.bean.estaticas.TipoBean;
+import br.com.usinasantafe.pst.model.bean.estaticas.TopicoBean;
+import br.com.usinasantafe.pst.model.bean.estaticas.TurnoBean;
+import br.com.usinasantafe.pst.model.bean.variaveis.CabAbordBean;
+import br.com.usinasantafe.pst.model.bean.variaveis.FotoAbordBean;
+import br.com.usinasantafe.pst.model.bean.variaveis.ItemAbordBean;
 
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
@@ -104,8 +104,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 				TableUtils.createTable(cs, ItemAbordBean.class);
 				TableUtils.createTable(cs, FotoAbordBean.class);
 
-//				TableUtils.createTable(cs, ConfigBean.class);
-//				oldVersion = 2;
 			}
 			
 			

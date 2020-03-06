@@ -1,4 +1,4 @@
-package br.com.usinasantafe.pst.pst;
+package br.com.usinasantafe.pst.model.pst;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.DeleteBuilder;

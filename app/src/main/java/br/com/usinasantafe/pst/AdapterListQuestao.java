@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import br.com.usinasantafe.pst.bean.estaticas.QuestaoBean;
+import br.com.usinasantafe.pst.model.bean.estaticas.QuestaoBean;
 
 
 /**

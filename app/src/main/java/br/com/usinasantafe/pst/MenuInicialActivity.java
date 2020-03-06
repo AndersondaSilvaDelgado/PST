@@ -23,7 +23,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import br.com.usinasantafe.pst.bean.estaticas.ColabBean;
+import br.com.usinasantafe.pst.model.bean.estaticas.ColabBean;
 import br.com.usinasantafe.pst.util.AtualDadosServ;
 import br.com.usinasantafe.pst.util.ConexaoWeb;
 import br.com.usinasantafe.pst.util.EnvioDadosServ;

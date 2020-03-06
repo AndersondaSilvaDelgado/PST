@@ -13,7 +13,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.usinasantafe.pst.bean.estaticas.TurnoBean;
+import br.com.usinasantafe.pst.model.bean.estaticas.TurnoBean;
 import br.com.usinasantafe.pst.util.ConexaoWeb;
 
 public class ListaTurnoActivity extends ActivityGeneric {

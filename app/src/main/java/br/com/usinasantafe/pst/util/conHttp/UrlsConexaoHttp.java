@@ -1,4 +1,4 @@
-package br.com.usinasantafe.pst.util;
+package br.com.usinasantafe.pst.util.conHttp;
 
 import br.com.usinasantafe.pst.PSTContext;
 
@@ -7,8 +7,8 @@ public class UrlsConexaoHttp {
     public static String urlPrincipal = "http://www.usinasantafe.com.br/pst/view/";
     public static String urlPrincEnvio = "http://www.usinasantafe.com.br/pst/view/";
 
-    public static String localPSTEstatica = "br.com.usinasantafe.pst.bean.estaticas.";
-    public static String localUrl = "br.com.usinasantafe.pst.util.UrlsConexaoHttp";
+    public static String localPSTEstatica = "br.com.usinasantafe.pst.model.bean.estaticas.";
+    public static String localUrl = "br.com.usinasantafe.pst.util.conHttp.UrlsConexaoHttp";
 
     public static String put = "?versao=" + PSTContext.versaoAplic.replace(".", "_");
 

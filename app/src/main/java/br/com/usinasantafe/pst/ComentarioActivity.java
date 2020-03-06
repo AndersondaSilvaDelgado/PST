@@ -38,7 +38,7 @@ public class ComentarioActivity extends ActivityGeneric {
 
                 int selectedRadioButtonID = radioGroupSegInseg.getCheckedRadioButtonId();
 
-                if ((selectedRadioButtonID != -1) && (!editTextComentario.getText().toString().equals(""))) {
+                if ((selectedRadioButtonID != -1) && (!editTextComentario.getText().toString().trim().equals(""))) {
 
                     RadioButton selectedRadioButton = (RadioButton) findViewById(selectedRadioButtonID);
                     String selectedRadioButtonText = selectedRadioButton.getText().toString();

@@ -8,16 +8,15 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.usinasantafe.pst.bean.dao.CabAbordDAO;
-import br.com.usinasantafe.pst.bean.dao.FotoAbordDAO;
-import br.com.usinasantafe.pst.bean.dao.ItemAbordDAO;
-import br.com.usinasantafe.pst.bean.variaveis.CabAbordBean;
-import br.com.usinasantafe.pst.bean.variaveis.FotoAbordBean;
-import br.com.usinasantafe.pst.bean.variaveis.ItemAbordBean;
+import br.com.usinasantafe.pst.model.dao.CabAbordDAO;
+import br.com.usinasantafe.pst.model.dao.FotoAbordDAO;
+import br.com.usinasantafe.pst.model.dao.ItemAbordDAO;
+import br.com.usinasantafe.pst.model.bean.variaveis.CabAbordBean;
+import br.com.usinasantafe.pst.model.bean.variaveis.FotoAbordBean;
+import br.com.usinasantafe.pst.model.bean.variaveis.ItemAbordBean;
 import br.com.usinasantafe.pst.util.AtualDadosServ;
 import br.com.usinasantafe.pst.util.EnvioDadosServ;
 

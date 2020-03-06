@@ -1,9 +1,9 @@
-package br.com.usinasantafe.pst.bean.estaticas;
+package br.com.usinasantafe.pst.model.bean.estaticas;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-import br.com.usinasantafe.pst.pst.Entidade;
+import br.com.usinasantafe.pst.model.pst.Entidade;
 
 @DatabaseTable(tableName="tbcolabest")
 public class ColabBean extends Entidade {

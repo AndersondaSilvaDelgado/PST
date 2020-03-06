@@ -1,11 +1,9 @@
-package br.com.usinasantafe.pst.bean.variaveis;
-
-import android.graphics.Bitmap;
+package br.com.usinasantafe.pst.model.bean.variaveis;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-import br.com.usinasantafe.pst.pst.Entidade;
+import br.com.usinasantafe.pst.model.pst.Entidade;
 
 @DatabaseTable(tableName="tbfotoabordvar")
 public class FotoAbordBean extends Entidade {
