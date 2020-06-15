@@ -37,13 +37,31 @@ public class DetalhesActivity extends ActivityGeneric {
                         && (editTextPessoasCont.getText().length() > 0)
                         && (editTextPessoasObs.getText().length() > 0)) {
 
-                    pstContext.getAbordagemCTR().setDetalhesCabAbord(Long.parseLong(editTextExtensao.getText().toString()),
-                            Long.parseLong(editTextPessoasCont.getText().toString()),
-                            Long.parseLong(editTextPessoasObs.getText().toString()));
+                    if(Long.parseLong(editTextExtensao.getText().toString()) <= 500L){
 
-                    Intent it = new Intent(DetalhesActivity.this, ComentarioActivity.class);
-                    startActivity(it);
-                    finish();
+                        pstContext.getAbordagemCTR().setDetalhesCabAbord(Long.parseLong(editTextExtensao.getText().toString()),
+                                Long.parseLong(editTextPessoasCont.getText().toString()),
+                                Long.parseLong(editTextPessoasObs.getText().toString()));
+
+                        Intent it = new Intent(DetalhesActivity.this, ComentarioActivity.class);
+                        startActivity(it);
+                        finish();
+
+                    }
+                    else{
+
+                        AlertDialog.Builder alerta = new AlertDialog.Builder(DetalhesActivity.this);
+                        alerta.setTitle("ATENÇÃO");
+                        alerta.setMessage("EXTENSO EM MINUTOS DA ABORDAGEM ULTRAPASSOU O LIMITE MÁXIMO, FAVOR ALTERAR O VALOR DIGITADO!");
+                        alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        alerta.show();
+
+                    }
 
                 }
                 else {
