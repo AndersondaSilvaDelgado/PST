@@ -1,4 +1,4 @@
-package br.com.usinasantafe.pst;
+package br.com.usinasantafe.pst.view;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import br.com.usinasantafe.pst.PSTContext;
+import br.com.usinasantafe.pst.R;
 
 public class DetalhesActivity extends ActivityGeneric {
 

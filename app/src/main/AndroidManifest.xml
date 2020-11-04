@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.com.usinasantafe.pst">
 
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -26,27 +27,27 @@
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
-        <activity android:name=".TopicoActivity"
+        <activity android:name=".view.TopicoActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".QuestaoActivity"
+        <activity android:name=".view.QuestaoActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ObservadorLeitorActivity"
+        <activity android:name=".view.ObservadorLeitorActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ObservadorDigActivity"
+        <activity android:name=".view.ObservadorDigActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ListaTurnoActivity"
+        <activity android:name=".view.ListaTurnoActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ListaSubAreaActivity"
+        <activity android:name=".view.ListaSubAreaActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ListaAreaActivity"
+        <activity android:name=".view.ListaAreaActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".DetalhesActivity"
+        <activity android:name=".view.DetalhesActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ComentarioActivity"
+        <activity android:name=".view.ComentarioActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".CameraActivity"
+        <activity android:name=".view.CameraActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".MenuInicialActivity"
+        <activity android:name=".view.MenuInicialActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

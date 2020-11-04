@@ -1,4 +1,4 @@
-package br.com.usinasantafe.pst;
+package br.com.usinasantafe.pst.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.usinasantafe.pst.PSTContext;
+import br.com.usinasantafe.pst.R;
 import br.com.usinasantafe.pst.model.bean.estaticas.QuestaoBean;
 import br.com.usinasantafe.pst.model.bean.variaveis.ItemAbordBean;
 

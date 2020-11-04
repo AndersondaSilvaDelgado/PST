@@ -1,4 +1,4 @@
-package br.com.usinasantafe.pst;
+package br.com.usinasantafe.pst.view;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -10,6 +10,8 @@ import android.widget.Button;
 
 import java.util.List;
 
+import br.com.usinasantafe.pst.PSTContext;
+import br.com.usinasantafe.pst.R;
 import br.com.usinasantafe.pst.model.bean.estaticas.ColabBean;
 import br.com.usinasantafe.pst.util.ConexaoWeb;
 

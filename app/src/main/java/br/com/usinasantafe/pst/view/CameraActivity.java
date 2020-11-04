@@ -1,25 +1,20 @@
-package br.com.usinasantafe.pst;
+package br.com.usinasantafe.pst.view;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.ThumbnailUtils;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 
-import java.io.File;
-import java.net.URI;
 import java.util.List;
 
+import br.com.usinasantafe.pst.PSTContext;
+import br.com.usinasantafe.pst.R;
 import br.com.usinasantafe.pst.util.EnvioDadosServ;
 
 public class CameraActivity extends ActivityGeneric {

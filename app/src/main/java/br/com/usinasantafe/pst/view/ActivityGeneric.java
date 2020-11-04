@@ -1,4 +1,4 @@
-package br.com.usinasantafe.pst;
+package br.com.usinasantafe.pst.view;
 
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +7,7 @@ import android.widget.EditText;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 
+import br.com.usinasantafe.pst.R;
 import br.com.usinasantafe.pst.model.pst.DatabaseHelper;
 
 /**

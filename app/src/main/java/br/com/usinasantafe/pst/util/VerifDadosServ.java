@@ -1,7 +1,6 @@
 package br.com.usinasantafe.pst.util;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -11,8 +10,7 @@ import com.google.gson.JsonObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import br.com.usinasantafe.pst.MenuInicialActivity;
-import br.com.usinasantafe.pst.model.pst.GenericRecordable;
+import br.com.usinasantafe.pst.view.MenuInicialActivity;
 import br.com.usinasantafe.pst.model.bean.variaveis.AtualAplicBean;
 import br.com.usinasantafe.pst.util.conHttp.PostVerGenerico;
 import br.com.usinasantafe.pst.util.conHttp.UrlsConexaoHttp;

@@ -70,6 +70,12 @@ public class AbordagemCTR {
         return cabAbordDAO.cabecFechList().size() > 0;
     }
 
+    public boolean verItemCabec(){
+        CabAbordDAO cabAbordDAO = new CabAbordDAO();
+        ItemAbordDAO itemAbordDAO = new ItemAbordDAO();
+        return itemAbordDAO.verItemCabec(cabAbordDAO.cabecAbertList().get(0).getIdCabAbord());
+    }
+
     public void salvarCabecAberto(){
         CabAbordDAO cabAbordDAO = new CabAbordDAO();
         cabAbordDAO.salvarCabecAbert(cabAbordBean);
@@ -136,7 +142,7 @@ public class AbordagemCTR {
         CabAbordDAO cabAbordDAO = new CabAbordDAO();
         ItemAbordDAO itemAbordDAO = new ItemAbordDAO();
         CabAbordBean cabAbordBean = (CabAbordBean) cabAbordDAO.cabecFechList().get(0);
-        List itemAbordList = itemAbordDAO.getListItemCabecFech(cabAbordBean.getIdCabAbord());
+        List itemAbordList = itemAbordDAO.getListItemCabec(cabAbordBean.getIdCabAbord());
 
         JsonArray jsonArrayItem = new JsonArray();
 

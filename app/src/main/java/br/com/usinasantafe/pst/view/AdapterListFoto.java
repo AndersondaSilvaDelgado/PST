@@ -1,4 +1,4 @@
-package br.com.usinasantafe.pst;
+package br.com.usinasantafe.pst.view;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import br.com.usinasantafe.pst.R;
 import br.com.usinasantafe.pst.model.bean.variaveis.FotoAbordBean;
 import br.com.usinasantafe.pst.control.AbordagemCTR;
 

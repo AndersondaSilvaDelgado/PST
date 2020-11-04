@@ -1,4 +1,4 @@
-package br.com.usinasantafe.pst;
+package br.com.usinasantafe.pst.view;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -14,6 +14,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.usinasantafe.pst.PSTContext;
+import br.com.usinasantafe.pst.R;
 import br.com.usinasantafe.pst.model.bean.estaticas.TipoBean;
 import br.com.usinasantafe.pst.model.bean.estaticas.TopicoBean;
 import br.com.usinasantafe.pst.util.ConexaoWeb;
@@ -141,9 +143,22 @@ public class TopicoActivity extends ActivityGeneric {
             public void onClick(View v) {
 
                 if(topicoList.size() == pstContext.getPosTipo()){
-                    Intent it = new Intent(TopicoActivity.this, CameraActivity.class);
-                    startActivity(it);
-                    finish();
+                    if(pstContext.getAbordagemCTR().verItemCabec()){
+                        Intent it = new Intent(TopicoActivity.this, CameraActivity.class);
+                        startActivity(it);
+                        finish();
+                    }
+                    else{
+                        AlertDialog.Builder alerta = new AlertDialog.Builder(TopicoActivity.this);
+                        alerta.setTitle("ATENÇÃO");
+                        alerta.setMessage("ABORDAGEM SEM NENHUM TÓPICO PREENCHIDO! POR FAVOR, PREENCHA ALGUM TÓPICO PARA TERMINAR A ABORDAGEM.");
+                        alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+                        alerta.show();
+                    }
                 }
                 else{
                     pstContext.setPosTipo(pstContext.getPosTipo() + 1);

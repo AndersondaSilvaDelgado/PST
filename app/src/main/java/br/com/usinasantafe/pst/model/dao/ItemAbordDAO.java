@@ -42,11 +42,18 @@ public class ItemAbordDAO {
 
     }
 
+    public boolean verItemCabec(Long idCabec){
+        List<ItemAbordBean> itemAbordList = getListItemCabec(idCabec);
+        boolean ret = (itemAbordList.size() > 0);
+        itemAbordList.clear();
+        return ret;
+    }
+
     public ItemAbordBean getItemCabecAberts(Long idCabec, Long idQuestao){
         return (ItemAbordBean) getListItemCabecAbert(idCabec, idQuestao).get(0);
     }
 
-    public List getListItemCabecFech(Long idCabec){
+    public List getListItemCabec(Long idCabec){
         ItemAbordBean itemAbordBean = new ItemAbordBean();
         return itemAbordBean.get("idCabItemAbord", idCabec);
     }

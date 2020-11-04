@@ -16,12 +16,12 @@ public class CabAbordDAO {
         cabAbordBean.insert();
     }
 
-    public List cabecFechList() {
+    public List<CabAbordBean> cabecFechList() {
         CabAbordBean cabAbordBean = new CabAbordBean();
         return cabAbordBean.get("statusCabAbord", 2L);
     }
 
-    public List cabecAbertList() {
+    public List<CabAbordBean> cabecAbertList() {
         CabAbordBean cabAbordBean = new CabAbordBean();
         return cabAbordBean.get("statusCabAbord", 1L);
     }
