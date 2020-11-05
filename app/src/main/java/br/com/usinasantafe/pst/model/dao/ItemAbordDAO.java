@@ -53,7 +53,7 @@ public class ItemAbordDAO {
         return (ItemAbordBean) getListItemCabecAbert(idCabec, idQuestao).get(0);
     }
 
-    public List getListItemCabec(Long idCabec){
+    public List<ItemAbordBean> getListItemCabec(Long idCabec){
         ItemAbordBean itemAbordBean = new ItemAbordBean();
         return itemAbordBean.get("idCabItemAbord", idCabec);
     }

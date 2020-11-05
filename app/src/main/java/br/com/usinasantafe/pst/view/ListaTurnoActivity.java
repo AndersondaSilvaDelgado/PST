@@ -20,7 +20,7 @@ import br.com.usinasantafe.pst.util.ConexaoWeb;
 
 public class ListaTurnoActivity extends ActivityGeneric {
 
-    private List turnoList;
+    private List<TurnoBean> turnoList;
     private PSTContext pstContext;
     private ListView turnoListView;
     private ProgressDialog progressBar;
@@ -93,13 +93,11 @@ public class ListaTurnoActivity extends ActivityGeneric {
 
         });
 
-        TurnoBean turnoBean = new TurnoBean();
-        turnoList = turnoBean.all();
+        turnoList = pstContext.getAbordagemCTR().turnoList();
 
         ArrayList<String> itens = new ArrayList<String>();
 
-        for (int i = 0; i < turnoList.size(); i++) {
-            turnoBean = (TurnoBean) turnoList.get(i);
+        for (TurnoBean turnoBean : turnoList) {
             itens.add(turnoBean.getDescrTurno());
         }
 
@@ -113,7 +111,7 @@ public class ListaTurnoActivity extends ActivityGeneric {
             public void onItemClick(AdapterView<?> l, View v, int position,
                                     long id) {
 
-                TurnoBean turnoBean = (TurnoBean) turnoList.get(position);
+                TurnoBean turnoBean = turnoList.get(position);
                 pstContext.getAbordagemCTR().setIdTurno(turnoBean.getIdTurno());
                 turnoList.clear();
 

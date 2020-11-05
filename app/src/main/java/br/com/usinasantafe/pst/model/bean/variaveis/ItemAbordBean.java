@@ -73,4 +73,5 @@ public class ItemAbordBean extends Entidade {
     public void setDthrItemAbord(String dthrItemAbord) {
         this.dthrItemAbord = dthrItemAbord;
     }
+
 }

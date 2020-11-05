@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -23,9 +24,10 @@ import br.com.usinasantafe.pst.util.ConexaoWeb;
 public class TopicoActivity extends ActivityGeneric {
 
     private PSTContext pstContext;
-    private List topicoList;
+    private List<TopicoBean> topicoList;
     private ListView topicoListView;
     private ProgressDialog progressBar;
+    private TipoBean tipoBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,20 +100,15 @@ public class TopicoActivity extends ActivityGeneric {
 
         });
 
-        TipoBean tipoBean = new TipoBean();
-        List tipoList = tipoBean.all();
-        tipoBean = (TipoBean) tipoList.get(pstContext.getPosTipo() - 1);
-        tipoList.clear();
+        tipoBean = pstContext.getAbordagemCTR().getTipo(pstContext.getPosTipo() - 1);
 
         textViewTipo.setText(tipoBean.getDescrTipo());
 
-        TopicoBean topicoBean = new TopicoBean();
-        topicoList = topicoBean.get("idTipo", tipoBean.getIdTipo());
+        topicoList = pstContext.getAbordagemCTR().topicoList(tipoBean.getIdTipo());
 
         ArrayList<String> itens = new ArrayList<String>();
 
-        for(int i = 0; i < topicoList.size(); i++){
-            topicoBean = (TopicoBean) topicoList.get(i);
+        for(TopicoBean topicoBean : topicoList){
             itens.add(topicoBean.getDescrTopico());
         }
 
@@ -125,7 +122,7 @@ public class TopicoActivity extends ActivityGeneric {
             public void onItemClick(AdapterView<?> l, View v, int position,
                                     long id) {
 
-                TopicoBean topicoBean = (TopicoBean) topicoList.get(position);
+                TopicoBean topicoBean = topicoList.get(position);
                 pstContext.setIdTopico(topicoBean.getIdTopico());
                 topicoList.clear();
 
@@ -142,29 +139,29 @@ public class TopicoActivity extends ActivityGeneric {
             @Override
             public void onClick(View v) {
 
-                if(topicoList.size() == pstContext.getPosTipo()){
-                    if(pstContext.getAbordagemCTR().verItemCabec()){
-                        Intent it = new Intent(TopicoActivity.this, CameraActivity.class);
+                if(pstContext.getAbordagemCTR().verItemCabec(tipoBean)){
+                    if(topicoList.size() == pstContext.getPosTipo()){
+                            Intent it = new Intent(TopicoActivity.this, CameraActivity.class);
+                            startActivity(it);
+                            finish();
+                    }
+                    else{
+                        pstContext.setPosTipo(pstContext.getPosTipo() + 1);
+                        Intent it = new Intent(TopicoActivity.this, TopicoActivity.class);
                         startActivity(it);
                         finish();
                     }
-                    else{
-                        AlertDialog.Builder alerta = new AlertDialog.Builder(TopicoActivity.this);
-                        alerta.setTitle("ATENÇÃO");
-                        alerta.setMessage("ABORDAGEM SEM NENHUM TÓPICO PREENCHIDO! POR FAVOR, PREENCHA ALGUM TÓPICO PARA TERMINAR A ABORDAGEM.");
-                        alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        });
-                        alerta.show();
-                    }
                 }
                 else{
-                    pstContext.setPosTipo(pstContext.getPosTipo() + 1);
-                    Intent it = new Intent(TopicoActivity.this, TopicoActivity.class);
-                    startActivity(it);
-                    finish();
+                    AlertDialog.Builder alerta = new AlertDialog.Builder(TopicoActivity.this);
+                    alerta.setTitle("ATENÇÃO");
+                    alerta.setMessage("ABORDAGEM SEM NENHUM TÓPICO PREENCHIDO! POR FAVOR, PREENCHA ALGUM TÓPICO PARA TERMINAR A ABORDAGEM.");
+                    alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    alerta.show();
                 }
 
                 topicoList.clear();

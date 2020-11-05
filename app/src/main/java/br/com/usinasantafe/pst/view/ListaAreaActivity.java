@@ -20,7 +20,7 @@ import br.com.usinasantafe.pst.util.ConexaoWeb;
 
 public class ListaAreaActivity extends ActivityGeneric {
 
-    private List areaList;
+    private List<AreaBean> areaList;
     private PSTContext pstContext;
     private ListView areaListView;
     private ProgressDialog progressBar;
@@ -93,13 +93,11 @@ public class ListaAreaActivity extends ActivityGeneric {
 
         });
 
-        AreaBean areaBean = new AreaBean();
-        areaList = areaBean.all();
+        areaList = pstContext.getAbordagemCTR().areaList();
 
         ArrayList<String> itens = new ArrayList<String>();
 
-        for (int i = 0; i < areaList.size(); i++) {
-            areaBean = (AreaBean) areaList.get(i);
+        for (AreaBean areaBean : areaList) {
             itens.add(areaBean.getDescrArea());
         }
 
@@ -113,7 +111,7 @@ public class ListaAreaActivity extends ActivityGeneric {
             public void onItemClick(AdapterView<?> l, View v, int position,
                                     long id) {
 
-                AreaBean subAreaBean = (AreaBean) areaList.get(position);
+                AreaBean subAreaBean = areaList.get(position);
                 pstContext.getAbordagemCTR().setIdAreaForm(subAreaBean.getIdArea());
                 areaList.clear();
 

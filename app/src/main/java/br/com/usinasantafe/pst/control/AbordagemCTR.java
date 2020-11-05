@@ -11,12 +11,26 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.usinasantafe.pst.model.bean.estaticas.AreaBean;
+import br.com.usinasantafe.pst.model.bean.estaticas.ColabBean;
+import br.com.usinasantafe.pst.model.bean.estaticas.QuestaoBean;
+import br.com.usinasantafe.pst.model.bean.estaticas.SubAreaBean;
+import br.com.usinasantafe.pst.model.bean.estaticas.TipoBean;
+import br.com.usinasantafe.pst.model.bean.estaticas.TopicoBean;
+import br.com.usinasantafe.pst.model.bean.estaticas.TurnoBean;
+import br.com.usinasantafe.pst.model.dao.AreaDAO;
 import br.com.usinasantafe.pst.model.dao.CabAbordDAO;
+import br.com.usinasantafe.pst.model.dao.ColabDAO;
 import br.com.usinasantafe.pst.model.dao.FotoAbordDAO;
 import br.com.usinasantafe.pst.model.dao.ItemAbordDAO;
 import br.com.usinasantafe.pst.model.bean.variaveis.CabAbordBean;
 import br.com.usinasantafe.pst.model.bean.variaveis.FotoAbordBean;
 import br.com.usinasantafe.pst.model.bean.variaveis.ItemAbordBean;
+import br.com.usinasantafe.pst.model.dao.QuestaoDAO;
+import br.com.usinasantafe.pst.model.dao.SubAreaDAO;
+import br.com.usinasantafe.pst.model.dao.TipoDAO;
+import br.com.usinasantafe.pst.model.dao.TopicoDAO;
+import br.com.usinasantafe.pst.model.dao.TurnoDAO;
 import br.com.usinasantafe.pst.util.AtualDadosServ;
 import br.com.usinasantafe.pst.util.EnvioDadosServ;
 
@@ -70,10 +84,33 @@ public class AbordagemCTR {
         return cabAbordDAO.cabecFechList().size() > 0;
     }
 
-    public boolean verItemCabec(){
+    public boolean verColab(Long matricColab){
+        ColabDAO colabDAO = new ColabDAO();
+        return colabDAO.verColab(matricColab);
+    }
+
+    public boolean verItemCabec(TipoBean tipoBean){
         CabAbordDAO cabAbordDAO = new CabAbordDAO();
         ItemAbordDAO itemAbordDAO = new ItemAbordDAO();
-        return itemAbordDAO.verItemCabec(cabAbordDAO.cabecAbertList().get(0).getIdCabAbord());
+        TopicoDAO topicoDAO = new TopicoDAO();
+        QuestaoDAO questaoDAO = new QuestaoDAO();
+        TipoDAO tipoDAO = new TipoDAO();
+        if(tipoBean.getFlagTipo() == 0L){
+            return true;
+        }
+        else{
+            boolean ver = false;
+            List<ItemAbordBean> itemAbordList = itemAbordDAO.getListItemCabec(cabAbordDAO.cabecAbertList().get(0).getIdCabAbord());
+            for(ItemAbordBean itemAbordBean : itemAbordList){
+                QuestaoBean questaoBean = questaoDAO.getQuestao(itemAbordBean.getIdQuestaoItemAbord());
+                TopicoBean topicoBean = topicoDAO.getTopico(questaoBean.getIdTopico());
+                TipoBean tipoBeanBD = tipoDAO.getTipo(topicoBean.getIdTipo());
+                if(tipoBean.getIdTipo().equals(tipoBeanBD.getIdTipo())){
+                    ver = true;
+                }
+            }
+            return ver;
+        }
     }
 
     public void salvarCabecAberto(){
@@ -105,6 +142,41 @@ public class AbordagemCTR {
         CabAbordBean cabAbordBean = cabAbordDAO.getCabecAbert();
         ItemAbordDAO itemAbordDAO = new ItemAbordDAO();
         return itemAbordDAO.getItemCabecAberts(cabAbordBean.getIdCabAbord(), idQuestao);
+    }
+
+    public ColabBean getColab(Long matricColab){
+        ColabDAO colabDAO = new ColabDAO();
+        return colabDAO.getColab(matricColab);
+    }
+
+    public TipoBean getTipo(int posicao){
+        TipoDAO tipoDAO = new TipoDAO();
+        return tipoDAO.getTipo(posicao);
+    }
+
+    public List<AreaBean> areaList(){
+        AreaDAO areaDAO = new AreaDAO();
+        return areaDAO.areaList();
+    }
+
+    public List<SubAreaBean> subAreaList(){
+        SubAreaDAO subAreaDAO = new SubAreaDAO();
+        return subAreaDAO.subAreaList(getIdAreaForm());
+    }
+
+    public List<TurnoBean> turnoList(){
+        TurnoDAO turnoDAO = new TurnoDAO();
+        return turnoDAO.turnoList();
+    }
+
+    public List<TopicoBean> topicoList(Long idTipo){
+        TopicoDAO topicoDAO = new TopicoDAO();
+        return topicoDAO.topicoList(idTipo);
+    }
+
+    public List<QuestaoBean> questaoList(Long idTopico){
+        QuestaoDAO questaoDAO = new QuestaoDAO();
+        return questaoDAO.questaoList(idTopico);
     }
 
     public FotoAbordBean salvarFoto(Bitmap bitmap){

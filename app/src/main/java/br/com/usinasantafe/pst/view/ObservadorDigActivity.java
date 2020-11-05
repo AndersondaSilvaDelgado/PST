@@ -96,14 +96,9 @@ public class ObservadorDigActivity extends ActivityGeneric {
 
                 if (!editTextPadrao.getText().toString().equals("")) {
 
-                    ColabBean colabBean = new ColabBean();
-                    List colabList = colabBean.get("matricColab", Long.parseLong(editTextPadrao.getText().toString()));
+                    if (pstContext.getAbordagemCTR().verColab(Long.parseLong(editTextPadrao.getText().toString()))) {
 
-                    if (colabList.size() > 0) {
-
-                        colabBean = (ColabBean) colabList.get(0);
-                        pstContext.getAbordagemCTR().setMatricFuncObsForm(colabBean.getMatricColab());
-                        colabList.clear();
+                        pstContext.getAbordagemCTR().setMatricFuncObsForm(pstContext.getAbordagemCTR().getColab(Long.parseLong(editTextPadrao.getText().toString())).getMatricColab());
 
                         Intent it = new Intent(ObservadorDigActivity.this, ListaAreaActivity.class);
                         startActivity(it);

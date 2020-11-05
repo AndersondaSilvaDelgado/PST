@@ -14,6 +14,8 @@ public class TipoBean extends Entidade {
     private Long idTipo;
     @DatabaseField
     private String descrTipo;
+    @DatabaseField
+    private Long flagTipo;
 
     public TipoBean() {
     }
@@ -32,5 +34,13 @@ public class TipoBean extends Entidade {
 
     public void setDescrTipo(String descrTipo) {
         this.descrTipo = descrTipo;
+    }
+
+    public Long getFlagTipo() {
+        return flagTipo;
+    }
+
+    public void setFlagTipo(Long flagTipo) {
+        this.flagTipo = flagTipo;
     }
 }

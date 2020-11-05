@@ -15,12 +15,13 @@ import java.util.List;
 
 import br.com.usinasantafe.pst.PSTContext;
 import br.com.usinasantafe.pst.R;
+import br.com.usinasantafe.pst.model.bean.variaveis.FotoAbordBean;
 import br.com.usinasantafe.pst.util.EnvioDadosServ;
 
 public class CameraActivity extends ActivityGeneric {
 
     private RecyclerView mRecyclerView;
-    private List fotoAbordList;
+    private List<FotoAbordBean> fotoAbordList;
     private PSTContext pstContext;
 
     @Override

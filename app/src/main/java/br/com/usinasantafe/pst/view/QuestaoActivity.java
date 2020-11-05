@@ -20,7 +20,7 @@ public class QuestaoActivity extends ActivityGeneric {
 
     private PSTContext pstContext;
     private ArrayList questaoArrayList;
-    private List questaoList;
+    private List<QuestaoBean> questaoList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +33,12 @@ public class QuestaoActivity extends ActivityGeneric {
         Button buttonRetQuestao = (Button) findViewById(R.id.buttonRetQuestao);
         Button buttonSalvarQuestao = (Button) findViewById(R.id.buttonSalvarQuestao);
 
-        QuestaoBean questaoBean = new QuestaoBean();
-        questaoList = questaoBean.get("idTopico", pstContext.getIdTopico());
+        questaoList = pstContext.getAbordagemCTR().questaoList(pstContext.getIdTopico());
 
         questaoArrayList = new ArrayList();
 
         for(int i = 0; i < questaoList.size(); i++){
-            questaoBean = (QuestaoBean) questaoList.get(i);
+            QuestaoBean questaoBean = questaoList.get(i);
             questaoArrayList.add(getLayoutInflater().inflate(R.layout.activity_item_questao, null));
             View view = (View) questaoArrayList.get(i);
             TextView textViewDescrQuestao = view.findViewById(R.id.textViewDescrQuestao);
