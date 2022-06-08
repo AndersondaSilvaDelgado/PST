@@ -27,7 +27,7 @@ public class ItemAbordDAO {
         ArrayList listaPesq = new ArrayList();
 
         EspecificaPesquisa pesq1 = new EspecificaPesquisa();
-        pesq1.setCampo("idCabItemAbord");
+        pesq1.setCampo("idCabecItemAbord");
         pesq1.setValor(idCabec);
         pesq1.setTipo(1);
         listaPesq.add(pesq1);
@@ -55,12 +55,12 @@ public class ItemAbordDAO {
 
     public List<ItemAbordBean> getListItemCabec(Long idCabec){
         ItemAbordBean itemAbordBean = new ItemAbordBean();
-        return itemAbordBean.get("idCabItemAbord", idCabec);
+        return itemAbordBean.get("idCabecItemAbord", idCabec);
     }
 
     public void delItemCabec(Long idCabec){
         ItemAbordBean itemAbordBean = new ItemAbordBean();
-        List itemAbordList = itemAbordBean.get("idCabItemAbord", idCabec);
+        List itemAbordList = itemAbordBean.get("idCabecItemAbord", idCabec);
         for (int i = 0; i < itemAbordList.size(); i++) {
             itemAbordBean = (ItemAbordBean) itemAbordList.get(i);
             itemAbordBean.delete();

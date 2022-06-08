@@ -3,6 +3,7 @@ package br.com.usinasantafe.pst.control;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -19,11 +20,11 @@ import br.com.usinasantafe.pst.model.bean.estaticas.TipoBean;
 import br.com.usinasantafe.pst.model.bean.estaticas.TopicoBean;
 import br.com.usinasantafe.pst.model.bean.estaticas.TurnoBean;
 import br.com.usinasantafe.pst.model.dao.AreaDAO;
-import br.com.usinasantafe.pst.model.dao.CabAbordDAO;
+import br.com.usinasantafe.pst.model.dao.CabecAbordDAO;
 import br.com.usinasantafe.pst.model.dao.ColabDAO;
 import br.com.usinasantafe.pst.model.dao.FotoAbordDAO;
 import br.com.usinasantafe.pst.model.dao.ItemAbordDAO;
-import br.com.usinasantafe.pst.model.bean.variaveis.CabAbordBean;
+import br.com.usinasantafe.pst.model.bean.variaveis.CabecAbordBean;
 import br.com.usinasantafe.pst.model.bean.variaveis.FotoAbordBean;
 import br.com.usinasantafe.pst.model.bean.variaveis.ItemAbordBean;
 import br.com.usinasantafe.pst.model.dao.QuestaoDAO;
@@ -36,52 +37,52 @@ import br.com.usinasantafe.pst.util.EnvioDadosServ;
 
 public class AbordagemCTR {
 
-    private CabAbordBean cabAbordBean;
+    private CabecAbordBean cabecAbordBean;
 
     public AbordagemCTR() {
-        if (cabAbordBean == null)
-            cabAbordBean = new CabAbordBean();
+        if (cabecAbordBean == null)
+            cabecAbordBean = new CabecAbordBean();
     }
 
     public void setMatricFuncObsForm(Long matricFuncObsForm) {
-        this.cabAbordBean.setMatricFuncCabAbord(matricFuncObsForm);
+        this.cabecAbordBean.setMatricFuncCabecAbord(matricFuncObsForm);
     }
 
     public void setIdAreaForm(Long idAreaForm){
-        this.cabAbordBean.setIdAreaCabAbord(idAreaForm);
+        this.cabecAbordBean.setIdAreaCabecAbord(idAreaForm);
     }
 
     public Long getIdAreaForm(){
-        return this.cabAbordBean.getIdAreaCabAbord();
+        return this.cabecAbordBean.getIdAreaCabecAbord();
     }
 
     public void setIdSubAreaForm(Long idSubAreaForm){
-        this.cabAbordBean.setIdSubAreaCabAbord(idSubAreaForm);
+        this.cabecAbordBean.setIdSubAreaCabecAbord(idSubAreaForm);
     }
 
     public void setIdTurno(Long idTurno){
-        this.cabAbordBean.setIdTurnoCabAbord(idTurno);
+        this.cabecAbordBean.setIdTurnoCabecAbord(idTurno);
     }
 
     public void setDetalhesCabAbord(Long extensaoMinCabAbord, Long pessoasContCabAbord, Long pessoasObsCabAbord){
-        this.cabAbordBean.setExtensaoMinCabAbord(extensaoMinCabAbord);
-        this.cabAbordBean.setPessoasContCabAbord(pessoasContCabAbord);
-        this.cabAbordBean.setPessoasObsCabAbord(pessoasObsCabAbord);
+        this.cabecAbordBean.setExtensaoMinCabecAbord(extensaoMinCabAbord);
+        this.cabecAbordBean.setPessoasContCabecAbord(pessoasContCabAbord);
+        this.cabecAbordBean.setPessoasObsCabecAbord(pessoasObsCabAbord);
     }
 
     public void setComentarioCabAbord(Long tipoCabAbord, String comentarioCabAbord){
-        this.cabAbordBean.setTipoCabAbord(tipoCabAbord);
-        this.cabAbordBean.setComentCabAbord(comentarioCabAbord);
+        this.cabecAbordBean.setTipoCabecAbord(tipoCabAbord);
+        this.cabecAbordBean.setComentCabecAbord(comentarioCabAbord);
     }
 
     public boolean verAbordAbert() {
-        CabAbordDAO cabAbordDAO = new CabAbordDAO();
-        return cabAbordDAO.cabecAbertList().size() > 0;
+        CabecAbordDAO cabecAbordDAO = new CabecAbordDAO();
+        return cabecAbordDAO.cabecAbertList().size() > 0;
     }
 
     public boolean verEnvioDados() {
-        CabAbordDAO cabAbordDAO = new CabAbordDAO();
-        return cabAbordDAO.cabecFechList().size() > 0;
+        CabecAbordDAO cabecAbordDAO = new CabecAbordDAO();
+        return cabecAbordDAO.cabecFechList().size() > 0;
     }
 
     public boolean verColab(Long matricColab){
@@ -90,7 +91,7 @@ public class AbordagemCTR {
     }
 
     public boolean verItemCabec(TipoBean tipoBean){
-        CabAbordDAO cabAbordDAO = new CabAbordDAO();
+        CabecAbordDAO cabecAbordDAO = new CabecAbordDAO();
         ItemAbordDAO itemAbordDAO = new ItemAbordDAO();
         TopicoDAO topicoDAO = new TopicoDAO();
         QuestaoDAO questaoDAO = new QuestaoDAO();
@@ -100,11 +101,11 @@ public class AbordagemCTR {
         }
         else{
             boolean ver = false;
-            List<ItemAbordBean> itemAbordList = itemAbordDAO.getListItemCabec(cabAbordDAO.cabecAbertList().get(0).getIdCabAbord());
+            List<ItemAbordBean> itemAbordList = itemAbordDAO.getListItemCabec(cabecAbordDAO.cabecAbertList().get(0).getIdCabecAbord());
             for(ItemAbordBean itemAbordBean : itemAbordList){
                 QuestaoBean questaoBean = questaoDAO.getQuestao(itemAbordBean.getIdQuestaoItemAbord());
                 TopicoBean topicoBean = topicoDAO.getTopico(questaoBean.getIdTopico());
-                TipoBean tipoBeanBD = tipoDAO.getTipo(topicoBean.getIdTipo());
+                TipoBean tipoBeanBD = tipoDAO.getTipoId(topicoBean.getIdTipo());
                 if(tipoBean.getIdTipo().equals(tipoBeanBD.getIdTipo())){
                     ver = true;
                 }
@@ -114,15 +115,15 @@ public class AbordagemCTR {
     }
 
     public void salvarCabecAberto(){
-        CabAbordDAO cabAbordDAO = new CabAbordDAO();
-        cabAbordDAO.salvarCabecAbert(cabAbordBean);
+        CabecAbordDAO cabecAbordDAO = new CabecAbordDAO();
+        cabecAbordDAO.salvarCabecAbert(cabecAbordBean);
     }
 
     public void salvarItem(Long idQuestao, Long seguro, Long inseguro){
-        CabAbordDAO cabAbordDAO = new CabAbordDAO();
-        CabAbordBean cabAbordBean = cabAbordDAO.getCabecAbert();
+        CabecAbordDAO cabecAbordDAO = new CabecAbordDAO();
+        CabecAbordBean cabecAbordBean = cabecAbordDAO.getCabecAbert();
         ItemAbordBean itemAbordBean = new ItemAbordBean();
-        itemAbordBean.setIdCabItemAbord(cabAbordBean.getIdCabAbord());
+        itemAbordBean.setIdCabecItemAbord(cabecAbordBean.getIdCabecAbord());
         itemAbordBean.setIdQuestaoItemAbord(idQuestao);
         itemAbordBean.setQtdeSegItemAbord(seguro);
         itemAbordBean.setQtdeInsegItemAbord(inseguro);
@@ -131,17 +132,17 @@ public class AbordagemCTR {
     }
 
     public boolean verItemCabecAbert(Long idQuestao){
-        CabAbordDAO cabAbordDAO = new CabAbordDAO();
-        CabAbordBean cabAbordBean = cabAbordDAO.getCabecAbert();
+        CabecAbordDAO cabecAbordDAO = new CabecAbordDAO();
+        CabecAbordBean cabecAbordBean = cabecAbordDAO.getCabecAbert();
         ItemAbordDAO itemAbordDAO = new ItemAbordDAO();
-        return itemAbordDAO.verItemCabecAbert(cabAbordBean.getIdCabAbord(), idQuestao);
+        return itemAbordDAO.verItemCabecAbert(cabecAbordBean.getIdCabecAbord(), idQuestao);
     }
 
     public ItemAbordBean getItemCabecAbert(Long idQuestao){
-        CabAbordDAO cabAbordDAO = new CabAbordDAO();
-        CabAbordBean cabAbordBean = cabAbordDAO.getCabecAbert();
+        CabecAbordDAO cabecAbordDAO = new CabecAbordDAO();
+        CabecAbordBean cabecAbordBean = cabecAbordDAO.getCabecAbert();
         ItemAbordDAO itemAbordDAO = new ItemAbordDAO();
-        return itemAbordDAO.getItemCabecAberts(cabAbordBean.getIdCabAbord(), idQuestao);
+        return itemAbordDAO.getItemCabecAberts(cabecAbordBean.getIdCabecAbord(), idQuestao);
     }
 
     public ColabBean getColab(Long matricColab){
@@ -180,97 +181,105 @@ public class AbordagemCTR {
     }
 
     public FotoAbordBean salvarFoto(Bitmap bitmap){
-        CabAbordDAO cabAbordDAO = new CabAbordDAO();
-        CabAbordBean cabAbordBean = cabAbordDAO.getCabecAbert();
+        CabecAbordDAO cabecAbordDAO = new CabecAbordDAO();
+        CabecAbordBean cabecAbordBean = cabecAbordDAO.getCabecAbert();
         FotoAbordDAO fotoAbordDAO = new FotoAbordDAO();
-        return fotoAbordDAO.salvarFoto(cabAbordBean.getIdCabAbord(), bitmap);
+        return fotoAbordDAO.salvarFoto(cabecAbordBean.getIdCabecAbord(), bitmap);
     }
 
-    public List getListFotoCabecAbert(){
-        CabAbordDAO cabAbordDAO = new CabAbordDAO();
-        CabAbordBean cabAbordBean = cabAbordDAO.getCabecAbert();
+    public List<FotoAbordBean> getListFotoCabecAbert(){
+        CabecAbordDAO cabecAbordDAO = new CabecAbordDAO();
+        CabecAbordBean cabecAbordBean = cabecAbordDAO.getCabecAbert();
         FotoAbordDAO fotoAbordDAO = new FotoAbordDAO();
-        return fotoAbordDAO.getListFotoCabecAbert(cabAbordBean.getIdCabAbord());
+        return fotoAbordDAO.getListFotoCabec(cabecAbordBean.getIdCabecAbord());
     }
 
     public void salvaBolFechado(){
-        CabAbordDAO cabAbordDAO = new CabAbordDAO();
-        CabAbordBean cabAbordBean = cabAbordDAO.getCabecAbert();
-        cabAbordDAO.salvarCabecFech(cabAbordBean);
+        CabecAbordDAO cabecAbordDAO = new CabecAbordDAO();
+        CabecAbordBean cabecAbordBean = cabecAbordDAO.getCabecAbert();
+        cabecAbordDAO.salvarCabecFech(cabecAbordBean);
     }
 
-    public String dadosCabecFechEnvio() {
-        CabAbordDAO cabAbordDAO = new CabAbordDAO();
-        CabAbordBean cabAbordBean = (CabAbordBean) cabAbordDAO.cabecFechList().get(0);
-        JsonArray jsonArrayCabec = new JsonArray();
-        Gson gsonCabec = new Gson();
-        jsonArrayCabec.add(gsonCabec.toJsonTree(cabAbordBean, cabAbordBean.getClass()));
-        JsonObject jsonCabec = new JsonObject();
-        jsonCabec.add("cabec", jsonArrayCabec);
-        return jsonCabec.toString();
-    }
-
-    public String dadosItemFechEnvio() {
-        CabAbordDAO cabAbordDAO = new CabAbordDAO();
+    public List<CabecAbordBean> dadosFechEnvio() {
+        CabecAbordDAO cabecAbordDAO = new CabecAbordDAO();
         ItemAbordDAO itemAbordDAO = new ItemAbordDAO();
-        CabAbordBean cabAbordBean = (CabAbordBean) cabAbordDAO.cabecFechList().get(0);
-        List itemAbordList = itemAbordDAO.getListItemCabec(cabAbordBean.getIdCabAbord());
-
-        JsonArray jsonArrayItem = new JsonArray();
-
-        for (int i = 0; i < itemAbordList.size(); i++) {
-            ItemAbordBean itemAbordBean = (ItemAbordBean) itemAbordList.get(i);
-            Gson gsonItem = new Gson();
-            jsonArrayItem.add(gsonItem.toJsonTree(itemAbordBean, itemAbordBean.getClass()));
-        }
-
-        JsonObject jsonItem = new JsonObject();
-        jsonItem.add("item", jsonArrayItem);
-        return jsonItem.toString();
-    }
-
-    public String dadosFotoFechEnvio(int pos){
-        CabAbordDAO cabAbordDAO = new CabAbordDAO();
-        CabAbordBean cabAbordBean = (CabAbordBean) cabAbordDAO.cabecFechList().get(0);
         FotoAbordDAO fotoAbordDAO = new FotoAbordDAO();
-        List fotoAbordList = fotoAbordDAO.getListFotoCabecAbert(cabAbordBean.getIdCabAbord());
-
-        JsonArray jsonArrayFoto = new JsonArray();
-
-        if(fotoAbordList.size() >= pos) {
-            FotoAbordBean fotoAbordBean = (FotoAbordBean) fotoAbordList.get(pos - 1);
-            Gson gsonFoto = new Gson();
-            jsonArrayFoto.add(gsonFoto.toJsonTree(fotoAbordBean, fotoAbordBean.getClass()));
+        List<CabecAbordBean> cabecAbordList = cabecAbordDAO.cabecFechList();
+        for (int i = 0; i < cabecAbordList.size(); i++) {
+            List<ItemAbordBean> itemAbordBeanList = itemAbordDAO.getListItemCabec(cabecAbordList.get(i).getIdCabecAbord());
+            cabecAbordList.get(i).setItemAbordBeanList(itemAbordBeanList);
+            List<FotoAbordBean> fotoAbordBeanList = fotoAbordDAO.getListFotoCabec(cabecAbordList.get(i).getIdCabecAbord());
+            cabecAbordList.get(i).setFotoAbordBeanList(fotoAbordBeanList);
         }
-
-        JsonObject jsonFoto = new JsonObject();
-        jsonFoto.add("foto", jsonArrayFoto);
-        return jsonFoto.toString();
-
+        return cabecAbordList;
     }
+//
+//    public String dadosCabecFechEnvio() {
+//        CabecAbordDAO cabecAbordDAO = new CabecAbordDAO();
+//        CabecAbordBean cabecAbordBean = cabecAbordDAO.cabecFechList().get(0);
+//        JsonArray jsonArrayCabec = new JsonArray();
+//        Gson gsonCabec = new Gson();
+//        jsonArrayCabec.add(gsonCabec.toJsonTree(cabecAbordBean, cabecAbordBean.getClass()));
+//        JsonObject jsonCabec = new JsonObject();
+//        jsonCabec.add("cabec", jsonArrayCabec);
+//        return jsonCabec.toString();
+//    }
+//
+//    public String dadosItemFechEnvio() {
+//        CabecAbordDAO cabecAbordDAO = new CabecAbordDAO();
+//        ItemAbordDAO itemAbordDAO = new ItemAbordDAO();
+//        CabecAbordBean cabecAbordBean = cabecAbordDAO.cabecFechList().get(0);
+//        List itemAbordList = itemAbordDAO.getListItemCabec(cabecAbordBean.getIdCabecAbord());
+//
+//        JsonArray jsonArrayItem = new JsonArray();
+//
+//        for (int i = 0; i < itemAbordList.size(); i++) {
+//            ItemAbordBean itemAbordBean = (ItemAbordBean) itemAbordList.get(i);
+//            Gson gsonItem = new Gson();
+//            jsonArrayItem.add(gsonItem.toJsonTree(itemAbordBean, itemAbordBean.getClass()));
+//        }
+//
+//        JsonObject jsonItem = new JsonObject();
+//        jsonItem.add("item", jsonArrayItem);
+//        return jsonItem.toString();
+//    }
+//
+//    public String dadosFotoFechEnvio(int pos){
+//        CabecAbordDAO cabecAbordDAO = new CabecAbordDAO();
+//        CabecAbordBean cabecAbordBean = (CabecAbordBean) cabecAbordDAO.cabecFechList().get(0);
+//        FotoAbordDAO fotoAbordDAO = new FotoAbordDAO();
+//        List fotoAbordList = fotoAbordDAO.getListFotoCabec(cabecAbordBean.getIdCabecAbord());
+//
+//        JsonArray jsonArrayFoto = new JsonArray();
+//
+//        if(fotoAbordList.size() >= pos) {
+//            FotoAbordBean fotoAbordBean = (FotoAbordBean) fotoAbordList.get(pos - 1);
+//            Gson gsonFoto = new Gson();
+//            jsonArrayFoto.add(gsonFoto.toJsonTree(fotoAbordBean, fotoAbordBean.getClass()));
+//        }
+//
+//        JsonObject jsonFoto = new JsonObject();
+//        jsonFoto.add("foto", jsonArrayFoto);
+//        return jsonFoto.toString();
+//
+//    }
 
-    public void deleteCabec(String retorno) {
+    public void deleteCabec(List<CabecAbordBean> cabecAbordBeanList) {
 
-        try{
+        for(CabecAbordBean cabecAbordBean : cabecAbordBeanList){
 
-            int pos1 = retorno.indexOf("_") + 1;
-            Long idCabec = Long.valueOf(retorno.substring(pos1));
-
-            CabAbordDAO cabAbordDAO = new CabAbordDAO();
-            cabAbordDAO.delCabec(idCabec);
+            CabecAbordDAO cabecAbordDAO = new CabecAbordDAO();
+            cabecAbordDAO.delCabec(cabecAbordBean.getIdCabecAbord());
 
             ItemAbordDAO itemAbordDAO = new ItemAbordDAO();
-            itemAbordDAO.delItemCabec(idCabec);
+            itemAbordDAO.delItemCabec(cabecAbordBean.getIdCabecAbord());
 
             FotoAbordDAO fotoAbordDAO = new FotoAbordDAO();
-            fotoAbordDAO.delFotoCabec(idCabec);
-
-            EnvioDadosServ.getInstance().envioDados();
+            fotoAbordDAO.delFotoCabec(cabecAbordBean.getIdCabecAbord());
 
         }
-        catch(Exception e){
-            EnvioDadosServ.getInstance().setEnviando(false);
-        }
+
+        EnvioDadosServ.getInstance().envioDados();
 
     }
 
@@ -309,20 +318,20 @@ public class AbordagemCTR {
 
     public void clearBD(){
 
-        CabAbordDAO cabAbordDAO = new CabAbordDAO();
-        List cabAbordList = cabAbordDAO.cabecAbertList();
+        CabecAbordDAO cabecAbordDAO = new CabecAbordDAO();
+        List cabAbordList = cabecAbordDAO.cabecAbertList();
 
         if(cabAbordList.size() > 0){
 
-            CabAbordBean cabAbordBean = (CabAbordBean) cabAbordList.get(0);
+            CabecAbordBean cabecAbordBean = (CabecAbordBean) cabAbordList.get(0);
 
             ItemAbordDAO itemAbordDAO = new ItemAbordDAO();
-            itemAbordDAO.delItemCabec(cabAbordBean.getIdCabAbord());
+            itemAbordDAO.delItemCabec(cabecAbordBean.getIdCabecAbord());
 
             FotoAbordDAO fotoAbordDAO = new FotoAbordDAO();
-            fotoAbordDAO.delFotoCabec(cabAbordBean.getIdCabAbord());
+            fotoAbordDAO.delFotoCabec(cabecAbordBean.getIdCabecAbord());
 
-            cabAbordBean.delete();
+            cabecAbordBean.delete();
 
         }
 

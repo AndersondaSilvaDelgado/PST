@@ -18,16 +18,16 @@ public class FotoAbordDAO {
 
     public FotoAbordBean salvarFoto(Long idCabAbord, Bitmap bitmap){
         FotoAbordBean fotoAbordBean = new FotoAbordBean();
-        fotoAbordBean.setIdCabFotoAbord(idCabAbord);
+        fotoAbordBean.setIdCabecFotoAbord(idCabAbord);
         fotoAbordBean.setFotoAbord(getBitmapString(bitmap));
         fotoAbordBean.setDthrFotoAbord(Tempo.getInstance().dataComHora());
         fotoAbordBean.insert();
         return fotoAbordBean;
     }
 
-    public List getListFotoCabecAbert(Long idCabec){
+    public List<FotoAbordBean> getListFotoCabec(Long idCabec){
         FotoAbordBean fotoAbordBean = new FotoAbordBean();
-        return fotoAbordBean.get("idCabFotoAbord", idCabec);
+        return fotoAbordBean.get("idCabecFotoAbord", idCabec);
     }
 
     private String getBitmapString(Bitmap foto){
@@ -58,7 +58,7 @@ public class FotoAbordDAO {
 
     public void delFotoCabec(Long idCabec){
         FotoAbordBean fotoAbordBean = new FotoAbordBean();
-        List fotoAbordList = fotoAbordBean.get("idCabFotoAbord", idCabec);
+        List fotoAbordList = fotoAbordBean.get("idCabecFotoAbord", idCabec);
         for (int i = 0; i < fotoAbordList.size(); i++) {
             fotoAbordBean = (FotoAbordBean) fotoAbordList.get(i);
             fotoAbordBean.delete();

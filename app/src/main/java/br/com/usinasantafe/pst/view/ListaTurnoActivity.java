@@ -32,8 +32,8 @@ public class ListaTurnoActivity extends ActivityGeneric {
 
         pstContext = (PSTContext) getApplication();
 
-        Button buttonRetTurno = (Button) findViewById(R.id.buttonRetTurno);
-        Button buttonAtualTurno = (Button) findViewById(R.id.buttonAtualTurno);
+        Button buttonRetTurno = findViewById(R.id.buttonRetTurno);
+        Button buttonAtualTurno = findViewById(R.id.buttonAtualTurno);
 
         buttonAtualTurno.setOnClickListener(new View.OnClickListener() {
             @Override

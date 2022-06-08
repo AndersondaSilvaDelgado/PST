@@ -6,10 +6,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
@@ -102,6 +103,7 @@ public class CameraActivity extends ActivityGeneric {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if(requestCode == 1 && resultCode == RESULT_OK){
+
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             fotoAbordList.add(pstContext.getAbordagemCTR().salvarFoto(bitmap));
 

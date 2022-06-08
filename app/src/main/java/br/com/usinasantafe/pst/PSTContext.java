@@ -6,10 +6,12 @@ import br.com.usinasantafe.pst.control.AbordagemCTR;
 
 public class PSTContext extends Application {
 
-    public static String versaoAplic = "1.04";
     private AbordagemCTR abordagemCTR;
     private int posTipo;
     private Long idTopico;
+
+    public static String versaoApp = "1.04";
+    public static String versaoWS = "1.04";
 
     @Override
     public void onCreate() {

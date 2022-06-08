@@ -13,7 +13,7 @@ public class FotoAbordBean extends Entidade {
     @DatabaseField(generatedId=true)
     private Long idFotoAbord;
     @DatabaseField
-    private Long idCabFotoAbord;
+    private Long idCabecFotoAbord;
     @DatabaseField
     private String fotoAbord;
     @DatabaseField
@@ -30,12 +30,12 @@ public class FotoAbordBean extends Entidade {
         this.idFotoAbord = idFotoAbord;
     }
 
-    public Long getIdCabFotoAbord() {
-        return idCabFotoAbord;
+    public Long getIdCabecFotoAbord() {
+        return idCabecFotoAbord;
     }
 
-    public void setIdCabFotoAbord(Long idCabFotoAbord) {
-        this.idCabFotoAbord = idCabFotoAbord;
+    public void setIdCabecFotoAbord(Long idCabecFotoAbord) {
+        this.idCabecFotoAbord = idCabecFotoAbord;
     }
 
     public String getDthrFotoAbord() {

@@ -1,10 +1,13 @@
 package br.com.usinasantafe.pst.util;
 
 import android.content.Context;
-import android.util.Log;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import br.com.usinasantafe.pst.control.AbordagemCTR;
-import br.com.usinasantafe.pst.util.conHttp.PostMultipartGenerico;
+import br.com.usinasantafe.pst.retrofit.PostAbordagem;
+import br.com.usinasantafe.pst.util.conHttp.PostCadGenerico;
 import br.com.usinasantafe.pst.util.conHttp.UrlsConexaoHttp;
 
 public class EnvioDadosServ {
@@ -24,31 +27,26 @@ public class EnvioDadosServ {
 
     public void dadosEnvio() {
 
-        UrlsConexaoHttp urlsConexaoHttp = new UrlsConexaoHttp();
+//        UrlsConexaoHttp urlsConexaoHttp = new UrlsConexaoHttp();
+//        AbordagemCTR abordagemCTR = new AbordagemCTR();
+//
+//        String dados = abordagemCTR.dadosCabecFechEnvio() + "_" + abordagemCTR.dadosItemFechEnvio()
+//                + "_" + abordagemCTR.dadosFotoFechEnvio(1)
+//                + "_" + abordagemCTR.dadosFotoFechEnvio(2)
+//                + "_" + abordagemCTR.dadosFotoFechEnvio(3)
+//                + "_" + abordagemCTR.dadosFotoFechEnvio(4);
+//
+//        String[] url = {urlsConexaoHttp.getsInserirDados()};
+//        Map<String, Object> parametrosPost = new HashMap<String, Object>();
+//        parametrosPost.put("dado", dados);
+//
+//        PostCadGenerico postCadGenerico = new PostCadGenerico();
+//        postCadGenerico.setParametrosPost(parametrosPost);
+//        postCadGenerico.execute(url);
+
         AbordagemCTR abordagemCTR = new AbordagemCTR();
-
-        String[] dados = new String[7];
-
-        String cabec = abordagemCTR.dadosCabecFechEnvio();
-        String item = abordagemCTR.dadosItemFechEnvio();
-
-        Log.i("PST", "CABECALHO = " + cabec);
-        Log.i("PST", "ITEM = " + item);
-        Log.i("PST", "FOTO 1 = " + abordagemCTR.dadosFotoFechEnvio(1));
-        Log.i("PST", "FOTO 2 = " + abordagemCTR.dadosFotoFechEnvio(2));
-        Log.i("PST", "FOTO 3 = " + abordagemCTR.dadosFotoFechEnvio(3));
-        Log.i("PST", "FOTO 4 = " + abordagemCTR.dadosFotoFechEnvio(4));
-
-        dados[0] = urlsConexaoHttp.getsInserirDados();
-        dados[1] = cabec;
-        dados[2] = item;
-        dados[3] = abordagemCTR.dadosFotoFechEnvio(1);
-        dados[4] = abordagemCTR.dadosFotoFechEnvio(2);
-        dados[5] = abordagemCTR.dadosFotoFechEnvio(3);
-        dados[6] = abordagemCTR.dadosFotoFechEnvio(4);
-
-        PostMultipartGenerico postMultipartGenerico = new PostMultipartGenerico();
-        postMultipartGenerico.execute(dados);
+        PostAbordagem postAbordagem = new PostAbordagem();
+        postAbordagem.envioAbordagem(abordagemCTR.dadosFechEnvio());
 
     }
 

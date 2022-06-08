@@ -17,7 +17,7 @@ public class TipoDAO {
         return  tipoBean;
     }
 
-    public TipoBean getTipo(Long idTipo){
+    public TipoBean getTipoId(Long idTipo){
         TipoBean tipoBean = new TipoBean();
         List<TipoBean> tipoList = tipoBean.get("idTipo", idTipo);
         tipoBean = tipoList.get(0);

@@ -2,9 +2,7 @@ package br.com.usinasantafe.pst.view;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.AlarmManager;
 import android.app.AlertDialog;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,21 +10,20 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import br.com.usinasantafe.pst.PSTContext;
 import br.com.usinasantafe.pst.R;
-import br.com.usinasantafe.pst.ReceberAlarme;
 import br.com.usinasantafe.pst.model.bean.estaticas.ColabBean;
+import br.com.usinasantafe.pst.retrofit.PostAbordagem;
 import br.com.usinasantafe.pst.util.AtualDadosServ;
 import br.com.usinasantafe.pst.util.ConexaoWeb;
 import br.com.usinasantafe.pst.util.EnvioDadosServ;
@@ -51,24 +48,24 @@ public class MenuInicialActivity extends ActivityGeneric {
 
         progressBar = new ProgressDialog(this);
 
+        if (!checkPermission(Manifest.permission.CAMERA)) {
+            String[] PERMISSIONS = {Manifest.permission.CAMERA};
+            ActivityCompat.requestPermissions(this, PERMISSIONS, 112);
+        }
+
         if (!checkPermission(Manifest.permission.INTERNET)) {
             String[] PERMISSIONS = {android.Manifest.permission.INTERNET};
-            ActivityCompat.requestPermissions((Activity) this, PERMISSIONS, 112);
+            ActivityCompat.requestPermissions(this, PERMISSIONS, 112);
         }
 
         if (!checkPermission(Manifest.permission.ACCESS_NETWORK_STATE)) {
             String[] PERMISSIONS = {android.Manifest.permission.ACCESS_NETWORK_STATE};
-            ActivityCompat.requestPermissions((Activity) this, PERMISSIONS, 112);
+            ActivityCompat.requestPermissions(this, PERMISSIONS, 112);
         }
 
         if (!checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             String[] PERMISSIONS = {android.Manifest.permission.WRITE_EXTERNAL_STORAGE};
-            ActivityCompat.requestPermissions((Activity) this, PERMISSIONS, 112);
-        }
-
-        if (!checkPermission(Manifest.permission.CAMERA)) {
-            String[] PERMISSIONS = {Manifest.permission.CAMERA};
-            ActivityCompat.requestPermissions((Activity) this, PERMISSIONS, 112);
+            ActivityCompat.requestPermissions(this, PERMISSIONS, 112);
         }
 
         customHandler.postDelayed(updateTimerThread, 0);
@@ -207,10 +204,12 @@ public class MenuInicialActivity extends ActivityGeneric {
 
                 } else if (text.equals("SAIR")) {
 
-                    Intent intent = new Intent(Intent.ACTION_MAIN);
-                    intent.addCategory(Intent.CATEGORY_HOME);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+//                    Intent intent = new Intent(Intent.ACTION_MAIN);
+//                    intent.addCategory(Intent.CATEGORY_HOME);
+//                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    startActivity(intent);
+//                    PostAbordagem postAbordagem = new PostAbordagem();
+//                    postAbordagem.envioAbordagem();
 
                 }
 
@@ -254,40 +253,16 @@ public class MenuInicialActivity extends ActivityGeneric {
             progressBar.setCancelable(true);
             progressBar.setMessage("BUSCANDO ATUALIZAÇÃO...");
             progressBar.show();
-            VerifDadosServ.getInstance().verAtualAplic(pstContext.versaoAplic, this, progressBar);
+            VerifDadosServ.getInstance().verAtualAplic(pstContext.versaoApp, this, progressBar);
         } else {
             startTimer();
         }
     }
 
     public void startTimer() {
-
-        Intent intent = new Intent(this, ReceberAlarme.class);
-        boolean alarmeAtivo = (PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_NO_CREATE) == null);
-
         if (progressBar.isShowing()) {
             progressBar.dismiss();
         }
-
-        if (alarmeAtivo) {
-
-            Log.i("PST", "NOVO TIMER");
-
-//            PendingIntent p = PendingIntent.getBroadcast(this, 0, intent, 0);
-            PendingIntent p = PendingIntent.getBroadcast(getApplicationContext(), 0,
-                    intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-            Calendar c = Calendar.getInstance();
-            c.setTimeInMillis(System.currentTimeMillis());
-            c.add(Calendar.SECOND, 1);
-
-            AlarmManager alarme = (AlarmManager) getSystemService(ALARM_SERVICE);
-            alarme.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), 60000, p);
-
-        } else {
-            Log.i("PMM", "TIMER já ativo");
-        }
     }
-
 
 }

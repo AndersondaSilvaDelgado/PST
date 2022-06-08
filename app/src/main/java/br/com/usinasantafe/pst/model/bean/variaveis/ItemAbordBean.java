@@ -13,7 +13,7 @@ public class ItemAbordBean extends Entidade {
     @DatabaseField(generatedId=true)
     private Long idItemAbord;
     @DatabaseField
-    private Long idCabItemAbord;
+    private Long idCabecItemAbord;
     @DatabaseField
     private Long idQuestaoItemAbord;
     @DatabaseField
@@ -34,12 +34,12 @@ public class ItemAbordBean extends Entidade {
         this.idItemAbord = idItemAbord;
     }
 
-    public Long getIdCabItemAbord() {
-        return idCabItemAbord;
+    public Long getIdCabecItemAbord() {
+        return idCabecItemAbord;
     }
 
-    public void setIdCabItemAbord(Long idCabItemAbord) {
-        this.idCabItemAbord = idCabItemAbord;
+    public void setIdCabecItemAbord(Long idCabecItemAbord) {
+        this.idCabecItemAbord = idCabecItemAbord;
     }
 
     public Long getIdQuestaoItemAbord() {

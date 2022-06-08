@@ -18,11 +18,10 @@
         android:layout_height="wrap_content"
         android:text="@string/texto_titulo_questao" />
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        >
+        android:layout_weight="1" >
 
         <LinearLayout
             android:id="@+id/layoutTela"
@@ -33,7 +32,7 @@
 
         </LinearLayout>
 
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <LinearLayout
         android:id="@+id/rightRelativeLayout"

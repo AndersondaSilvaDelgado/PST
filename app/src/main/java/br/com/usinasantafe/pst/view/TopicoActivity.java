@@ -36,11 +36,11 @@ public class TopicoActivity extends ActivityGeneric {
 
         pstContext = (PSTContext) getApplication();
 
-        TextView textViewTipo = (TextView) findViewById(R.id.textViewTipo);
-        Button buttonAvancaTopico = (Button) findViewById(R.id.buttonAvancaTopico);
-        Button buttonAtualTopico = (Button) findViewById(R.id.buttonAtualTopico);
-        Button buttonRetTopico = (Button) findViewById(R.id.buttonRetTopico);
-        Button buttonCancAbord = (Button) findViewById(R.id.buttonCancAbord);
+        TextView textViewTipo = findViewById(R.id.textViewTipo);
+        Button buttonAvancaTopico = findViewById(R.id.buttonAvancaTopico);
+        Button buttonAtualTopico = findViewById(R.id.buttonAtualTopico);
+        Button buttonRetTopico = findViewById(R.id.buttonRetTopico);
+        Button buttonCancAbord = findViewById(R.id.buttonCancAbord);
 
         buttonAtualTopico.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,9 +101,7 @@ public class TopicoActivity extends ActivityGeneric {
         });
 
         tipoBean = pstContext.getAbordagemCTR().getTipo(pstContext.getPosTipo() - 1);
-
         textViewTipo.setText(tipoBean.getDescrTipo());
-
         topicoList = pstContext.getAbordagemCTR().topicoList(tipoBean.getIdTipo());
 
         ArrayList<String> itens = new ArrayList<String>();
@@ -113,7 +111,7 @@ public class TopicoActivity extends ActivityGeneric {
         }
 
         AdapterList adapterList = new AdapterList(this, itens);
-        topicoListView = (ListView) findViewById(R.id.listTopico);
+        topicoListView = findViewById(R.id.listTopico);
         topicoListView.setAdapter(adapterList);
 
         topicoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -141,9 +139,9 @@ public class TopicoActivity extends ActivityGeneric {
 
                 if(pstContext.getAbordagemCTR().verItemCabec(tipoBean)){
                     if(topicoList.size() == pstContext.getPosTipo()){
-                            Intent it = new Intent(TopicoActivity.this, CameraActivity.class);
-                            startActivity(it);
-                            finish();
+                        Intent it = new Intent(TopicoActivity.this, CameraActivity.class);
+                        startActivity(it);
+                        finish();
                     }
                     else{
                         pstContext.setPosTipo(pstContext.getPosTipo() + 1);
@@ -151,6 +149,7 @@ public class TopicoActivity extends ActivityGeneric {
                         startActivity(it);
                         finish();
                     }
+                    topicoList.clear();
                 }
                 else{
                     AlertDialog.Builder alerta = new AlertDialog.Builder(TopicoActivity.this);
@@ -163,9 +162,6 @@ public class TopicoActivity extends ActivityGeneric {
                     });
                     alerta.show();
                 }
-
-                topicoList.clear();
-
             }
         });
 

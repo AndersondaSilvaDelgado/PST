@@ -11,14 +11,15 @@ import java.net.URL;
 import java.util.Iterator;
 import java.util.Map;
 
-public class PostCadGenerico extends AsyncTask<String, Void, String> {
+import br.com.usinasantafe.pst.control.AbordagemCTR;
+import br.com.usinasantafe.pst.util.EnvioDadosServ;
 
+public class PostCadGenerico extends AsyncTask<String, Void, String> {
 
 	private static PostCadGenerico instance = null;
 	private Map<String, Object> parametrosPost = null;
 
 	public PostCadGenerico() {
-
 	}
 
     public static PostCadGenerico getInstance() {
@@ -26,7 +27,6 @@ public class PostCadGenerico extends AsyncTask<String, Void, String> {
         instance = new PostCadGenerico();
         return instance;
     }
-
 
 	@Override
 	protected String doInBackground(String... arg) {
@@ -94,14 +94,18 @@ public class PostCadGenerico extends AsyncTask<String, Void, String> {
 	protected void onPostExecute(String result) {
 
 		try {
-//			EnvioDadosServ.getInstance().setEnviando(false);
-//			Log.i("ECM", "VALOR RECEBIDO --> " + result);
-//			if(result.trim().equals("GRAVOU-CHECKLIST")){
-//				EnvioDadosServ.getInstance().delChecklist();
-//			}
-		} catch (Exception e) {
 
-			Log.i("PMM", "Erro2 = " + e);
+			Log.i("ECM", "VALOR RECEBIDO --> " + result);
+			if(result.trim().contains("GRAVOU")){
+//				AbordagemCTR abordagemCTR = new AbordagemCTR();
+//				abordagemCTR.deleteCabec(result.trim());
+			}
+			else{
+				EnvioDadosServ.getInstance().setEnviando(false);
+			}
+		} catch (Exception e) {
+			EnvioDadosServ.getInstance().setEnviando(false);
+			Log.i("PMM", "Erro = " + e);
 		}
 		
     }
@@ -115,9 +119,9 @@ public class PostCadGenerico extends AsyncTask<String, Void, String> {
 			return null;
 		}
 		String urlParams = null;
-		Iterator<String> e = (Iterator<String>) params.keySet().iterator();
+		Iterator<String> e = params.keySet().iterator();
 		while (e.hasNext()) {
-			String chave = (String) e.next();
+			String chave = e.next();
 			Object objValor = params.get(chave);
 			String valor = objValor.toString();
 			urlParams = urlParams == null ? "" : urlParams + "&";
