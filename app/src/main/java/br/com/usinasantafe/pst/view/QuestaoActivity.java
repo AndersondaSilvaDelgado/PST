@@ -29,9 +29,9 @@ public class QuestaoActivity extends ActivityGeneric {
 
         pstContext = (PSTContext) getApplication();
 
-        LinearLayout linearLayout =  (LinearLayout)  findViewById(R.id.layoutTela);
-        Button buttonRetQuestao = (Button) findViewById(R.id.buttonRetQuestao);
-        Button buttonSalvarQuestao = (Button) findViewById(R.id.buttonSalvarQuestao);
+        LinearLayout linearLayout = findViewById(R.id.layoutTela);
+        Button buttonRetQuestao = findViewById(R.id.buttonRetQuestao);
+        Button buttonSalvarQuestao = findViewById(R.id.buttonSalvarQuestao);
 
         questaoList = pstContext.getAbordagemCTR().questaoList(pstContext.getIdTopico());
 
@@ -55,44 +55,36 @@ public class QuestaoActivity extends ActivityGeneric {
             linearLayout.addView(view);
         }
 
-        buttonRetQuestao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        buttonRetQuestao.setOnClickListener(v -> {
 
-                Intent it = new Intent(QuestaoActivity.this, TopicoActivity.class);
-                startActivity(it);
-                finish();
+            Intent it = new Intent(QuestaoActivity.this, TopicoActivity.class);
+            startActivity(it);
+            finish();
 
-            }
         });
 
-        buttonSalvarQuestao.setOnClickListener(new View.OnClickListener() {
+        buttonSalvarQuestao.setOnClickListener(v -> {
 
-            @Override
-            public void onClick(View v) {
-
-                for(int i = 0; i < questaoArrayList.size(); i++) {
-                    View view = (View) questaoArrayList.get(i);
-                    EditText editTextQtdeSeg = view.findViewById(R.id.editTextQtdeSeg);
-                    EditText editTextQtdeInseg = view.findViewById(R.id.editTextQtdeInseg);
-                    if((editTextQtdeSeg.getText().length() > 0) || (editTextQtdeInseg.getText().length() > 0)){
-                        Long seguro = 0L;
-                        Long inseguro = 0L;
-                        if((editTextQtdeSeg.getText().length() > 0))
-                            seguro = Long.parseLong(editTextQtdeSeg.getText().toString());
-                        if((editTextQtdeInseg.getText().length() > 0))
-                            inseguro = Long.parseLong(editTextQtdeInseg.getText().toString());
-                        QuestaoBean questaoBean = (QuestaoBean) questaoList.get(i);
-                        pstContext.getAbordagemCTR().salvarItem(questaoBean.getIdQuestao(), seguro, inseguro);
-                    }
+            for(int i = 0; i < questaoArrayList.size(); i++) {
+                View view = (View) questaoArrayList.get(i);
+                EditText editTextQtdeSeg = view.findViewById(R.id.editTextQtdeSeg);
+                EditText editTextQtdeInseg = view.findViewById(R.id.editTextQtdeInseg);
+                if((editTextQtdeSeg.getText().length() > 0) || (editTextQtdeInseg.getText().length() > 0)){
+                    Long seguro = 0L;
+                    Long inseguro = 0L;
+                    if((editTextQtdeSeg.getText().length() > 0))
+                        seguro = Long.parseLong(editTextQtdeSeg.getText().toString());
+                    if((editTextQtdeInseg.getText().length() > 0))
+                        inseguro = Long.parseLong(editTextQtdeInseg.getText().toString());
+                    QuestaoBean questaoBean = questaoList.get(i);
+                    pstContext.getAbordagemCTR().salvarItem(questaoBean.getIdQuestao(), seguro, inseguro);
                 }
-                questaoArrayList.clear();
-                questaoList.clear();
-                Intent it = new Intent(QuestaoActivity.this, TopicoActivity.class);
-                startActivity(it);
-                finish();
-
             }
+            questaoArrayList.clear();
+            questaoList.clear();
+            Intent it = new Intent(QuestaoActivity.this, TopicoActivity.class);
+            startActivity(it);
+            finish();
 
         });
 

@@ -22,57 +22,76 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".view.ConfigActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
-        <activity android:name=".view.TopicoActivity"
-            android:exported="false"
+
+        <activity
+            android:name=".view.TopicoActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
-        <activity android:name=".view.QuestaoActivity"
-            android:exported="false"
+        <activity
+            android:name=".view.QuestaoActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
-        <activity android:name=".view.ObservadorDigActivity"
-            android:exported="false"
+        <activity
+            android:name=".view.ObservadorDigActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
-        <activity android:name=".view.ListaTurnoActivity"
-            android:exported="false"
+        <activity
+            android:name=".view.ListaTurnoActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
-        <activity android:name=".view.ListaSubAreaActivity"
-            android:exported="false"
+        <activity
+            android:name=".view.ListaSubAreaActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
-        <activity android:name=".view.ListaAreaActivity"
-            android:exported="false"
+        <activity
+            android:name=".view.ListaAreaActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
-        <activity android:name=".view.DetalhesActivity"
-            android:exported="false"
+        <activity
+            android:name=".view.DetalhesActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
-        <activity android:name=".view.ComentarioActivity"
-            android:exported="false"
+        <activity
+            android:name=".view.ComentarioActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
-        <activity android:name=".view.CameraActivity"
-            android:exported="false"
+        <activity
+            android:name=".view.CameraActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
-        <activity android:name=".view.MenuInicialActivity"
+        <activity
+            android:name=".view.MenuInicialActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".NetworkChangeListerner">
-        </receiver>
+
+        <receiver android:name=".NetworkChangeListerner"></receiver>
     </application>
+
 </manifest>

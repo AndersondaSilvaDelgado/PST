@@ -42,61 +42,46 @@ public class TopicoActivity extends ActivityGeneric {
         Button buttonRetTopico = findViewById(R.id.buttonRetTopico);
         Button buttonCancAbord = findViewById(R.id.buttonCancAbord);
 
-        buttonAtualTopico.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        buttonAtualTopico.setOnClickListener(v -> {
 
-                AlertDialog.Builder alerta = new AlertDialog.Builder( TopicoActivity.this);
-                alerta.setTitle("ATENÇÃO");
-                alerta.setMessage("DESEJA REALMENTE ATUALIZAR BASE DE DADOS?");
-                alerta.setNegativeButton("SIM", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+            AlertDialog.Builder alerta = new AlertDialog.Builder( TopicoActivity.this);
+            alerta.setTitle("ATENÇÃO");
+            alerta.setMessage("DESEJA REALMENTE ATUALIZAR BASE DE DADOS?");
+            alerta.setNegativeButton("SIM", (dialog, which) -> {
 
-                        ConexaoWeb conexaoWeb = new ConexaoWeb();
+                ConexaoWeb conexaoWeb = new ConexaoWeb();
 
-                        if (conexaoWeb.verificaConexao(TopicoActivity.this)) {
+                if (conexaoWeb.verificaConexao(TopicoActivity.this)) {
 
-                            progressBar = new ProgressDialog(TopicoActivity.this);
-                            progressBar.setCancelable(true);
-                            progressBar.setMessage("ATUALIZANDO ...");
-                            progressBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                            progressBar.setProgress(0);
-                            progressBar.setMax(100);
-                            progressBar.show();
+                    progressBar = new ProgressDialog(TopicoActivity.this);
+                    progressBar.setCancelable(true);
+                    progressBar.setMessage("ATUALIZANDO ...");
+                    progressBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                    progressBar.setProgress(0);
+                    progressBar.setMax(100);
+                    progressBar.show();
 
-                            pstContext.getAbordagemCTR().atualDadosItem(TopicoActivity.this, TopicoActivity.class, progressBar);
+                    pstContext.getAbordagemCTR().atualDadosItem(TopicoActivity.this, TopicoActivity.class, progressBar);
 
-                        } else {
+                } else {
 
-                            AlertDialog.Builder alerta = new AlertDialog.Builder( TopicoActivity.this);
-                            alerta.setTitle("ATENÇÃO");
-                            alerta.setMessage("FALHA NA CONEXÃO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.");
-                            alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
+                    AlertDialog.Builder alerta1 = new AlertDialog.Builder( TopicoActivity.this);
+                    alerta1.setTitle("ATENÇÃO");
+                    alerta1.setMessage("FALHA NA CONEXÃO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.");
+                    alerta1.setPositiveButton("OK", (dialog1, which1) -> {
+                    });
 
-                                }
-                            });
+                    alerta1.show();
 
-                            alerta.show();
-
-                        }
+                }
 
 
-                    }
-                });
+            });
 
-                alerta.setPositiveButton("NÃO", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+            alerta.setPositiveButton("NÃO", (dialog, which) -> {
+            });
 
-                    }
-                });
-
-                alerta.show();
-
-            }
+            alerta.show();
 
         });
 
@@ -104,7 +89,7 @@ public class TopicoActivity extends ActivityGeneric {
         textViewTipo.setText(tipoBean.getDescrTipo());
         topicoList = pstContext.getAbordagemCTR().topicoList(tipoBean.getIdTipo());
 
-        ArrayList<String> itens = new ArrayList<String>();
+        ArrayList<String> itens = new ArrayList<>();
 
         for(TopicoBean topicoBean : topicoList){
             itens.add(topicoBean.getDescrTopico());
@@ -114,97 +99,67 @@ public class TopicoActivity extends ActivityGeneric {
         topicoListView = findViewById(R.id.listTopico);
         topicoListView.setAdapter(adapterList);
 
-        topicoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        topicoListView.setOnItemClickListener((l, v, position, id) -> {
 
-            @Override
-            public void onItemClick(AdapterView<?> l, View v, int position,
-                                    long id) {
+            TopicoBean topicoBean = topicoList.get(position);
+            pstContext.setIdTopico(topicoBean.getIdTopico());
+            topicoList.clear();
 
-                TopicoBean topicoBean = topicoList.get(position);
-                pstContext.setIdTopico(topicoBean.getIdTopico());
-                topicoList.clear();
-
-                Intent it = new Intent(TopicoActivity.this, QuestaoActivity.class);
-                startActivity(it);
-                finish();
-
-            }
+            Intent it = new Intent(TopicoActivity.this, QuestaoActivity.class);
+            startActivity(it);
+            finish();
 
         });
 
-        buttonAvancaTopico.setOnClickListener(new View.OnClickListener() {
+        buttonAvancaTopico.setOnClickListener(v -> {
 
-            @Override
-            public void onClick(View v) {
-
-                if(pstContext.getAbordagemCTR().verItemCabec(tipoBean)){
-                    if(topicoList.size() == pstContext.getPosTipo()){
-                        Intent it = new Intent(TopicoActivity.this, CameraActivity.class);
-                        startActivity(it);
-                        finish();
-                    }
-                    else{
-                        pstContext.setPosTipo(pstContext.getPosTipo() + 1);
-                        Intent it = new Intent(TopicoActivity.this, TopicoActivity.class);
-                        startActivity(it);
-                        finish();
-                    }
-                    topicoList.clear();
-                }
-                else{
-                    AlertDialog.Builder alerta = new AlertDialog.Builder(TopicoActivity.this);
-                    alerta.setTitle("ATENÇÃO");
-                    alerta.setMessage("ABORDAGEM SEM NENHUM TÓPICO PREENCHIDO! POR FAVOR, PREENCHA ALGUM TÓPICO PARA TERMINAR A ABORDAGEM.");
-                    alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    });
-                    alerta.show();
-                }
-            }
-        });
-
-        buttonRetTopico.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if(pstContext.getPosTipo() > 1){
-                    pstContext.setPosTipo(pstContext.getPosTipo() - 1);
+            if(pstContext.getAbordagemCTR().verItemCabec(tipoBean)){
+                if(topicoList.size() == pstContext.getPosTipo()){
+                    Intent it = new Intent(TopicoActivity.this, CameraActivity.class);
+                    startActivity(it);
+                } else {
+                    pstContext.setPosTipo(pstContext.getPosTipo() + 1);
                     Intent it = new Intent(TopicoActivity.this, TopicoActivity.class);
                     startActivity(it);
-                    finish();
                 }
+                finish();
+                topicoList.clear();
+            } else {
+                AlertDialog.Builder alerta = new AlertDialog.Builder(TopicoActivity.this);
+                alerta.setTitle("ATENÇÃO");
+                alerta.setMessage("ABORDAGEM SEM NENHUM TÓPICO PREENCHIDO! POR FAVOR, PREENCHA ALGUM TÓPICO PARA TERMINAR A ABORDAGEM.");
+                alerta.setPositiveButton("OK", (dialog, which) -> {
+                });
+                alerta.show();
             }
         });
 
-        buttonCancAbord.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                AlertDialog.Builder alerta = new AlertDialog.Builder(TopicoActivity.this);
-                alerta.setTitle("ATENÇÃO");
-                alerta.setMessage("DESEJA REALMENTE ABANDONA A ABORDAGEM?");
-                alerta.setPositiveButton("SIM", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        pstContext.getAbordagemCTR().clearBD();
-                        Intent it = new Intent(TopicoActivity.this, MenuInicialActivity.class);
-                        startActivity(it);
-                        finish();
-                    }
-                });
-
-                alerta.setNegativeButton("NÃO", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-
-                alerta.show();
-
+        buttonRetTopico.setOnClickListener(v -> {
+            if(pstContext.getPosTipo() > 1){
+                pstContext.setPosTipo(pstContext.getPosTipo() - 1);
+                Intent it = new Intent(TopicoActivity.this, TopicoActivity.class);
+                startActivity(it);
+                finish();
             }
+        });
+
+        buttonCancAbord.setOnClickListener(v -> {
+
+            AlertDialog.Builder alerta = new AlertDialog.Builder(TopicoActivity.this);
+            alerta.setTitle("ATENÇÃO");
+            alerta.setMessage("DESEJA REALMENTE ABANDONA A ABORDAGEM?");
+            alerta.setPositiveButton("SIM", (dialog, which) -> {
+                pstContext.getAbordagemCTR().clearBD();
+                Intent it = new Intent(TopicoActivity.this, MenuInicialActivity.class);
+                startActivity(it);
+                finish();
+            });
+
+            alerta.setNegativeButton("NÃO", (dialog, which) -> {
+            });
+
+            alerta.show();
+
         });
 
     }

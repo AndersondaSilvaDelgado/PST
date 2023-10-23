@@ -32,64 +32,49 @@ public class ListaAreaActivity extends ActivityGeneric {
 
         pstContext = (PSTContext) getApplication();
 
-        Button buttonRetArea = (Button) findViewById(R.id.buttonRetArea);
-        Button buttonAtualArea = (Button) findViewById(R.id.buttonAtualArea);
+        Button buttonRetArea = findViewById(R.id.buttonRetArea);
+        Button buttonAtualArea = findViewById(R.id.buttonAtualArea);
 
-        buttonAtualArea.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        buttonAtualArea.setOnClickListener(v -> {
 
-                AlertDialog.Builder alerta = new AlertDialog.Builder( ListaAreaActivity.this);
-                alerta.setTitle("ATENÇÃO");
-                alerta.setMessage("DESEJA REALMENTE ATUALIZAR BASE DE DADOS?");
-                alerta.setNegativeButton("SIM", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+            AlertDialog.Builder alerta = new AlertDialog.Builder( ListaAreaActivity.this);
+            alerta.setTitle("ATENÇÃO");
+            alerta.setMessage("DESEJA REALMENTE ATUALIZAR BASE DE DADOS?");
+            alerta.setNegativeButton("SIM", (dialog, which) -> {
 
-                        ConexaoWeb conexaoWeb = new ConexaoWeb();
+                ConexaoWeb conexaoWeb = new ConexaoWeb();
 
-                        if (conexaoWeb.verificaConexao(ListaAreaActivity.this)) {
+                if (conexaoWeb.verificaConexao(ListaAreaActivity.this)) {
 
-                            progressBar = new ProgressDialog(ListaAreaActivity.this);
-                            progressBar.setCancelable(true);
-                            progressBar.setMessage("ATUALIZANDO ...");
-                            progressBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                            progressBar.setProgress(0);
-                            progressBar.setMax(100);
-                            progressBar.show();
+                    progressBar = new ProgressDialog(ListaAreaActivity.this);
+                    progressBar.setCancelable(true);
+                    progressBar.setMessage("ATUALIZANDO ...");
+                    progressBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                    progressBar.setProgress(0);
+                    progressBar.setMax(100);
+                    progressBar.show();
 
-                            pstContext.getAbordagemCTR().atualDadosArea(ListaAreaActivity.this, ListaAreaActivity.class, progressBar);
+                    pstContext.getAbordagemCTR().atualDadosArea(ListaAreaActivity.this, ListaAreaActivity.class, progressBar);
 
-                        } else {
+                } else {
 
-                            AlertDialog.Builder alerta = new AlertDialog.Builder( ListaAreaActivity.this);
-                            alerta.setTitle("ATENÇÃO");
-                            alerta.setMessage("FALHA NA CONEXÃO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.");
-                            alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
+                    AlertDialog.Builder alerta1 = new AlertDialog.Builder( ListaAreaActivity.this);
+                    alerta1.setTitle("ATENÇÃO");
+                    alerta1.setMessage("FALHA NA CONEXÃO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.");
+                    alerta1.setPositiveButton("OK", (dialog1, which1) -> {
+                    });
 
-                                }
-                            });
+                    alerta1.show();
 
-                            alerta.show();
-
-                        }
+                }
 
 
-                    }
-                });
+            });
 
-                alerta.setPositiveButton("NÃO", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+            alerta.setPositiveButton("NÃO", (dialog, which) -> {
+            });
 
-                    }
-                });
-
-                alerta.show();
-
-            }
+            alerta.show();
 
         });
 
@@ -102,36 +87,26 @@ public class ListaAreaActivity extends ActivityGeneric {
         }
 
         AdapterList adapterList = new AdapterList(this, itens);
-        areaListView = (ListView) findViewById(R.id.listArea);
+        areaListView = findViewById(R.id.listArea);
         areaListView.setAdapter(adapterList);
 
-        areaListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        areaListView.setOnItemClickListener((l, v, position, id) -> {
 
-            @Override
-            public void onItemClick(AdapterView<?> l, View v, int position,
-                                    long id) {
+            AreaBean subAreaBean = areaList.get(position);
+            pstContext.getAbordagemCTR().setIdAreaForm(subAreaBean.getIdArea());
+            areaList.clear();
 
-                AreaBean subAreaBean = areaList.get(position);
-                pstContext.getAbordagemCTR().setIdAreaForm(subAreaBean.getIdArea());
-                areaList.clear();
-
-                Intent it = new Intent(ListaAreaActivity.this, ListaSubAreaActivity.class);
-                startActivity(it);
-                finish();
-
-            }
+            Intent it = new Intent(ListaAreaActivity.this, ListaSubAreaActivity.class);
+            startActivity(it);
+            finish();
 
         });
 
 
-        buttonRetArea.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent it = new Intent(ListaAreaActivity.this, ObservadorDigActivity.class);
-                startActivity(it);
-                finish();
-            }
+        buttonRetArea.setOnClickListener(v -> {
+            Intent it = new Intent(ListaAreaActivity.this, ObservadorDigActivity.class);
+            startActivity(it);
+            finish();
         });
 
     }

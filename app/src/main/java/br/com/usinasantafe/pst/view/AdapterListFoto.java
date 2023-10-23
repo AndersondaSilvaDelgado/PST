@@ -53,24 +53,18 @@ public class AdapterListFoto extends RecyclerView.Adapter<ImagemViewHolder> {
                 AlertDialog.Builder alerta = new AlertDialog.Builder(context);
                 alerta.setTitle("ATENÇÃO");
                 alerta.setMessage("DESEJA APAGAR A FOTO DA OBSERVAÇÃO?");
-                alerta.setPositiveButton("SIM", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                alerta.setPositiveButton("SIM", (dialog, which) -> {
 
-                        imagemList.remove(pos);
-                        fotoAbordBean.delete();
+                    imagemList.remove(pos);
+                    fotoAbordBean.delete();
 
-                        Intent it = new Intent(context, CameraActivity.class);
-                        context.startActivity(it);
+                    Intent it = new Intent(context, CameraActivity.class);
+                    context.startActivity(it);
 
-                    }
                 });
 
-                alerta.setNegativeButton("NÃO", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                alerta.setNegativeButton("NÃO", (dialog, which) -> {
 
-                    }
                 });
 
                 alerta.show();

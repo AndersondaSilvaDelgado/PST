@@ -35,101 +35,77 @@ public class ListaTurnoActivity extends ActivityGeneric {
         Button buttonRetTurno = findViewById(R.id.buttonRetTurno);
         Button buttonAtualTurno = findViewById(R.id.buttonAtualTurno);
 
-        buttonAtualTurno.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        buttonAtualTurno.setOnClickListener(v -> {
 
-                AlertDialog.Builder alerta = new AlertDialog.Builder( ListaTurnoActivity.this);
-                alerta.setTitle("ATENÇÃO");
-                alerta.setMessage("DESEJA REALMENTE ATUALIZAR BASE DE DADOS?");
-                alerta.setNegativeButton("SIM", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+            AlertDialog.Builder alerta = new AlertDialog.Builder( ListaTurnoActivity.this);
+            alerta.setTitle("ATENÇÃO");
+            alerta.setMessage("DESEJA REALMENTE ATUALIZAR BASE DE DADOS?");
+            alerta.setNegativeButton("SIM", (dialog, which) -> {
 
-                        ConexaoWeb conexaoWeb = new ConexaoWeb();
+                ConexaoWeb conexaoWeb = new ConexaoWeb();
 
-                        if (conexaoWeb.verificaConexao(ListaTurnoActivity.this)) {
+                if (conexaoWeb.verificaConexao(ListaTurnoActivity.this)) {
 
-                            progressBar = new ProgressDialog(ListaTurnoActivity.this);
-                            progressBar.setCancelable(true);
-                            progressBar.setMessage("ATUALIZANDO ...");
-                            progressBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                            progressBar.setProgress(0);
-                            progressBar.setMax(100);
-                            progressBar.show();
+                    progressBar = new ProgressDialog(ListaTurnoActivity.this);
+                    progressBar.setCancelable(true);
+                    progressBar.setMessage("ATUALIZANDO ...");
+                    progressBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                    progressBar.setProgress(0);
+                    progressBar.setMax(100);
+                    progressBar.show();
 
-                            pstContext.getAbordagemCTR().atualDadosTurno(ListaTurnoActivity.this, ListaTurnoActivity.class, progressBar);
+                    pstContext.getAbordagemCTR().atualDadosTurno(ListaTurnoActivity.this, ListaTurnoActivity.class, progressBar);
 
-                        } else {
+                } else {
 
-                            AlertDialog.Builder alerta = new AlertDialog.Builder( ListaTurnoActivity.this);
-                            alerta.setTitle("ATENÇÃO");
-                            alerta.setMessage("FALHA NA CONEXÃO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.");
-                            alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
+                    AlertDialog.Builder alerta1 = new AlertDialog.Builder( ListaTurnoActivity.this);
+                    alerta1.setTitle("ATENÇÃO");
+                    alerta1.setMessage("FALHA NA CONEXÃO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.");
+                    alerta1.setPositiveButton("OK", (dialog1, which1) -> {
+                    });
 
-                                }
-                            });
+                    alerta1.show();
 
-                            alerta.show();
-
-                        }
+                }
 
 
-                    }
-                });
+            });
 
-                alerta.setPositiveButton("NÃO", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+            alerta.setPositiveButton("NÃO", (dialog, which) -> {
+            });
 
-                    }
-                });
-
-                alerta.show();
-
-            }
+            alerta.show();
 
         });
 
         turnoList = pstContext.getAbordagemCTR().turnoList();
 
-        ArrayList<String> itens = new ArrayList<String>();
+        ArrayList<String> itens = new ArrayList<>();
 
         for (TurnoBean turnoBean : turnoList) {
             itens.add(turnoBean.getDescrTurno());
         }
 
         AdapterList adapterList = new AdapterList(this, itens);
-        turnoListView = (ListView) findViewById(R.id.listTurno);
+        turnoListView = findViewById(R.id.listTurno);
         turnoListView.setAdapter(adapterList);
 
-        turnoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        turnoListView.setOnItemClickListener((l, v, position, id) -> {
 
-            @Override
-            public void onItemClick(AdapterView<?> l, View v, int position,
-                                    long id) {
+            TurnoBean turnoBean = turnoList.get(position);
+            pstContext.getAbordagemCTR().setIdTurno(turnoBean.getIdTurno());
+            turnoList.clear();
 
-                TurnoBean turnoBean = turnoList.get(position);
-                pstContext.getAbordagemCTR().setIdTurno(turnoBean.getIdTurno());
-                turnoList.clear();
-
-                Intent it = new Intent(ListaTurnoActivity.this, DetalhesActivity.class);
-                startActivity(it);
-                finish();
-
-            }
+            Intent it = new Intent(ListaTurnoActivity.this, DetalhesActivity.class);
+            startActivity(it);
+            finish();
 
         });
 
-        buttonRetTurno.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent it = new Intent(ListaTurnoActivity.this, ListaSubAreaActivity.class);
-                startActivity(it);
-                finish();
-            }
+        buttonRetTurno.setOnClickListener(v -> {
+            Intent it = new Intent(ListaTurnoActivity.this, ListaSubAreaActivity.class);
+            startActivity(it);
+            finish();
         });
 
     }

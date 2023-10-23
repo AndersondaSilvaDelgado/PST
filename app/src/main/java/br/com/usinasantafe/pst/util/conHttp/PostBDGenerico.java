@@ -6,7 +6,7 @@ import android.util.Log;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.net.HttpURLConnection;
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.Map;
@@ -16,32 +16,45 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-import br.com.usinasantafe.pst.control.AbordagemCTR;
-import br.com.usinasantafe.pst.util.EnvioDadosServ;
+import br.com.usinasantafe.pst.util.AtualDadosServ;
 
-public class PostCadGenerico extends AsyncTask<String, Void, String> {
+public class PostBDGenerico extends AsyncTask<String, Void, String> {
 
-	private static PostCadGenerico instance = null;
+	private static PostBDGenerico instance = null;
 	private Map<String, Object> parametrosPost = null;
+	private String tipo = null;
+	
+	private UrlsConexaoHttp urlsConexaoHttp;
 
-	public PostCadGenerico() {
+	public PostBDGenerico() {
 	}
 
-    public static PostCadGenerico getInstance() {
+    public static PostBDGenerico getInstance() {
         if (instance == null)
-        instance = new PostCadGenerico();
+        instance = new PostBDGenerico();
         return instance;
     }
 
 	@Override
 	protected String doInBackground(String... arg) {
 		
+		String resultado = "";
 		BufferedReader bufferedReader = null;
-		String resultado = null;
 		
-		String url = arg[0];
+		tipo = arg[0];
+		String url = "";
 		
 		try {
+			
+			Object o = new Object();
+            Class<?> retClasse = Class.forName(urlsConexaoHttp.localUrl); 
+			
+            for (Field field : retClasse.getDeclaredFields()) {
+                String campo = field.getName();
+                if(campo.equals(tipo)){
+                	url = "" + retClasse.getField(campo).get(o);
+               }
+            }
 
 			String parametros = getQueryString(parametrosPost);
 			URL urlCon = new URL(url);
@@ -72,16 +85,14 @@ public class PostCadGenerico extends AsyncTask<String, Void, String> {
 			resultado = stringBuffer.toString();
 
 			connection.disconnect();
-			
+            
 		} catch (Exception e) {
-			Log.i("PMM", "Erro = " + e);
 			if(bufferedReader != null){
 				try {
 					bufferedReader.close();
-				} catch (Exception er) {
-					Log.i("PMM", "Erro = " + er);
+				} catch (Exception erro) {
+					
 				}
-				
 			}
 		}
 		finally{
@@ -90,40 +101,30 @@ public class PostCadGenerico extends AsyncTask<String, Void, String> {
 				try {
 					bufferedReader.close();
 				} catch (Exception e) {
-					Log.i("PMM", "Erro = " + e);
+					
 				}
-				
 			}
 			
 		}
-		return resultado;
 		
+		return resultado;
 	}
-
+	
 	protected void onPostExecute(String result) {
 
 		try {
-
-			Log.i("ECM", "VALOR RECEBIDO --> " + result);
-			if(result.trim().contains("GRAVOU")){
-//				AbordagemCTR abordagemCTR = new AbordagemCTR();
-//				abordagemCTR.deleteCabec(result.trim());
-			}
-			else{
-				EnvioDadosServ.getInstance().setEnviando(false);
-			}
+			AtualDadosServ.getInstance().manipularDadosHttp(tipo, result);
 		} catch (Exception e) {
-			EnvioDadosServ.getInstance().setEnviando(false);
-			Log.i("PMM", "Erro = " + e);
+			Log.i("PMM", "Erro2 = " + e);
 		}
-		
+
     }
 
 	public void setParametrosPost(Map<String, Object> parametrosPost) {
 		this.parametrosPost = parametrosPost;
 	}
 
-	private String getQueryString(Map<String, Object> params) throws Exception {
+	private String getQueryString(Map<String, Object> params) {
 		if (params == null || params.size() == 0) {
 			return null;
 		}
@@ -151,5 +152,4 @@ public class PostCadGenerico extends AsyncTask<String, Void, String> {
 				}
 		};
 	}
-
 }

@@ -2,13 +2,8 @@ package br.com.usinasantafe.pst.util;
 
 import android.content.Context;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import br.com.usinasantafe.pst.control.AbordagemCTR;
-import br.com.usinasantafe.pst.retrofit.PostAbordagem;
-import br.com.usinasantafe.pst.util.conHttp.PostCadGenerico;
-import br.com.usinasantafe.pst.util.conHttp.UrlsConexaoHttp;
+import br.com.usinasantafe.pst.util.retrofit.AbordagemEnvio;
 
 public class EnvioDadosServ {
 
@@ -27,26 +22,9 @@ public class EnvioDadosServ {
 
     public void dadosEnvio() {
 
-//        UrlsConexaoHttp urlsConexaoHttp = new UrlsConexaoHttp();
-//        AbordagemCTR abordagemCTR = new AbordagemCTR();
-//
-//        String dados = abordagemCTR.dadosCabecFechEnvio() + "_" + abordagemCTR.dadosItemFechEnvio()
-//                + "_" + abordagemCTR.dadosFotoFechEnvio(1)
-//                + "_" + abordagemCTR.dadosFotoFechEnvio(2)
-//                + "_" + abordagemCTR.dadosFotoFechEnvio(3)
-//                + "_" + abordagemCTR.dadosFotoFechEnvio(4);
-//
-//        String[] url = {urlsConexaoHttp.getsInserirDados()};
-//        Map<String, Object> parametrosPost = new HashMap<String, Object>();
-//        parametrosPost.put("dado", dados);
-//
-//        PostCadGenerico postCadGenerico = new PostCadGenerico();
-//        postCadGenerico.setParametrosPost(parametrosPost);
-//        postCadGenerico.execute(url);
-
         AbordagemCTR abordagemCTR = new AbordagemCTR();
-        PostAbordagem postAbordagem = new PostAbordagem();
-        postAbordagem.envioAbordagem(abordagemCTR.dadosFechEnvio());
+        AbordagemEnvio abordagemEnvio = new AbordagemEnvio();
+        abordagemEnvio.envioDadosAbordagem(abordagemCTR.dadosFechEnvio());
 
     }
 

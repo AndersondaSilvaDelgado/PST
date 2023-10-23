@@ -32,9 +32,9 @@ public class CameraActivity extends ActivityGeneric {
 
         pstContext = (PSTContext) getApplication();
 
-        Button buttonCapturaFoto = (Button) findViewById(R.id.buttonCapturaFoto);
-        Button buttonAvancaFoto = (Button) findViewById(R.id.buttonAvancaFoto);
-        Button buttonRetFoto = (Button) findViewById(R.id.buttonRetFoto);
+        Button buttonCapturaFoto = findViewById(R.id.buttonCapturaFoto);
+        Button buttonAvancaFoto = findViewById(R.id.buttonAvancaFoto);
+        Button buttonRetFoto = findViewById(R.id.buttonRetFoto);
 
         mRecyclerView = findViewById(R.id.recyclerview);
         GridLayoutManager mGridLayoutManager = new GridLayoutManager(CameraActivity.this, 2);
@@ -45,37 +45,22 @@ public class CameraActivity extends ActivityGeneric {
         AdapterListFoto adapterListFoto = new AdapterListFoto(CameraActivity.this, fotoAbordList);
         mRecyclerView.setAdapter(adapterListFoto);
 
-        buttonCapturaFoto.setOnClickListener(new View.OnClickListener() {
+        buttonCapturaFoto.setOnClickListener(v -> tirarFoto());
 
-            @Override
-            public void onClick(View v) {
-                tirarFoto();
-            }
+        buttonAvancaFoto.setOnClickListener(v -> {
+
+            pstContext.getAbordagemCTR().salvaBolFechado();
+            EnvioDadosServ.getInstance().envioDados(CameraActivity.this);
+
+            Intent it = new Intent(CameraActivity.this, MenuInicialActivity.class);
+            startActivity(it);
+            finish();
         });
 
-        buttonAvancaFoto.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                pstContext.getAbordagemCTR().salvaBolFechado();
-                EnvioDadosServ.getInstance().envioDados(CameraActivity.this);
-
-                Intent it = new Intent(CameraActivity.this, MenuInicialActivity.class);
-                startActivity(it);
-                finish();
-            }
-        });
-
-        buttonRetFoto.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent it = new Intent(CameraActivity.this, TopicoActivity.class);
-                startActivity(it);
-                finish();
-            }
-
+        buttonRetFoto.setOnClickListener(v -> {
+            Intent it = new Intent(CameraActivity.this, TopicoActivity.class);
+            startActivity(it);
+            finish();
         });
 
     }
@@ -89,11 +74,7 @@ public class CameraActivity extends ActivityGeneric {
             AlertDialog.Builder alerta = new AlertDialog.Builder(CameraActivity.this);
             alerta.setTitle("ATENÇÃO");
             alerta.setMessage("CADA ABORDAGEM PODEM TER APENAS 4 FOTOS. POR FAVOR, EXCLUA UMA FOTO PARA PODE TIRA UMA NOVA FOTO.");
-            alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                }
+            alerta.setPositiveButton("OK", (dialog, which) -> {
             });
             alerta.show();
         }

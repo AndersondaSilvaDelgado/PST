@@ -1,17 +1,14 @@
 package br.com.usinasantafe.pst.util;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.util.Log;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import br.com.usinasantafe.pst.control.ConfigCTR;
 import br.com.usinasantafe.pst.view.MenuInicialActivity;
-import br.com.usinasantafe.pst.model.bean.variaveis.AtualAplicBean;
 import br.com.usinasantafe.pst.util.conHttp.PostVerGenerico;
 import br.com.usinasantafe.pst.util.conHttp.UrlsConexaoHttp;
 
@@ -23,9 +20,12 @@ public class VerifDadosServ {
     private static VerifDadosServ instance = null;
     private UrlsConexaoHttp urlsConexaoHttp;
     private ProgressDialog progressDialog;
-    private String tipo;
-    private MenuInicialActivity menuInicialActivity;
+    private Context telaAtual;
+    private Class telaProx;
+    private String dados;
+    private String classe;
     private PostVerGenerico postVerGenerico;
+    public static int status;
 
     public VerifDadosServ() {
     }
@@ -39,53 +39,41 @@ public class VerifDadosServ {
     public void manipularDadosHttp(String result) {
         try {
 
-        if (!result.equals("")) {
-                if (this.tipo.equals("Atualiza")) {
-                    String verAtualizacao = result.trim();
-                    if (verAtualizacao.equals("S")) {
-                        AtualizarAplicativo atualizarAplicativo = new AtualizarAplicativo();
-                        atualizarAplicativo.setContext(this.menuInicialActivity);
-                        atualizarAplicativo.execute();
-                    } else {
-                        this.menuInicialActivity.startTimer();
-                    }
-                }
-            }
+            ConfigCTR configCTR = new ConfigCTR();
+            configCTR.recToken(result.trim(), this.telaAtual, this.telaProx, this.progressDialog);
 
         } catch (Exception e) {
             Log.i("PMM", "Erro Manip atualizar = " + e);
         }
 
     }
+    public void salvarToken(String dados, Context telaAtual, Class telaProx, ProgressDialog progressDialog) {
 
-    public void verAtualAplic(String versaoAplic, MenuInicialActivity menuInicialActivity, ProgressDialog progressDialog) {
-
-        urlsConexaoHttp = new UrlsConexaoHttp();
+        this.urlsConexaoHttp = new UrlsConexaoHttp();
+        this.telaAtual = telaAtual;
+        this.telaProx = telaProx;
         this.progressDialog = progressDialog;
-        this.tipo = "Atualiza";
-        this.menuInicialActivity = menuInicialActivity;
+        this.dados = dados;
+        this.classe = "Token";
 
-        AtualAplicBean atualAplicBean = new AtualAplicBean();
-        atualAplicBean.setVersaoAtual(versaoAplic);
+        envioVerif();
 
-        JsonArray jsonArray = new JsonArray();
+    }
 
-        Gson gson = new Gson();
-        jsonArray.add(gson.toJsonTree(atualAplicBean, atualAplicBean.getClass()));
+    public void envioVerif() {
 
-        JsonObject json = new JsonObject();
-        json.add("dados", jsonArray);
+        status = 2;
+        this.urlsConexaoHttp = new UrlsConexaoHttp();
+        String[] url = {urlsConexaoHttp.urlVerifica(classe)};
+        Map<String, Object> parametrosPost = new HashMap<>();
+        parametrosPost.put("dado", this.dados);
 
-        Log.i("PMM", "LISTA = " + json.toString());
-
-        String[] url = {urlsConexaoHttp.urlVerifica(tipo)};
-        Map<String, Object> parametrosPost = new HashMap<String, Object>();
-        parametrosPost.put("dado", json.toString());
-
+        Log.i("PMM", "postVerGenerico.execute('" + urlsConexaoHttp.urlVerifica(classe) + "'); - Dados de Envio = " + this.dados);
         postVerGenerico = new PostVerGenerico();
         postVerGenerico.setParametrosPost(parametrosPost);
         postVerGenerico.execute(url);
 
     }
+
 
 }

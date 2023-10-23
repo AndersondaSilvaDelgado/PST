@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">PST</string>
     <string name="texto_item_default">TESTE</string>
-    <string name="texto_menu_principal">PRINCIPAL - V 1.04</string>
+    <string name="texto_menu_principal">PRINCIPAL</string>
     <string name="texto_senha">SENHA:</string>
     <string name="texto_num1">1</string>
     <string name="texto_num2">2</string>
@@ -45,4 +45,6 @@
     <string name="texto_titulo_comentario">COMENTARIO</string>
     <string name="texto_titulo_questao">QUESTÃO</string>
     <string name="texto_cancelar_abord">CANCELAR ABORD.</string>
+    <string name="texto_nro_aparelho_config">NRO APARELHO:</string>
+    <string name="texto_atualizar_dados">ATUALIZAR DADOS</string>
 </resources>

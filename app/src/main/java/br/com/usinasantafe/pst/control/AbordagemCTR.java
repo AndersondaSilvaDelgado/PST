@@ -211,60 +211,13 @@ public class AbordagemCTR {
             List<FotoAbordBean> fotoAbordBeanList = fotoAbordDAO.getListFotoCabec(cabecAbordList.get(i).getIdCabecAbord());
             cabecAbordList.get(i).setFotoAbordBeanList(fotoAbordBeanList);
         }
+        Log.i("PST", "COMPLETO = " + new Gson().toJson(cabecAbordList));
         return cabecAbordList;
     }
-//
-//    public String dadosCabecFechEnvio() {
-//        CabecAbordDAO cabecAbordDAO = new CabecAbordDAO();
-//        CabecAbordBean cabecAbordBean = cabecAbordDAO.cabecFechList().get(0);
-//        JsonArray jsonArrayCabec = new JsonArray();
-//        Gson gsonCabec = new Gson();
-//        jsonArrayCabec.add(gsonCabec.toJsonTree(cabecAbordBean, cabecAbordBean.getClass()));
-//        JsonObject jsonCabec = new JsonObject();
-//        jsonCabec.add("cabec", jsonArrayCabec);
-//        return jsonCabec.toString();
-//    }
-//
-//    public String dadosItemFechEnvio() {
-//        CabecAbordDAO cabecAbordDAO = new CabecAbordDAO();
-//        ItemAbordDAO itemAbordDAO = new ItemAbordDAO();
-//        CabecAbordBean cabecAbordBean = cabecAbordDAO.cabecFechList().get(0);
-//        List itemAbordList = itemAbordDAO.getListItemCabec(cabecAbordBean.getIdCabecAbord());
-//
-//        JsonArray jsonArrayItem = new JsonArray();
-//
-//        for (int i = 0; i < itemAbordList.size(); i++) {
-//            ItemAbordBean itemAbordBean = (ItemAbordBean) itemAbordList.get(i);
-//            Gson gsonItem = new Gson();
-//            jsonArrayItem.add(gsonItem.toJsonTree(itemAbordBean, itemAbordBean.getClass()));
-//        }
-//
-//        JsonObject jsonItem = new JsonObject();
-//        jsonItem.add("item", jsonArrayItem);
-//        return jsonItem.toString();
-//    }
-//
-//    public String dadosFotoFechEnvio(int pos){
-//        CabecAbordDAO cabecAbordDAO = new CabecAbordDAO();
-//        CabecAbordBean cabecAbordBean = (CabecAbordBean) cabecAbordDAO.cabecFechList().get(0);
-//        FotoAbordDAO fotoAbordDAO = new FotoAbordDAO();
-//        List fotoAbordList = fotoAbordDAO.getListFotoCabec(cabecAbordBean.getIdCabecAbord());
-//
-//        JsonArray jsonArrayFoto = new JsonArray();
-//
-//        if(fotoAbordList.size() >= pos) {
-//            FotoAbordBean fotoAbordBean = (FotoAbordBean) fotoAbordList.get(pos - 1);
-//            Gson gsonFoto = new Gson();
-//            jsonArrayFoto.add(gsonFoto.toJsonTree(fotoAbordBean, fotoAbordBean.getClass()));
-//        }
-//
-//        JsonObject jsonFoto = new JsonObject();
-//        jsonFoto.add("foto", jsonArrayFoto);
-//        return jsonFoto.toString();
-//
-//    }
 
     public void deleteCabec(List<CabecAbordBean> cabecAbordBeanList) {
+
+        Log.i("PST", "RETORNO = " + new Gson().toJson(cabecAbordBeanList));
 
         for(CabecAbordBean cabecAbordBean : cabecAbordBeanList){
 

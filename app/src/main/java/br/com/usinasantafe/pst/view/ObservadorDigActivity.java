@@ -27,111 +27,83 @@ public class ObservadorDigActivity extends ActivityGeneric {
 
         pstContext = (PSTContext) getApplication();
 
-        Button buttonOkOperador = (Button) findViewById(R.id.buttonOkPadrao);
-        Button buttonCancOperador = (Button) findViewById(R.id.buttonCancPadrao);
-        Button buttonAtualPadrao = (Button) findViewById(R.id.buttonAtualPadrao);
+        Button buttonOkOperador = findViewById(R.id.buttonOkPadrao);
+        Button buttonCancOperador = findViewById(R.id.buttonCancPadrao);
+        Button buttonAtualPadrao = findViewById(R.id.buttonAtualPadrao);
 
-        buttonAtualPadrao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        buttonAtualPadrao.setOnClickListener(v -> {
 
-                AlertDialog.Builder alerta = new AlertDialog.Builder( ObservadorDigActivity.this);
-                alerta.setTitle("ATENÇÃO");
-                alerta.setMessage("DESEJA REALMENTE ATUALIZAR BASE DE DADOS?");
-                alerta.setNegativeButton("SIM", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+            AlertDialog.Builder alerta = new AlertDialog.Builder( ObservadorDigActivity.this);
+            alerta.setTitle("ATENÇÃO");
+            alerta.setMessage("DESEJA REALMENTE ATUALIZAR BASE DE DADOS?");
+            alerta.setNegativeButton("SIM", (dialog, which) -> {
 
-                        ConexaoWeb conexaoWeb = new ConexaoWeb();
+                ConexaoWeb conexaoWeb = new ConexaoWeb();
 
-                        if (conexaoWeb.verificaConexao(ObservadorDigActivity.this)) {
+                if (conexaoWeb.verificaConexao(ObservadorDigActivity.this)) {
 
-                            progressBar = new ProgressDialog(ObservadorDigActivity.this);
-                            progressBar.setCancelable(true);
-                            progressBar.setMessage("ATUALIZANDO ...");
-                            progressBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                            progressBar.setProgress(0);
-                            progressBar.setMax(100);
-                            progressBar.show();
+                    progressBar = new ProgressDialog(ObservadorDigActivity.this);
+                    progressBar.setCancelable(true);
+                    progressBar.setMessage("ATUALIZANDO ...");
+                    progressBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                    progressBar.setProgress(0);
+                    progressBar.setMax(100);
+                    progressBar.show();
 
-                            pstContext.getAbordagemCTR().atualDadosColab(ObservadorDigActivity.this, ObservadorDigActivity.class, progressBar);
+                    pstContext.getAbordagemCTR().atualDadosColab(ObservadorDigActivity.this, ObservadorDigActivity.class, progressBar);
 
-                        } else {
+                } else {
 
-                            AlertDialog.Builder alerta = new AlertDialog.Builder( ObservadorDigActivity.this);
-                            alerta.setTitle("ATENÇÃO");
-                            alerta.setMessage("FALHA NA CONEXÃO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.");
-                            alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
+                    AlertDialog.Builder alerta1 = new AlertDialog.Builder( ObservadorDigActivity.this);
+                    alerta1.setTitle("ATENÇÃO");
+                    alerta1.setMessage("FALHA NA CONEXÃO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.");
+                    alerta1.setPositiveButton("OK", (dialog1, which1) -> {
+                    });
 
-                                }
-                            });
+                    alerta1.show();
 
-                            alerta.show();
-
-                        }
+                }
 
 
-                    }
-                });
+            });
 
-                alerta.setPositiveButton("NÃO", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+            alerta.setPositiveButton("NÃO", (dialog, which) -> {
+            });
 
-                    }
-                });
+            alerta.show();
 
-                alerta.show();
+        });
 
+        buttonOkOperador.setOnClickListener(v -> {
+
+            if (!editTextPadrao.getText().toString().equals("")) {
+
+                if (pstContext.getAbordagemCTR().verColab(Long.parseLong(editTextPadrao.getText().toString()))) {
+
+                    pstContext.getAbordagemCTR().setMatricFuncObsForm(pstContext.getAbordagemCTR().getColab(Long.parseLong(editTextPadrao.getText().toString())).getMatricColab());
+
+                    Intent it = new Intent(ObservadorDigActivity.this, ListaAreaActivity.class);
+                    startActivity(it);
+                    finish();
+
+                } else {
+
+                    AlertDialog.Builder alerta = new AlertDialog.Builder(ObservadorDigActivity.this);
+                    alerta.setTitle("ATENÇÃO");
+                    alerta.setMessage("NUMERAÇÃO DO FUNCIONARIO INEXISTENTE! FAVOR VERIFICA A MESMA.");
+                    alerta.setPositiveButton("OK", (dialog, which) -> {
+                    });
+
+                    alerta.show();
+
+                }
             }
 
         });
 
-        buttonOkOperador.setOnClickListener(new View.OnClickListener() {
-            @SuppressWarnings("rawtypes")
-            @Override
-            public void onClick(View v) {
-
-                if (!editTextPadrao.getText().toString().equals("")) {
-
-                    if (pstContext.getAbordagemCTR().verColab(Long.parseLong(editTextPadrao.getText().toString()))) {
-
-                        pstContext.getAbordagemCTR().setMatricFuncObsForm(pstContext.getAbordagemCTR().getColab(Long.parseLong(editTextPadrao.getText().toString())).getMatricColab());
-
-                        Intent it = new Intent(ObservadorDigActivity.this, ListaAreaActivity.class);
-                        startActivity(it);
-                        finish();
-
-                    } else {
-
-                        AlertDialog.Builder alerta = new AlertDialog.Builder(ObservadorDigActivity.this);
-                        alerta.setTitle("ATENÇÃO");
-                        alerta.setMessage("NUMERAÇÃO DO FUNCIONARIO INEXISTENTE! FAVOR VERIFICA A MESMA.");
-                        alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-
-                        alerta.show();
-
-                    }
-                }
-
-            }
-
-        });
-
-        buttonCancOperador.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if (editTextPadrao.getText().toString().length() > 0) {
-                    editTextPadrao.setText(editTextPadrao.getText().toString().substring(0, editTextPadrao.getText().toString().length() - 1));
-                }
+        buttonCancOperador.setOnClickListener(v -> {
+            if (editTextPadrao.getText().toString().length() > 0) {
+                editTextPadrao.setText(editTextPadrao.getText().toString().substring(0, editTextPadrao.getText().toString().length() - 1));
             }
         });
 
